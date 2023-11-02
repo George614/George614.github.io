@@ -2,11 +2,13 @@
 layout: page
 permalink: /teaching/
 title: teaching
-description: Materials for courses you taught. Replace this text with your description.
+description: Courses that I served as a teaching assistant for.
 nav: true
 nav_order: 5
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
+• Graduate Teaching Assistant for CSCI-635 Intro to Machine Learning (Python) 2021-2022
 
-Organize your courses by years, topics, or universities, however you like!
+• Graduate Teaching Assistant for CSCI-620 Intro to Big Data (MySQL, Java, MongoDB, R) 2018, 2020
+
+• Mentored 4 graduate students in their capstones/research 2015-2019

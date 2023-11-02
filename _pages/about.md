@@ -2,16 +2,16 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href='https://www.cs.rit.edu/~ago/nac_lab.html'>Neural Adaptive Computing (NAC) Lab</a>. Department of Computer Science.
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+  # more_info: >
+  #   <p>555 your office number</p>
+  #   <p>123 your address street</p>
+  #   <p>Your City, State 12345</p>
 
 news: true  # includes a list of news items
 latest_posts: true  # includes a list of the newest posts
@@ -19,8 +19,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Hi there, my name is Zhizhuo Yang (杨智卓 in Chinese), aka George. I'm a PhD student and a multidisciplinary researcher  majoring in computer science at RIT. My primary research areas are active inference and continual reinforcement learning. My advisor is [Dr. Alexander G. Ororbia II](https://www.cs.rit.edu/~ago/) at Rochester Insitiute of Technology. Previously, I worked on deep learning based eye tracking systems and generative modeling of coordinated eye and head movements. I'm also interested in computer vision and computer graphics.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I love playing :basketball: and :badminton:, listening to music, traveling and hiking in my free time. I learned to play :saxophone: and :guitar: at a young age. 

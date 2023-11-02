@@ -1,61 +1,54 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Zhizhuo Yang",
+    "label": "Research Scientist, Engineer, PhD Candidate",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "zhizhuoyang@mail.rit.edu",
+    "url": "https://george614.github.io",
+    "summary": "Enthusiastic PhD candidate dedicated in embodied AI, reinforcement learning, continual learning and active inference at RIT | Experienced in CV/CG | Research scientist intern at Meta",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
+      "city": "Rochester",
       "countryCode": "US",
-      "region": "California"
+      "region": "New York"
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "network": "LinkedIn",
+        "username": "zhizhuo-yang",
+        "url": "https://www.linkedin.com/in/zhizhuo-yang/"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": [
-        "Relativity"
-      ]
+      "name": "Meta",
+      "position": "AI Research scientist intern",
+      "startDate": "2023-05",
+      "endDate": "2023-09",
+      "summary": "Research projects on sensor fusion & pose tacking with machine learning"
     }
   ],
   "volunteer": [],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
+      "institution": "Rochester Institute of Technology, USA",
+      "url": "https://www.cs.rit.edu/~ago/nac_lab.html",
+      "area": "Computing & information sciences",
       "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "",
+      "startDate": "2017-08",
+      "endDate": "2024-08",
+      "summary": "Research areas include reinforcement learning, continual learning, active inference, deep learning and eye-tracking",
       "courses": [
-        "Theory of Relativity"
+        "Deep Learning for Vision",
+        "Biologically-inspired intelligent systems",
+        "Statistical machine learning and data mining",
+        "Cyberinfrastructure",
+        "Foundation of computer graphics",
+        "Foundations of software engineering",
+        "Teaching skills workshop",
+        "Research foundations",
+        "Quantitative foundations"
       ]
-    }
-  ],
-  "awards": [
-    {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
     }
   ],
   "certificates": [],
@@ -63,7 +56,7 @@
   "skills": [],
   "languages": [
     {
-      "language": "German",
+      "language": "Chinese",
       "fluency": "Native speaker"
     },
     {
