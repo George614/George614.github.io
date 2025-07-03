@@ -1,15 +1,14 @@
 {
   "basics": {
     "name": "Zhizhuo Yang",
-    "label": "Research Scientist, Engineer, PhD Candidate",
+    "label": "Research Scientist, Engineer, Ph.D. in Computer Science",
     "image": "",
-    "email": "zhizhuoyang@mail.rit.edu",
     "url": "https://george614.github.io",
-    "summary": "Enthusiastic PhD candidate dedicated in embodied AI, reinforcement learning, continual learning and active inference at RIT | Experienced in CV/CG | Research scientist intern at Meta",
+    "summary": "Enthusiastic AI researcher in generative AI, reinforcement learning, continual learning and active inference | Experienced in CV/CG | Research scientist at Writer",
     "location": {
-      "city": "Rochester",
+      "city": "San Francisco",
       "countryCode": "US",
-      "region": "New York"
+      "region": "California"
     },
     "profiles": [
       {
@@ -21,11 +20,18 @@
   },
   "work": [
     {
+      "name": "Writer",
+      "position": "AI Research Scientist",
+      "startDate": "2025-02",
+      "endDate": "Present",
+      "summary": "Research projects on LLM post-training, AI agents, and various cool research topics in the field of generative AI"
+    },
+    {
       "name": "Meta",
-      "position": "AI Research scientist intern",
+      "position": "AI Research Scientist Intern",
       "startDate": "2023-05",
-      "endDate": "2023-09",
-      "summary": "Research projects on sensor fusion & pose tacking with machine learning"
+      "endDate": "2023-12",
+      "summary": "Research projects on sensor fusion & pose tracking with machine learning"
     }
   ],
   "volunteer": [],
