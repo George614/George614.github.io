@@ -1,4 +1,33 @@
 $(document).ready(function() {
+  // Show/hide footer based on scroll position
+  const $footer = $('footer.fixed-bottom');
+  let footerVisible = false;
+
+  function checkScrollPosition() {
+    const scrollTop = $(window).scrollTop();
+    const windowHeight = $(window).height();
+    const documentHeight = $(document).height();
+
+    // Show footer when user is within 100px of the bottom
+    if (scrollTop + windowHeight >= documentHeight - 100) {
+      if (!footerVisible) {
+        $footer.addClass('visible');
+        footerVisible = true;
+      }
+    } else {
+      if (footerVisible) {
+        $footer.removeClass('visible');
+        footerVisible = false;
+      }
+    }
+  }
+
+  // Check on scroll
+  $(window).on('scroll', checkScrollPosition);
+
+  // Check on page load
+  checkScrollPosition();
+
   // add toggle functionality to abstract and bibtex buttons
   $('a.abstract').click(function() {
     $(this).parent().parent().find(".abstract.hidden").toggleClass('open');

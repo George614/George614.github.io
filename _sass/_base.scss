@@ -445,6 +445,13 @@ blockquote {
 footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);
   font-size: 0.75rem;
+  // Hide footer initially, show only when scrolled to bottom
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+
+  &.visible {
+    transform: translateY(0);
+  }
 
   .container {
     color: var(--global-footer-text-color);

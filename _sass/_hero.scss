@@ -25,7 +25,7 @@
 
   // Add mesh gradient background layer
   .mesh-gradient {
-    position: fixed; // Changed from absolute to fixed for full coverage
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -44,7 +44,7 @@
   // Sophisticated multi-layer gradient background
   &::before {
     content: '';
-    position: fixed; // Changed from absolute to fixed for full viewport coverage
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
