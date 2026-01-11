@@ -1,0 +1,50 @@
+/*******************************************************************************
+ * BACKUP: Floating Blobs Effect for Light Mode
+ * This file contains the CSS for the floating blobs background effect.
+ * To restore, copy this content to the appropriate section in _base.scss
+ *******************************************************************************/
+
+/* Floating Blobs for Light Mode */
+html:not([data-theme='dark']) body::before,
+html:not([data-theme='dark']) body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: -1;
+  animation: float 30s ease-in-out infinite;
+}
+
+html:not([data-theme='dark']) body::before {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  top: -200px;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+html:not([data-theme='dark']) body::after {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  bottom: -150px;
+  right: -150px;
+  animation-delay: -15s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
+  50% {
+    transform: translate(0, 100px) scale(1);
+  }
+  75% {
+    transform: translate(-50px, 50px) scale(0.9);
+  }
+}

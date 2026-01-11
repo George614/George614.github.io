@@ -12,6 +12,250 @@
   <!-- Body -->
   <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
 
+    <!-- Particles.js Animated Background -->
+    <div id="particles-js"></div>
+
+    <!-- Geometric Mesh Background Elements (Light Mode) -->
+    <div class="geometric-shapes"></div>
+    <div class="accent-particles"></div>
+    <div class="corner-accent-tl"></div>
+    <div class="corner-accent-br"></div>
+
+    <!-- Thematic Animated Elements -->
+    <div class="archery-element">
+      <svg viewBox="0 0 140 100" class="archery-svg">
+        <defs>
+          <radialGradient id="targetGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:rgba(255,215,0,0.95)"/>
+            <stop offset="20%" style="stop-color:rgba(255,215,0,0.85)"/>
+            <stop offset="20%" style="stop-color:rgba(255,100,100,0.85)"/>
+            <stop offset="40%" style="stop-color:rgba(255,100,100,0.75)"/>
+            <stop offset="40%" style="stop-color:rgba(64,224,208,0.75)"/>
+            <stop offset="60%" style="stop-color:rgba(64,224,208,0.65)"/>
+            <stop offset="60%" style="stop-color:rgba(0,119,182,0.65)"/>
+            <stop offset="80%" style="stop-color:rgba(0,119,182,0.55)"/>
+            <stop offset="80%" style="stop-color:rgba(255,255,255,0.4)"/>
+            <stop offset="100%" style="stop-color:rgba(200,200,200,0.35)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Professional archery target (right side, larger) -->
+        <g transform="translate(100, 50)">
+          <!-- Outer ring (white) -->
+          <circle cx="0" cy="0" r="32" fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+          <!-- Blue ring -->
+          <circle cx="0" cy="0" r="26" fill="rgba(0,119,182,0.7)" stroke="rgba(0,80,140,0.3)" stroke-width="0.5"/>
+          <!-- Teal ring -->
+          <circle cx="0" cy="0" r="20" fill="rgba(64,224,208,0.75)" stroke="rgba(0,180,180,0.3)" stroke-width="0.5"/>
+          <!-- Red ring -->
+          <circle cx="0" cy="0" r="14" fill="rgba(255,100,100,0.8)" stroke="rgba(220,60,60,0.3)" stroke-width="0.5"/>
+          <!-- Gold center (bullseye) -->
+          <circle cx="0" cy="0" r="7" fill="rgba(255,215,0,0.9)" stroke="rgba(220,180,0,0.4)" stroke-width="0.5"/>
+          <!-- Center X -->
+          <circle cx="0" cy="0" r="1.5" fill="rgba(0,0,0,0.7)"/>
+        </g>
+
+        <!-- Recurve bow (left side, proper proportion) -->
+        <g transform="translate(20, 50)">
+          <!-- Upper limb -->
+          <path d="M 8 0 Q 12 -22 16 -42" stroke="rgba(139,90,43,0.75)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Lower limb -->
+          <path d="M 8 0 Q 12 22 16 42" stroke="rgba(139,90,43,0.75)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Bow riser/handle -->
+          <rect x="4" y="-8" width="8" height="16" rx="2.5" fill="rgba(101,67,33,0.65)" stroke="rgba(139,90,43,0.75)" stroke-width="1.5"/>
+          <!-- Bowstring -->
+          <line x1="8" y1="-42" x2="8" y2="42" stroke="rgba(180,180,180,0.55)" stroke-width="1.2"/>
+        </g>
+
+        <!-- Arrow in flight (center, pointing to target) -->
+        <g transform="translate(40, 50)">
+          <!-- Arrow shaft -->
+          <line x1="0" y1="0" x2="52" y2="0" stroke="rgba(64,224,208,0.85)" stroke-width="2.5"/>
+          <!-- Arrow point (sharp tip) -->
+          <polygon points="52,0 42,-3.5 42,3.5" fill="rgba(80,80,80,0.85)"/>
+          <!-- Fletching (feathers) - 3 feathers -->
+          <path d="M 4 0 L 0 -6 L 7 -3 Z" fill="rgba(255,100,100,0.7)" opacity="0.85"/>
+          <path d="M 4 0 L 0 6 L 7 3 Z" fill="rgba(255,100,100,0.7)" opacity="0.85"/>
+          <path d="M 8 0 L 4 -4 L 9 -2 Z" fill="rgba(255,100,100,0.6)" opacity="0.75"/>
+          <!-- Nock -->
+          <rect x="-1" y="-2.5" width="4" height="5" rx="0.8" fill="rgba(139,90,43,0.75)"/>
+        </g>
+
+        <!-- Stand/target mount -->
+        <g transform="translate(100, 82)">
+          <rect x="-2" y="0" width="4" height="15" fill="rgba(100,100,100,0.5)" rx="1"/>
+          <rect x="-8" y="15" width="16" height="3" fill="rgba(80,80,80,0.5)" rx="1"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cogwheel-element">
+      <svg viewBox="0 0 120 120" class="cogwheel-svg">
+        <defs>
+          <linearGradient id="gearGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:rgba(0,119,182,0.75)"/>
+            <stop offset="100%" style="stop-color:rgba(0,80,140,0.75)"/>
+          </linearGradient>
+        </defs>
+
+        <g class="cogwheel-inner">
+          <!-- Gear teeth - 8 evenly spaced teeth -->
+          <g fill="url(#gearGradient)" stroke="rgba(0,80,140,0.8)" stroke-width="1.5">
+            <!-- Tooth 1 (top) -->
+            <rect x="56" y="8" width="8" height="14" rx="1"/>
+            <!-- Tooth 2 (top-right) -->
+            <rect x="76.5" y="16.5" width="8" height="14" rx="1" transform="rotate(45 80.5 23.5)"/>
+            <!-- Tooth 3 (right) -->
+            <rect x="98" y="56" width="14" height="8" rx="1"/>
+            <!-- Tooth 4 (bottom-right) -->
+            <rect x="76.5" y="89.5" width="8" height="14" rx="1" transform="rotate(-45 80.5 96.5)"/>
+            <!-- Tooth 5 (bottom) -->
+            <rect x="56" y="98" width="8" height="14" rx="1"/>
+            <!-- Tooth 6 (bottom-left) -->
+            <rect x="35.5" y="89.5" width="8" height="14" rx="1" transform="rotate(45 39.5 96.5)"/>
+            <!-- Tooth 7 (left) -->
+            <rect x="8" y="56" width="14" height="8" rx="1"/>
+            <!-- Tooth 8 (top-left) -->
+            <rect x="35.5" y="16.5" width="8" height="14" rx="1" transform="rotate(-45 39.5 23.5)"/>
+          </g>
+
+          <!-- Main gear body (octagon shape between teeth) -->
+          <polygon points="60,22 78,22 83,37 98,42 98,56 98,64 98,78 83,83 78,98 60,98 42,98 37,83 22,78 22,64 22,56 22,42 37,37 42,22"
+                   fill="url(#gearGradient)" stroke="rgba(0,80,140,0.8)" stroke-width="2" stroke-linejoin="round"/>
+
+          <!-- Inner ring -->
+          <circle cx="60" cy="60" r="32" fill="none" stroke="rgba(64,224,208,0.6)" stroke-width="2"/>
+          <circle cx="60" cy="60" r="26" fill="none" stroke="rgba(64,224,208,0.4)" stroke-width="1.5"/>
+
+          <!-- Center hub -->
+          <circle cx="60" cy="60" r="18" fill="rgba(20,60,100,0.4)" stroke="rgba(0,80,140,0.8)" stroke-width="2"/>
+          <!-- Center hole -->
+          <circle cx="60" cy="60" r="8" fill="rgba(255,255,255,0.25)" stroke="rgba(0,80,140,0.6)" stroke-width="1.5"/>
+
+          <!-- Spokes (6 spokes) -->
+          <g stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round">
+            <line x1="60" y1="28" x2="60" y2="42"/>
+            <line x1="60" y1="78" x2="60" y2="92"/>
+            <line x1="28" y1="60" x2="42" y2="60"/>
+            <line x1="78" y1="60" x2="92" y2="60"/>
+            <line x1="38" y1="38" x2="48" y2="48"/>
+            <line x1="82" y1="38" x2="72" y2="48"/>
+            <line x1="38" y1="82" x2="48" y2="72"/>
+            <line x1="82" y1="82" x2="72" y2="72"/>
+          </g>
+
+          <!-- Hub bolts -->
+          <g fill="rgba(64,224,208,0.5)">
+            <circle cx="60" cy="36" r="2.5"/>
+            <circle cx="60" cy="84" r="2.5"/>
+            <circle cx="36" cy="60" r="2.5"/>
+            <circle cx="84" cy="60" r="2.5"/>
+            <circle cx="43" cy="43" r="2.5"/>
+            <circle cx="77" cy="43" r="2.5"/>
+            <circle cx="43" cy="77" r="2.5"/>
+            <circle cx="77" cy="77" r="2.5"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="circuit-element">
+      <svg viewBox="0 0 220 120" class="circuit-svg">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+
+        <!-- Central IC Chip -->
+        <g transform="translate(85, 35)">
+          <!-- IC body -->
+          <rect x="0" y="0" width="50" height="50" fill="rgba(20,50,90,0.2)" stroke="rgba(0,119,182,0.75)" stroke-width="2" rx="2"/>
+
+          <!-- Pin 1 indicator -->
+          <circle cx="8" cy="8" r="2.5" fill="rgba(0,119,182,0.6)"/>
+
+          <!-- IC label -->
+          <rect x="12" y="12" width="26" height="26" fill="rgba(0,119,182,0.1)" stroke="rgba(0,119,182,0.3)" stroke-width="1" rx="1"/>
+
+          <!-- Left pins -->
+          <g stroke="rgba(0,119,182,0.65)" stroke-width="2" stroke-linecap="round">
+            <line x1="0" y1="10" x2="-8" y2="10"/>
+            <line x1="0" y1="20" x2="-8" y2="20"/>
+            <line x1="0" y1="30" x2="-8" y2="30"/>
+            <line x1="0" y1="40" x2="-8" y2="40"/>
+          </g>
+
+          <!-- Right pins -->
+          <g stroke="rgba(0,119,182,0.65)" stroke-width="2" stroke-linecap="round">
+            <line x1="50" y1="10" x2="58" y2="10"/>
+            <line x1="50" y1="20" x2="58" y2="20"/>
+            <line x1="50" y1="30" x2="58" y2="30"/>
+            <line x1="50" y1="40" x2="58" y2="40"/>
+          </g>
+
+          <!-- Top pins -->
+          <g stroke="rgba(0,119,182,0.65)" stroke-width="2" stroke-linecap="round">
+            <line x1="10" y1="0" x2="10" y2="-8"/>
+            <line x1="20" y1="0" x2="20" y2="-8"/>
+            <line x1="30" y1="0" x2="30" y2="-8"/>
+            <line x1="40" y1="0" x2="40" y2="-8"/>
+          </g>
+
+          <!-- Bottom pins -->
+          <g stroke="rgba(0,119,182,0.65)" stroke-width="2" stroke-linecap="round">
+            <line x1="10" y1="50" x2="10" y2="58"/>
+            <line x1="20" y1="50" x2="20" y2="58"/>
+            <line x1="30" y1="50" x2="30" y2="58"/>
+            <line x1="40" y1="50" x2="40" y2="58"/>
+          </g>
+        </g>
+
+        <!-- Circuit traces - properly connected -->
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+
+          <!-- Trace from left - connects to IC left pins -->
+          <path d="M5 45 L30 45 L40 55 L77 55" stroke="rgba(0,119,182,0.6)" stroke-width="2"/>
+          <circle cx="5" cy="45" r="3.5" fill="rgba(64,224,208,0.75)" stroke="rgba(0,119,182,0.5)" stroke-width="1"/>
+          <circle cx="30" cy="45" r="2" fill="rgba(64,224,208,0.6)"/>
+
+          <!-- Trace from left bottom - connects to IC bottom-left -->
+          <path d="M5 95 L45 95 L55 85 L75 85 L85 93" stroke="rgba(64,224,208,0.55)" stroke-width="2"/>
+          <circle cx="5" cy="95" r="3.5" fill="rgba(64,224,208,0.75)" stroke="rgba(64,224,208,0.5)" stroke-width="1"/>
+          <circle cx="55" cy="85" r="2" fill="rgba(0,119,182,0.6)"/>
+
+          <!-- Trace from top - connects to IC top pins -->
+          <path d="M40 5 L60 5 L70 15 L95 15 L105 27" stroke="rgba(0,119,182,0.6)" stroke-width="2"/>
+          <circle cx="40" cy="5" r="3.5" fill="rgba(64,224,208,0.75)" stroke="rgba(0,119,182,0.5)" stroke-width="1"/>
+          <circle cx="70" cy="15" r="2" fill="rgba(64,224,208,0.6)"/>
+
+          <!-- Trace from IC right to right edge -->
+          <path d="M143 45 L165 45 L175 35 L205 35 L215 45" stroke="rgba(64,224,208,0.55)" stroke-width="2"/>
+          <circle cx="165" cy="45" r="2" fill="rgba(0,119,182,0.6)"/>
+          <circle cx="215" cy="45" r="3.5" fill="rgba(64,224,208,0.7)" stroke="rgba(64,224,208,0.5)" stroke-width="1"/>
+
+          <!-- Trace from IC top-right -->
+          <path d="M125 27 L135 27 L145 17 L165 17 L175 7 L195 7" stroke="rgba(46,139,87,0.5)" stroke-width="2"/>
+          <circle cx="145" cy="17" r="2" fill="rgba(46,139,87,0.5)"/>
+          <circle cx="195" cy="7" r="3" fill="rgba(46,139,87,0.7)" stroke="rgba(46,139,87,0.5)" stroke-width="1"/>
+
+          <!-- Trace from IC bottom to bottom -->
+          <path d="M115 93 L125 103 L145 103 L155 113 L175 113" stroke="rgba(46,139,87,0.5)" stroke-width="1.8"/>
+          <circle cx="145" cy="103" r="2" fill="rgba(46,139,87,0.5)"/>
+          <circle cx="175" cy="113" r="3" fill="rgba(46,139,87,0.7)" stroke="rgba(46,139,87,0.5)" stroke-width="1"/>
+
+        </g>
+
+        <!-- Vias -->
+        <g opacity="0.6">
+          <circle cx="30" cy="45" r="2.5" fill="none" stroke="rgba(0,119,182,0.35)" stroke-width="1"/>
+          <circle cx="70" cy="15" r="2.5" fill="none" stroke="rgba(0,119,182,0.35)" stroke-width="1"/>
+          <circle cx="165" cy="45" r="2.5" fill="none" stroke="rgba(64,224,208,0.35)" stroke-width="1"/>
+        </g>
+      </svg>
+    </div>
+
     <!-- Header -->
     {%- include header.html %}
 

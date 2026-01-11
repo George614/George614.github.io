@@ -26,3 +26,48 @@
 
   <!-- Scroll Animations -->
   <script defer src="{{ '/assets/js/scroll-animations.js' | relative_url | bust_file_cache }}"></script>
+
+  <!-- Particles.js Animated Background -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Only initialize particles in dark mode
+      function initParticles() {
+        var theme = document.documentElement.getAttribute('data-theme');
+        var particlesEl = document.getElementById('particles-js');
+
+        if (theme === 'dark') {
+          particlesEl.style.display = 'block';
+          if (!window.pJSDom || window.pJSDom.length === 0) {
+            fetch('{{ '/assets/json/particles.json' | relative_url }}')
+              .then(response => response.json())
+              .then(config => {
+                config.particles.color.value = '#ffffff';
+                config.particles.line_linked.color = '#ffffff';
+                particlesJS('particles-js', config);
+              })
+              .catch(error => console.error('Error loading particles config:', error));
+          }
+        } else {
+          particlesEl.style.display = 'none';
+          if (window.pJSDom && window.pJSDom.length > 0) {
+            window.pJSDom[0].pJS.fn.vendors.destroypJS();
+            window.pJSDom = [];
+          }
+        }
+      }
+
+      // Wait a bit for theme to be initialized, then check
+      setTimeout(initParticles, 100);
+
+      // Watch for theme changes
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'data-theme') {
+            initParticles();
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    });
+  </script>

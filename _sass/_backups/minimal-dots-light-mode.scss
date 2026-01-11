@@ -1,0 +1,22 @@
+/*******************************************************************************
+ * BACKUP: Minimal Dots Effect for Light Mode
+ * This file contains the CSS for the minimal dots background effect.
+ * To restore, copy this content to the appropriate section in _base.scss
+ *******************************************************************************/
+
+/* Minimal Dots for Light Mode */
+html:not([data-theme='dark']) body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle, #0077b6 1px, transparent 1px),
+    radial-gradient(circle, #40e0d0 1px, transparent 1px);
+  background-size: 100px 100px, 140px 140px;
+  background-position: 0 0, 70px 70px;
+}

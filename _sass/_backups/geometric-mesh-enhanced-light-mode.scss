@@ -1,0 +1,259 @@
+/*******************************************************************************
+ * BACKUP: Enhanced Geometric Mesh Effect for Light Mode
+ * This file contains the CSS for the enhanced geometric mesh background effect.
+ * To restore, copy this content to the appropriate section in _base.scss
+ *
+ * Aesthetic: "Technical Organicism" - Precision meets organic movement
+ *
+ * LAYERS:
+ * 1. Base grid with white background (z-index: -5)
+ * 2. Floating color orbs (z-index: -4)
+ * 3. Geometric shapes (circle + triangle) (z-index: -3)
+ * 4. Accent particles (z-index: -2)
+ * 5. Corner accent frames (z-index: -1)
+ *
+ * HTML elements needed:
+ * - <div class="geometric-shapes"></div>
+ * - <div class="accent-particles"></div>
+ * - <div class="corner-accent-tl"></div>
+ * - <div class="corner-accent-br"></div>
+ *******************************************************************************/
+
+/* Geometric Mesh Background for Light Mode - ENHANCED */
+html:not([data-theme='dark']) body {
+  background-color: transparent !important;
+  position: relative;
+}
+
+/* Hide light mode elements in dark mode */
+html[data-theme='dark'] .geometric-shapes,
+html[data-theme='dark'] .accent-particles,
+html[data-theme='dark'] .corner-accent-tl,
+html[data-theme='dark'] .corner-accent-br {
+  display: none;
+}
+
+/* Layer 1: Base grid with white background */
+html:not([data-theme='dark']) body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(0, 119, 182, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 119, 182, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+/* Layer 2: Floating color orbs */
+html:not([data-theme='dark']) body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -4;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(64, 224, 208, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(0, 119, 182, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(46, 139, 87, 0.10) 0%, transparent 35%),
+    radial-gradient(circle at 70% 20%, rgba(64, 224, 208, 0.10) 0%, transparent 30%);
+  animation: gradientFloat 25s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Layer 3: Floating geometric shapes */
+.geometric-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.geometric-shapes::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgba(0, 119, 182, 0.3);
+  border-radius: 50%;
+  animation: floatShape1 18s ease-in-out infinite;
+}
+
+.geometric-shapes::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  right: 15%;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid rgba(64, 224, 208, 0.2);
+  animation: floatShape2 22s ease-in-out infinite;
+}
+
+/* Layer 4: Accent particles */
+.accent-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.accent-particles::before,
+.accent-particles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 119, 182, 0.25);
+}
+
+.accent-particles::before {
+  width: 8px;
+  height: 8px;
+  top: 25%;
+  left: 20%;
+  animation: particleFloat1 15s ease-in-out infinite;
+}
+
+.accent-particles::after {
+  width: 6px;
+  height: 6px;
+  top: 60%;
+  right: 25%;
+  background: rgba(64, 224, 208, 0.25);
+  animation: particleFloat2 17s ease-in-out infinite;
+}
+
+/* Layer 5: Corner accent frames */
+.corner-accent-tl {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  width: 80px;
+  height: 80px;
+  z-index: -1;
+  opacity: 0.08;
+}
+
+.corner-accent-tl::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-top: 2px solid rgba(0, 119, 182, 0.5);
+  border-left: 2px solid rgba(0, 119, 182, 0.5);
+}
+
+.corner-accent-br {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 80px;
+  height: 80px;
+  z-index: -1;
+  opacity: 0.08;
+}
+
+.corner-accent-br::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-bottom: 2px solid rgba(64, 224, 208, 0.5);
+  border-right: 2px solid rgba(64, 224, 208, 0.5);
+}
+
+/* Animations */
+@keyframes meshMove {
+  0%, 100% {
+    background-position: 0 0, 0 0;
+  }
+  50% {
+    background-position: 30px 30px, -30px 30px;
+  }
+}
+
+@keyframes gradientFloat {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes floatShape1 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(20px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-15px, 20px) rotate(240deg);
+  }
+}
+
+@keyframes floatShape2 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-25px, 35px) rotate(180deg);
+  }
+}
+
+@keyframes particleFloat1 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.25;
+  }
+  25% {
+    transform: translate(15px, -20px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(30px, 10px);
+    opacity: 0.25;
+  }
+  75% {
+    transform: translate(10px, 25px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes particleFloat2 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.25;
+  }
+  33% {
+    transform: translate(-20px, 15px);
+    opacity: 0.4;
+  }
+  66% {
+    transform: translate(15px, -25px);
+    opacity: 0.25;
+  }
+}
