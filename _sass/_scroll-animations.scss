@@ -1,0 +1,68 @@
+// Scroll reveal animations
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Different reveal directions
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Staggered children
+.reveal-stagger {
+  > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.active > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.active > *:nth-child(1) { transition-delay: 0.1s; }
+  &.active > *:nth-child(2) { transition-delay: 0.2s; }
+  &.active > *:nth-child(3) { transition-delay: 0.3s; }
+  &.active > *:nth-child(4) { transition-delay: 0.4s; }
+  &.active > *:nth-child(5) { transition-delay: 0.5s; }
+}
+
+// NOTE: Do NOT globally apply .reveal to all elements
+// Only use .reveal class explicitly where you want scroll animations

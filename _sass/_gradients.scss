@@ -1,0 +1,92 @@
+// Gradient utilities and components
+
+// Gradient text
+.gradient-text {
+  background: var(--global-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Gradient buttons
+.btn-gradient {
+  background: var(--global-gradient-primary);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--global-shadow-glow);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Gradient borders
+.gradient-border {
+  position: relative;
+  background: var(--global-card-bg-color);
+  border-radius: 12px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--global-gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Gradient backgrounds for sections
+.gradient-bg-section {
+  background: var(--global-gradient-primary);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+  color: white;
+
+  a {
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// Gradient overlay for images
+.gradient-overlay {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    pointer-events: none;
+  }
+}
+
+// Gradient progress bar
+.progress-bar-gradient {
+  background: var(--global-gradient-primary);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}

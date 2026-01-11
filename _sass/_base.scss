@@ -2,6 +2,43 @@
  * Styles for the base elements of the theme.
  ******************************************************************************/
 
+// Page load animations
+body {
+  opacity: 0;
+  animation: pageLoad 0.5s ease forwards;
+}
+
+@keyframes pageLoad {
+  to {
+    opacity: 1;
+  }
+}
+
+// Staggered content entrance
+.container {
+  > * {
+    opacity: 0;
+    animation: contentFadeIn 0.6s ease forwards;
+  }
+
+  > *:nth-child(1) { animation-delay: 0.1s; }
+  > *:nth-child(2) { animation-delay: 0.2s; }
+  > *:nth-child(3) { animation-delay: 0.3s; }
+  > *:nth-child(4) { animation-delay: 0.4s; }
+  > *:nth-child(5) { animation-delay: 0.5s; }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 // Typography
 
 p,
@@ -827,12 +864,63 @@ code {
 
 
 // Transitioning Themes
-html.transition,
-html.transition *,
-html.transition *:before,
-html.transition *:after {
-  transition: all 750ms !important;
+html.transitioning,
+html.transitioning *,
+html.transitioning *:before,
+html.transitioning *:after {
+  transition:
+    background-color 500ms ease-in-out,
+    color 500ms ease-in-out,
+    border-color 500ms ease-in-out,
+    box-shadow 500ms ease-in-out,
+    fill 500ms ease-in-out,
+    stroke 500ms ease-in-out !important;
   transition-delay: 0 !important;
+}
+
+// Add flash effect during theme switch
+html.transitioning::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--global-theme-color);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 9999;
+  animation: themeFlash 500ms ease-in-out;
+}
+
+@keyframes themeFlash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.15; }
+}
+
+// Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .shape,
+  .floating-shapes {
+    display: none;
+  }
 }
 
 // Extra Markdown style (post Customization)

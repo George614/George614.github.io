@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: <a href='https://www.cs.rit.edu/~ago/nac_lab.html'>Neural Adaptive Computing (NAC) Lab</a>. Department of Computer Science.
 

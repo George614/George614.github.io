@@ -190,6 +190,17 @@ ul.timeline li::before {
   top: -0.5rem;
 }
 
+/* Increase spacing between timeline and content */
+.cv .list-group-item {
+  padding-left: 1.5rem !important;
+}
+
+.cv .list-group-item .col-xs-10,
+.cv .list-group-item .cl-sm-10,
+.cv .list-group-item .col-md-10 {
+  padding-left: 2rem !important;
+}
+
 /*ul.timeline::before {
      content: "●";
      font-size: 1em;

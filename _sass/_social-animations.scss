@@ -1,0 +1,118 @@
+// Modern social icons with unified subtle gradient
+.social {
+  .contact-icons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 25px !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    font-size: 0 !important;
+
+    a {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      width: 70px !important;
+      height: 80px !important;
+      flex: 0 0 calc(33.333% - 17px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+
+      // Hexagon with flat top and bottom
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+
+      // Unified subtle gradient for all icons
+      &::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        background: linear-gradient(135deg, var(--global-theme-color) 0%, var(--global-hover-color) 100%) !important;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+        z-index: 0 !important;
+        transition: all 0.4s ease !important;
+      }
+
+      // Subtle shine overlay
+      &::after {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        background: linear-gradient(135deg,
+          rgba(255,255,255,0.15) 0%,
+          rgba(255,255,255,0.05) 50%,
+          rgba(255,255,255,0) 100%) !important;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+        z-index: 1 !important;
+        opacity: 0.6 !important;
+        transition: all 0.4s ease !important;
+      }
+
+      i {
+        position: relative !important;
+        z-index: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: 100% !important;
+
+        &::before {
+          color: #fff !important;
+          font-size: 1.8rem !important;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+          transition: all 0.4s ease !important;
+        }
+      }
+
+      // Subtle hover effects
+      &:hover {
+        transform: translateY(-8px) scale(1.1) !important;
+
+        &::before {
+          filter: brightness(1.15) !important;
+        }
+
+        &::after {
+          opacity: 0.8 !important;
+        }
+
+        i::before {
+          text-shadow: 0 0 15px rgba(255,255,255,0.6) !important;
+        }
+      }
+    }
+
+    // Center the last row with 2 items
+    &:has(a:nth-last-child(2):nth-child(odd)) {
+      justify-content: center !important;
+
+      a:nth-last-child(2),
+      a:last-child {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    }
+  }
+}
+
+// Navbar social icons with modern enhancement
+.navbar-brand.social {
+  a {
+    i::before {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &:hover {
+      transform: scale(1.3) rotate(8deg);
+
+      i::before {
+        color: var(--global-theme-color);
+        filter: drop-shadow(0 0 8px var(--global-theme-color));
+      }
+    }
+  }
+}

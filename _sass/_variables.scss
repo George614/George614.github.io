@@ -22,6 +22,13 @@ $pink-color:          #f92080 !default;
 $pink-color-light:    #ffdddd !default;
 $yellow-color:        #efcc00 !default;
 
+// New blue-green theme colors
+$teal-color:          #0891B2 !default;
+$turquoise-color:     #40E0D0 !default;
+$ocean-blue:          #0077B6 !default;
+$sea-green:           #2E8B57 !default;
+$deep-blue:           #1E3A8A !default;
+
 $grey-color:          #828282 !default;
 $grey-color-light:    lighten($grey-color, 40%);
 $grey-color-dark:     #1C1C1D;
@@ -37,3 +44,21 @@ $code-bg-color-dark:      #2c3237 !default;
 
 // Font awesome location
 $fa-font-path: "../webfonts";
+
+// Enhanced gradient colors
+$gradient-purple-light: #E8B4F8;
+$gradient-purple-dark: #8B5CF6;
+$gradient-cyan-light: #A5F3FC;
+$gradient-cyan-dark: #0891B2;
+$gradient-pink: #EC4899;
+$gradient-blue: #3B82F6;
+
+// Gradient definitions
+$gradient-primary-light: linear-gradient(135deg, $purple-color 0%, $gradient-purple-dark 100%);
+$gradient-primary-dark: linear-gradient(135deg, $cyan-color 0%, $gradient-cyan-dark 100%);
+
+// Glassmorphism variables
+$glass-bg-light: rgba(255, 255, 255, 0.7);
+$glass-bg-dark: rgba(30, 30, 30, 0.7);
+$glass-border-light: rgba(255, 255, 255, 0.3);
+$glass-border-dark: rgba(255, 255, 255, 0.1);

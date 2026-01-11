@@ -9,6 +9,9 @@ let toggleTheme = (theme) => {
 };
 
 let setTheme = (theme) => {
+  // Add transitioning class
+  document.documentElement.classList.add('transitioning');
+
   transTheme();
   setHighlight(theme);
   setGiscusTheme(theme);
@@ -54,6 +57,11 @@ let setTheme = (theme) => {
         ) + "ee", // + 'ee' for trasparency.
     });
   }
+
+  // Remove transitioning class after animation completes
+  setTimeout(() => {
+    document.documentElement.classList.remove('transitioning');
+  }, 500);
 };
 
 let setHighlight = (theme) => {
@@ -81,9 +89,9 @@ let setGiscusTheme = (theme) => {
 };
 
 let transTheme = () => {
-  document.documentElement.classList.add("transition");
+  document.documentElement.classList.add("transitioning");
   window.setTimeout(() => {
-    document.documentElement.classList.remove("transition");
+    document.documentElement.classList.remove("transitioning");
   }, 500);
 };
 

@@ -7,8 +7,8 @@
   --global-code-bg-color: #{$code-bg-color-light};
   --global-text-color: #{$black-color};
   --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$purple-color};
-  --global-hover-color: #{$purple-color};
+  --global-theme-color: #{$ocean-blue};
+  --global-hover-color: #{$turquoise-color};
   --global-hover-text-color: #{$white-color};
   --global-footer-bg-color: #{$grey-color-dark};
   --global-footer-text-color: #{$grey-color-light};
@@ -16,6 +16,17 @@
   --global-distill-app-color: #{$grey-color};
   --global-divider-color: rgba(0,0,0,.1);
   --global-card-bg-color: #{$white-color};
+
+  // Add gradient variables
+  --global-gradient-primary: linear-gradient(135deg, #{$ocean-blue} 0%, #{$sea-green} 100%);
+  --global-gradient-secondary: linear-gradient(135deg, #{$turquoise-color} 0%, #{$teal-color} 100%);
+  --global-glass-bg: #{$glass-bg-light};
+  --global-glass-border: #{$glass-border-light};
+  --global-shadow-color: rgba(0, 0, 0, 0.1);
+  --global-shadow-glow: rgba(0, 119, 182, 0.3);
+
+  // Theme color RGB for rgba conversions
+  --global-theme-color-rgb: 0, 119, 182;
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;
@@ -52,8 +63,8 @@ html[data-theme='dark'] {
   --global-code-bg-color: #{$code-bg-color-dark};
   --global-text-color: #{$grey-color-light};
   --global-text-color-light: #{$grey-color-light};
-  --global-theme-color: #{$cyan-color};
-  --global-hover-color: #{$cyan-color};
+  --global-theme-color: #{$turquoise-color};
+  --global-hover-color: #{$teal-color};
   --global-hover-text-color: #{$white-color};
   --global-footer-bg-color: #{$grey-color-light};
   --global-footer-text-color: #{$grey-color-dark};
@@ -61,6 +72,16 @@ html[data-theme='dark'] {
   --global-distill-app-color: #{$grey-color-light};
   --global-divider-color: #424246;
   --global-card-bg-color: #{$grey-900};
+
+  // Add dark mode gradient variables
+  --global-gradient-primary: linear-gradient(135deg, #{$turquoise-color} 0%, #{$sea-green} 100%);
+  --global-gradient-secondary: linear-gradient(135deg, #{$teal-color} 0%, #{$deep-blue} 100%);
+  --global-glass-bg: #{$glass-bg-dark};
+  --global-glass-border: #{$glass-border-dark};
+  --global-shadow-color: rgba(0, 0, 0, 0.4);
+  --global-shadow-glow: rgba(64, 224, 208, 0.4);
+
+  --global-theme-color-rgb: 64, 224, 208;
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;
