@@ -288,6 +288,11 @@ nav: true
     overflow-y: auto;
     opacity: 0;
     transition: opacity 0.4s ease;
+    cursor: pointer;
+  }
+
+  .modal-content {
+    cursor: default;
   }
 
   .project-modal.active {
@@ -303,29 +308,34 @@ nav: true
   }
 
   .modal-close {
-    position: fixed;
-    top: 28px;
-    right: 28px;
-    width: 44px;
-    height: 44px;
-    display: flex;
+    position: fixed !important;
+    top: 88px !important;
+    right: 28px !important;
+    width: 56px !important;
+    height: 56px !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 1000000;
-    opacity: 0.4;
+    z-index: 99999999 !important;
+    opacity: 0.9 !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
   }
 
   .modal-close::before,
   .modal-close::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 1px;
-    background: #f5f5f5;
+    width: 28px;
+    height: 3px;
+    background: #ffffff;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
   }
 
   .modal-close::before {
@@ -338,14 +348,17 @@ nav: true
 
   .modal-close:hover {
     opacity: 1;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.25);
     transform: rotate(90deg);
+    border-color: var(--portfolio-accent);
+    box-shadow: 0 0 20px rgba(201, 168, 124, 0.4);
   }
 
   .modal-close:hover::before,
   .modal-close:hover::after {
     background: var(--portfolio-accent);
-    width: 24px;
+    width: 32px;
+    height: 4px;
   }
 
   .modal-header {
@@ -402,23 +415,25 @@ nav: true
 
   .modal-screenshots {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
     margin-bottom: 40px;
+    justify-items: center;
   }
 
   .screenshot-item {
-    aspect-ratio: 16 / 9;
     border-radius: 12px;
     overflow: hidden;
     background: var(--portfolio-card-border);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+    width: 100%;
   }
 
   .screenshot-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     transition: transform 0.5s ease;
   }
 
@@ -531,7 +546,12 @@ nav: true
     }
 
     .modal-screenshots {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .screenshot-item {
+      max-width: 100%;
     }
   }
 </style>
@@ -583,7 +603,7 @@ nav: true
 
 <!-- Project Detail Modal -->
 <div id="project-modal" class="project-modal">
-  <span class="modal-close"></span>
+  <span class="modal-close" id="modal-close-btn"></span>
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-icon">
@@ -608,7 +628,7 @@ nav: true
         <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.40.29.png" alt="Screenshot 3">
       </div>
       <div class="screenshot-item">
-        <img src="/assets/portfolio/Screenshot - iPhone 17 Pro - 2026-01-04 at 18.41.41.png" alt="Screenshot 4">
+        <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.41.41.png" alt="Screenshot 4">
       </div>
     </div>
 
@@ -663,7 +683,7 @@ nav: true
 
   // Project modal functionality
   const modal = document.getElementById('project-modal');
-  const closeBtn = document.querySelector('.modal-close');
+  const closeBtn = document.getElementById('modal-close-btn');
 
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -680,7 +700,7 @@ nav: true
   closeBtn.addEventListener('click', closeModal);
 
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (e.target === modal || e.target.closest('.modal-content') === null) {
       closeModal();
     }
   });
