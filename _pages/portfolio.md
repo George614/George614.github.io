@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Portfolio
+title: Projects
 permalink: /portfolio/
 nav_order: 8
 nav: true
@@ -559,7 +559,7 @@ nav: true
 <div class="portfolio-container">
   <header class="portfolio-header">
     <p class="portfolio-subtitle">Creative Works</p>
-    <h1 class="portfolio-title">Portfolio</h1>
+    <h1 class="portfolio-title">Projects</h1>
     <p class="portfolio-description">
       A collection of applications and projects I've built, exploring the intersection of design, technology, and user experience.
     </p>
