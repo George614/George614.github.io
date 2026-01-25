@@ -241,8 +241,8 @@ nav: true
     font-size: 0.9rem;
     line-height: 1.6;
     color: var(--portfolio-text);
-    opacity: 0.7;
-    font-weight: 300;
+    opacity: 0.9;
+    font-weight: 400;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -284,27 +284,22 @@ nav: true
     position: fixed;
     inset: 0;
     z-index: 999999;
-    background: rgba(0, 0, 0, 0.95);
-    overflow-y: auto;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 90px 0 0 0;
   }
 
   .modal-content {
-    cursor: default;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    position: relative;
   }
 
   .project-modal.active {
     display: block;
+    overflow-y: auto;
     opacity: 1;
-  }
-
-  .modal-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    position: relative;
+    transition: opacity 0.4s ease;
   }
 
   .modal-close {
@@ -319,12 +314,12 @@ nav: true
     cursor: pointer;
     z-index: 99999999 !important;
     opacity: 0.9 !important;
-    background: rgba(255, 255, 255, 0.4) !important;
+    background: rgba(0, 0, 0, 0.1) !important;
     backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
   }
 
   .modal-close::before,
@@ -333,7 +328,7 @@ nav: true
     position: absolute;
     width: 28px;
     height: 3px;
-    background: #ffffff;
+    background: #000000;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
   }
@@ -348,7 +343,7 @@ nav: true
 
   .modal-close:hover {
     opacity: 1;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.2);
     transform: rotate(90deg);
     border-color: var(--portfolio-accent);
     box-shadow: 0 0 20px rgba(201, 168, 124, 0.4);
@@ -391,7 +386,7 @@ nav: true
     font-size: 2.5rem;
     font-weight: 600;
     font-style: italic;
-    color: #f5f5f5;
+    color: #000000;
     margin-bottom: 8px;
     letter-spacing: 0.08em;
   }
@@ -409,25 +404,37 @@ nav: true
     margin: 0 auto 40px;
     font-size: 1.1rem;
     line-height: 1.8;
-    color: rgba(245, 245, 245, 0.8);
-    font-weight: 300;
+    color: #000000;
+    font-weight: 400;
   }
 
   .modal-screenshots {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 32px;
     margin-bottom: 40px;
     justify-items: center;
   }
 
+  /* Double column layout for iOS mock-up screenshots */
+  .modal-screenshots.ios-screenshots {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
   .screenshot-item {
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--portfolio-card-border);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    max-width: 300px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    max-width: 700px;
     width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  /* Smaller screenshots for iOS mock-ups */
+  .ios-screenshots .screenshot-item {
+    max-width: 320px;
   }
 
   .screenshot-item img {
@@ -438,7 +445,7 @@ nav: true
   }
 
   .screenshot-item:hover img {
-    transform: scale(1.03);
+    transform: scale(1.02);
   }
 
   .modal-tech-stack {
@@ -451,14 +458,14 @@ nav: true
 
   .modal-tech-badge {
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #f5f5f5;
+    background: rgba(0, 0, 0, 0.05);
+    color: #000000;
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .modal-links {
@@ -473,9 +480,9 @@ nav: true
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.02);
+    color: #000000;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     font-weight: 500;
@@ -489,6 +496,7 @@ nav: true
   .modal-link:hover {
     background: var(--portfolio-accent);
     border-color: var(--portfolio-accent);
+    color: #ffffff;
     transform: translateY(-2px);
   }
 
@@ -553,6 +561,10 @@ nav: true
     .screenshot-item {
       max-width: 100%;
     }
+
+    .ios-screenshots {
+      grid-template-columns: 1fr !important;
+    }
   }
 </style>
 
@@ -574,6 +586,31 @@ nav: true
   </div>
 
   <div class="portfolio-grid">
+    <!-- GPU Memory Calculator Project Card -->
+    <div class="project-card" data-category="ai web" data-project="gpu-calculator">
+      <div class="project-banner">
+        <img src="/assets/img/gpu-calculator.png" alt="GPU Memory Calculator">
+      </div>
+      <div class="project-info">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg, #3a7ca5 0%, #2d5a87 100%);">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">GPU Memory Calculator</h3>
+            <p class="project-category">AI/ML · Web Tool</p>
+          </div>
+        </div>
+        <p class="project-brief">
+          Calculate GPU memory requirements for training Large Language Models with support for PyTorch DDP, DeepSpeed ZeRO, Megatron-LM, and FSDP.
+        </p>
+        <div class="view-project-btn">
+          <span>View Project</span>
+          <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+        </div>
+      </div>
+    </div>
+
     <!-- iOS App Project Card -->
     <div class="project-card" data-category="ios" data-project="ios-app">
       <div class="project-banner">
@@ -605,48 +642,149 @@ nav: true
 <div id="project-modal" class="project-modal">
   <span class="modal-close" id="modal-close-btn"></span>
   <div class="modal-content">
-    <div class="modal-header">
-      <div class="modal-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H3V6h18v12zM9 10h2v4H9zm4 0h2v4h-2z"/></svg>
+    <!-- GPU Calculator Modal Content -->
+    <div id="gpu-calculator-modal" style="display: none;">
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        </div>
+        <h2 class="modal-title">GPU Memory Calculator</h2>
+        <p class="modal-category">AI/ML · Web Tool</p>
       </div>
-      <h2 class="modal-title">My iOS App</h2>
-      <p class="modal-category">iOS · Featured Project</p>
+
+      <p class="modal-description">
+        A comprehensive Python application for calculating GPU memory requirements for Large Language Model (LLM) training and inference. The calculator supports multiple distributed training engines including PyTorch DDP, DeepSpeed ZeRO (stages 1-3), Megatron-LM, Megatron+DeepSpeed, and PyTorch FSDP. It also supports inference engines like vLLM, TGI, TensorRT-LLM, and SGLang with KV cache optimization.
+      </p>
+
+      <h3 style="color: #000000; font-size: 1.4rem; margin-bottom: 24px; font-weight: 600; letter-spacing: 0.05em;">Key Features</h3>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Training Memory Calculation</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Training Engines:</strong> PyTorch DDP, DeepSpeed ZeRO, Megatron-LM, and FSDP</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Detailed Breakdown:</strong> Memory by component (parameters, gradients, optimizer states, activations)</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Preset Models:</strong> Quick-load configurations for LLaMA 2, GPT-3, Mixtral, and more</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Advanced Features:</strong> CPU/NVMe offloading, activation checkpointing, multi-node training</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Inference Support</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Engines:</strong> HuggingFace Transformers, vLLM, TGI, TensorRT-LLM, SGLang</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">KV Cache Optimization:</strong> Quantization options (INT8, FP8, INT4)</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Tensor Parallelism:</strong> Automatic memory distribution across GPUs</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance Metrics:</strong> Throughput estimation (tokens/second)</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Interfaces & Tools</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Web Interface:</strong> Interactive UI with real-time validation and formula explanations</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Command Line:</strong> CLI tool for quick calculations and batch processing</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Python API:</strong> Programmatic access for integration into workflows</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Framework Export:</strong> Generate configs for Accelerate, Lightning, and Axolotl</li>
+        </ul>
+      </div>
+
+      <div class="modal-screenshots">
+        <div class="screenshot-item">
+          <img src="/assets/img/gpu-calculator.png" alt="GPU Memory Calculator Screenshot">
+        </div>
+      </div>
+
+      <div class="modal-tech-stack">
+        <span class="modal-tech-badge">Python</span>
+        <span class="modal-tech-badge">PyTorch</span>
+        <span class="modal-tech-badge">DeepSpeed</span>
+        <span class="modal-tech-badge">FastAPI</span>
+        <span class="modal-tech-badge">HuggingFace</span>
+        <span class="modal-tech-badge">Megatron-LM</span>
+        <span class="modal-tech-badge">FSDP</span>
+      </div>
+
+      <div class="modal-links">
+        <a href="https://github.com/George614/gpu-mem-calculator" class="modal-link">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub Repository
+        </a>
+        <a href="https://huggingface.co/spaces/george614/gpu-memory-calculator" class="modal-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
+          HuggingFace Demo
+        </a>
+      </div>
     </div>
 
-    <p class="modal-description">
-      A beautifully crafted iOS application built with SwiftUI, featuring intuitive design and smooth user experience.
-    </p>
+    <!-- iOS App Modal Content -->
+    <div id="ios-app-modal" style="display: none;">
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H3V6h18v12zM9 10h2v4H9zm4 0h2v4h-2z"/></svg>
+        </div>
+        <h2 class="modal-title">My iOS App</h2>
+        <p class="modal-category">iOS · Featured Project</p>
+      </div>
 
-    <div class="modal-screenshots">
-      <div class="screenshot-item">
-        <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.38.52.png" alt="Screenshot 1">
-      </div>
-      <div class="screenshot-item">
-        <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.39.01.png" alt="Screenshot 2">
-      </div>
-      <div class="screenshot-item">
-        <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.40.29.png" alt="Screenshot 3">
-      </div>
-      <div class="screenshot-item">
-        <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.41.41.png" alt="Screenshot 4">
-      </div>
-    </div>
+      <p class="modal-description">
+        A beautifully crafted iOS application built with SwiftUI, featuring intuitive design and smooth user experience. The app showcases modern iOS development practices with clean architecture and responsive animations.
+      </p>
 
-    <div class="modal-tech-stack">
-      <span class="modal-tech-badge">Swift</span>
-      <span class="modal-tech-badge">SwiftUI</span>
-      <span class="modal-tech-badge">iOS 17</span>
-    </div>
+      <h3 style="color: #000000; font-size: 1.4rem; margin-bottom: 24px; font-weight: 600; letter-spacing: 0.05em;">Key Features</h3>
 
-    <div class="modal-links">
-      <a href="#" class="modal-link">
-        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31 1.59-2.45 1.49-4.18-.03-1.77-1.25-3.09-2.56-4.6-1.28-1.48-2.55-1.48-3.81-1.5-1.27-.02-2.49.7-3.37.7-.89 0-2.53-.7-3.38-.7-1.54 0-3.18 1.32-4.27 3.29-1.57 2.87-1.31 8.19 1.06 12.5 1.07 1.89 2.52 4.02 4.37 4.02 1.81 0 2.5-1.01 4.17-1.01 1.67 0 2.24 1.01 4.17 1.01 1.93 0 3.37-2.05 4.54-4.02 1.35-2.47 1.92-4.86 1.96-4.98-.04-.01-3.72-.08-5.73-2.82z"/></svg>
-        App Store
-      </a>
-      <a href="#" class="modal-link">
-        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        GitHub
-      </a>
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">User Interface</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">SwiftUI Framework:</strong> Modern declarative UI framework for building native iOS interfaces</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Custom Animations:</strong> Smooth transitions and micro-interactions for enhanced user experience</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Responsive Design:</strong> Adaptive layouts that work seamlessly across different iPhone screen sizes</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Dark Mode Support:</strong> Fully integrated with iOS system appearance settings</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Technical Highlights</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Clean Architecture:</strong> MVVM pattern with separation of concerns</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Data Persistence:</strong> Core Data integration for local data storage</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Networking:</strong> Async/await based API calls with error handling</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance:</strong> Optimized rendering and memory management</li>
+        </ul>
+      </div>
+
+      <div class="modal-screenshots ios-screenshots">
+        <div class="screenshot-item">
+          <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.38.52.png" alt="Screenshot 1">
+        </div>
+        <div class="screenshot-item">
+          <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.39.01.png" alt="Screenshot 2">
+        </div>
+        <div class="screenshot-item">
+          <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.40.29.png" alt="Screenshot 3">
+        </div>
+        <div class="screenshot-item">
+          <img src="/assets/portfolio/Simulator Screenshot - iPhone 17 Pro - 2026-01-04 at 18.41.41.png" alt="Screenshot 4">
+        </div>
+      </div>
+
+      <div class="modal-tech-stack">
+        <span class="modal-tech-badge">Swift</span>
+        <span class="modal-tech-badge">SwiftUI</span>
+        <span class="modal-tech-badge">iOS 17</span>
+        <span class="modal-tech-badge">Core Data</span>
+        <span class="modal-tech-badge">MVVM</span>
+      </div>
+
+      <div class="modal-links">
+        <a href="#" class="modal-link">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31 1.59-2.45 1.49-4.18-.03-1.77-1.25-3.09-2.56-4.6-1.28-1.48-2.55-1.48-3.81-1.5-1.27-.02-2.49.7-3.37.7-.89 0-2.53-.7-3.38-.7-1.54 0-3.18 1.32-4.27 3.29-1.57 2.87-1.31 8.19 1.06 12.5 1.07 1.89 2.52 4.02 4.37 4.02 1.81 0 2.5-1.01 4.17-1.01 1.67 0 2.24 1.01 4.17 1.01 1.93 0 3.37-2.05 4.54-4.02 1.35-2.47 1.92-4.86 1.96-4.98-.04-.01-3.72-.08-5.73-2.82z"/></svg>
+          App Store
+        </a>
+        <a href="#" class="modal-link">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -687,6 +825,19 @@ nav: true
 
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', () => {
+      const projectId = card.dataset.project;
+      const modalContent = document.getElementById(`${projectId}-modal`);
+
+      // Hide all modal contents
+      document.querySelectorAll('.modal-content > div').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      // Show the selected modal content
+      if (modalContent) {
+        modalContent.style.display = 'block';
+      }
+
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
@@ -695,12 +846,19 @@ nav: true
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
+
+    // Hide all modal contents after closing
+    setTimeout(() => {
+      document.querySelectorAll('.modal-content > div').forEach(div => {
+        div.style.display = 'none';
+      });
+    }, 400);
   }
 
   closeBtn.addEventListener('click', closeModal);
 
   modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.closest('.modal-content') === null) {
+    if (e.target === modal) {
       closeModal();
     }
   });
@@ -710,4 +868,10 @@ nav: true
       closeModal();
     }
   });
+
+  // Move modal outside of article element to avoid positioning issues
+  const modalElement = document.getElementById('project-modal');
+  if (modalElement && modalElement.parentNode.tagName === 'ARTICLE') {
+    document.body.appendChild(modalElement);
+  }
 </script>
