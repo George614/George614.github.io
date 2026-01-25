@@ -265,6 +265,35 @@ nav: true
     font-weight: 400;
   }
 
+  .copyright-notice {
+    margin-top: 80px;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid var(--gallery-border);
+    animation: fadeIn 1s ease-out;
+  }
+
+  .copyright-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--gallery-text);
+    opacity: 0.5;
+    margin: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .copyright-text:hover {
+    opacity: 0.8;
+  }
+
+  .copyright-text svg {
+    flex-shrink: 0;
+  }
+
   @keyframes fadeInDown {
     from {
       opacity: 0;
@@ -727,6 +756,225 @@ nav: true
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Sequoia Section -->
+  <div class="gallery-section">
+    <div class="section-header">
+      <h2 class="section-title">Sequoia</h2>
+      <p class="section-location">California · Ancient Forests</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1358.jpg" alt="Sequoia I">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Gentle Giants</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1359.jpg" alt="Sequoia II">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Forest Cathedral</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1381.jpg" alt="Sequoia III">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Morning Mist</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1395.jpg" alt="Sequoia IV">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Ancient Bark</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1397.jpg" alt="Sequoia V">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Trail of Giants</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1419.jpg" alt="Sequoia VI">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Sun Through Branches</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1450.jpg" alt="Sequoia VII">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Forest Floor</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1456.jpg" alt="Sequoia VIII">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Standing Tall</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Sequoia/IMG_1475.jpg" alt="Sequoia IX">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Whispers of Time</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lassen & Mt. Shasta Section -->
+  <div class="gallery-section">
+    <div class="section-header">
+      <h2 class="section-title">Lassen & Mt. Shasta</h2>
+      <p class="section-location">Northern California · Volcanic Landscapes</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_0347.jpg" alt="Lassen & Mt. Shasta I">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Volcanic Vista</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_0389.jpg" alt="Lassen & Mt. Shasta II">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Peak Reflection</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_0403.jpg" alt="Lassen & Mt. Shasta III">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Mountain Mist</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_0439.jpg" alt="Lassen & Mt. Shasta IV">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Alpine Lake</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_0480.jpg" alt="Lassen & Mt. Shasta V">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Snowy Slopes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_1681.jpg" alt="Lassen & Mt. Shasta VI">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Sunset Summit</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_1737.jpg" alt="Lassen & Mt. Shasta VII">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Trail to Heaven</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-frame">
+          <div class="photo-placeholder">
+            <img src="/assets/photography/Lassen & Mt. Shasta/IMG_1790.jpg" alt="Lassen & Mt. Shasta VIII">
+          </div>
+          <div class="photo-caption">
+            <p class="photo-title">Guardian Peak</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Notice -->
+  <div class="copyright-notice">
+    <p class="copyright-text">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4"></path>
+        <path d="M12 8h.01"></path>
+      </svg>
+      All photographs are © protected. Permission required for any use or reproduction.
+    </p>
   </div>
 </div>
 
