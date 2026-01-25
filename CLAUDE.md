@@ -121,3 +121,55 @@ Co-authors are linked automatically via `_data/coauthors.yml`.
 - MathJax is enabled by default (`enable_math: true`)
 - Dark mode toggle is enabled (`enable_darkmode: true`)
 - Bootstrap table integration version is configurable via `bootstrap-table.version` in `_config.yml`
+
+## Portfolio vs Projects Collections
+
+### Important: Two Different Systems
+The site has **two separate project systems**:
+
+1. **`_pages/portfolio.md`** - The main portfolio page at `/portfolio/`:
+   - Uses **custom HTML** (not Jekyll collections)
+   - Projects are hardcoded in the page with custom styling
+   - Modal-based interface with project details
+   - Used for showcasing work with interactive previews
+
+2. **`_pages/projects.md`** - A Jekyll collection-based page at `/projects/`:
+   - Uses the `site.projects` collection
+   - Projects are defined as markdown files in `_projects/` folder
+   - Standard card-based layout
+   - Less frequently used
+
+**When adding new projects**: Add them to `_pages/portfolio.md` with proper modal structure, NOT to the `_projects/` collection.
+
+## Common Pitfalls
+
+### Jekyll Front Matter
+- **Never use `url` in front matter** - it's a reserved Jekyll variable that conflicts with collection permalinks
+- Use `github` instead for repository links
+- Use `img` for image paths (local paths only, not remote URLs)
+
+### Modal Design
+- **Always use light backgrounds (white) with dark text (black)** for maximum readability
+- Dark backgrounds with light text reduce readability and create accessibility issues
+- Use `padding-top` on the modal overlay (not just content padding) to clear fixed navbar
+- Modal should have `position: fixed; inset: 0; padding-top: 50px;` to avoid cropping
+
+### Image Handling
+- **Always use local images** in `assets/` directory
+- Download remote images before referencing them
+- Convert HEIC images to JPEG using: `sips -s format jpeg [source] --out [destination]`
+- Images are automatically processed to WebP formats by jekyll-imagemagick
+
+### Testing with Playwright
+When making UI changes:
+1. Always test with Playwright's `browser_take_screenshot` with `fullPage: true`
+2. Use `browser_evaluate` to check scrollability and element positions
+3. Verify that modals are not cropped (top/bottom should be visible)
+4. Test both opening and closing modals
+5. Check that all links and interactive elements work
+
+### Development Workflow
+- Use `docker compose up` for local development (port 8080)
+- Changes auto-reload via LiveReload
+- For image conversions, macOS `sips` command is preferred over `ffmpeg`
+- Test in browser after making changes - don't assume based on code alone
