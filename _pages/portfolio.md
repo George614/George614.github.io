@@ -661,30 +661,30 @@ nav: true
       <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
         <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Training Memory Calculation</h4>
         <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Training Engines:</strong> PyTorch DDP, DeepSpeed ZeRO, Megatron-LM, and FSDP</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Detailed Breakdown:</strong> Memory by component (parameters, gradients, optimizer states, activations)</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Preset Models:</strong> Quick-load configurations for LLaMA 2, GPT-3, Mixtral, and more</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Advanced Features:</strong> CPU/NVMe offloading, activation checkpointing, multi-node training</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Training Engines:</strong> <span style="color: #1a1a1a; font-weight: 500;">PyTorch DDP, DeepSpeed ZeRO, Megatron-LM, and FSDP</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Detailed Breakdown:</strong> <span style="color: #1a1a1a; font-weight: 500;">Memory by component (parameters, gradients, optimizer states, activations)</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Preset Models:</strong> <span style="color: #1a1a1a; font-weight: 500;">Quick-load configurations for LLaMA 2, GPT-3, Mixtral, and more</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Advanced Features:</strong> <span style="color: #1a1a1a; font-weight: 500;">CPU/NVMe offloading, activation checkpointing, multi-node training</span></li>
         </ul>
       </div>
 
       <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
         <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Inference Support</h4>
         <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Engines:</strong> HuggingFace Transformers, vLLM, TGI, TensorRT-LLM, SGLang</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">KV Cache Optimization:</strong> Quantization options (INT8, FP8, INT4)</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Tensor Parallelism:</strong> Automatic memory distribution across GPUs</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance Metrics:</strong> Throughput estimation (tokens/second)</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Multiple Engines:</strong> <span style="color: #1a1a1a; font-weight: 500;">HuggingFace Transformers, vLLM, TGI, TensorRT-LLM, SGLang</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">KV Cache Optimization:</strong> <span style="color: #1a1a1a; font-weight: 500;">Quantization options (INT8, FP8, INT4)</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Tensor Parallelism:</strong> <span style="color: #1a1a1a; font-weight: 500;">Automatic memory distribution across GPUs</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance Metrics:</strong> <span style="color: #1a1a1a; font-weight: 500;">Throughput estimation (tokens/second)</span></li>
         </ul>
       </div>
 
       <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
         <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Interfaces & Tools</h4>
         <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Web Interface:</strong> Interactive UI with real-time validation and formula explanations</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Command Line:</strong> CLI tool for quick calculations and batch processing</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Python API:</strong> Programmatic access for integration into workflows</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Framework Export:</strong> Generate configs for Accelerate, Lightning, and Axolotl</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Web Interface:</strong> <span style="color: #1a1a1a; font-weight: 500;">Interactive UI with real-time validation and formula explanations</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Command Line:</strong> <span style="color: #1a1a1a; font-weight: 500;">CLI tool for quick calculations and batch processing</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Python API:</strong> <span style="color: #1a1a1a; font-weight: 500;">Programmatic access for integration into workflows</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Framework Export:</strong> <span style="color: #1a1a1a; font-weight: 500;">Generate configs for Accelerate, Lightning, and Axolotl</span></li>
         </ul>
       </div>
 
@@ -735,20 +735,20 @@ nav: true
       <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
         <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">User Interface</h4>
         <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">SwiftUI Framework:</strong> Modern declarative UI framework for building native iOS interfaces</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Custom Animations:</strong> Smooth transitions and micro-interactions for enhanced user experience</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Responsive Design:</strong> Adaptive layouts that work seamlessly across different iPhone screen sizes</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Dark Mode Support:</strong> Fully integrated with iOS system appearance settings</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">SwiftUI Framework:</strong> <span style="color: #1a1a1a; font-weight: 500;">Modern declarative UI framework for building native iOS interfaces</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Custom Animations:</strong> <span style="color: #1a1a1a; font-weight: 500;">Smooth transitions and micro-interactions for enhanced user experience</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Responsive Design:</strong> <span style="color: #1a1a1a; font-weight: 500;">Adaptive layouts that work seamlessly across different iPhone screen sizes</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Dark Mode Support:</strong> <span style="color: #1a1a1a; font-weight: 500;">Fully integrated with iOS system appearance settings</span></li>
         </ul>
       </div>
 
       <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
         <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Technical Highlights</h4>
         <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Clean Architecture:</strong> MVVM pattern with separation of concerns</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Data Persistence:</strong> Core Data integration for local data storage</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Networking:</strong> Async/await based API calls with error handling</li>
-          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance:</strong> Optimized rendering and memory management</li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Clean Architecture:</strong> <span style="color: #1a1a1a; font-weight: 500;">MVVM pattern with separation of concerns</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Data Persistence:</strong> <span style="color: #1a1a1a; font-weight: 500;">Core Data integration for local data storage</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Networking:</strong> <span style="color: #1a1a1a; font-weight: 500;">Async/await based API calls with error handling</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Performance:</strong> <span style="color: #1a1a1a; font-weight: 500;">Optimized rendering and memory management</span></li>
         </ul>
       </div>
 
@@ -770,7 +770,7 @@ nav: true
       <div class="modal-tech-stack">
         <span class="modal-tech-badge">Swift</span>
         <span class="modal-tech-badge">SwiftUI</span>
-        <span class="modal-tech-badge">iOS 17</span>
+        <span class="modal-tech-badge">iOS 26</span>
         <span class="modal-tech-badge">Core Data</span>
         <span class="modal-tech-badge">MVVM</span>
       </div>
