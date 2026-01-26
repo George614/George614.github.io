@@ -4,26 +4,42 @@ $(document).ready(function() {
   let footerVisible = false;
 
   function checkScrollPosition() {
+    // Cache DOM queries to reduce overhead
+    if (!this._footerCache) {
+      this._footerCache = {
+        $footer: $('footer.fixed-bottom'),
+        lastState: false
+      };
+    }
+
     const scrollTop = $(window).scrollTop();
     const windowHeight = $(window).height();
     const documentHeight = $(document).height();
 
     // Show footer when user is within 100px of the bottom
-    if (scrollTop + windowHeight >= documentHeight - 100) {
-      if (!footerVisible) {
-        $footer.addClass('visible');
-        footerVisible = true;
+    const shouldShow = scrollTop + windowHeight >= documentHeight - 100;
+
+    // Only update DOM if state changes
+    if (shouldShow !== this._footerCache.lastState) {
+      if (shouldShow) {
+        this._footerCache.$footer.addClass('visible');
+      } else {
+        this._footerCache.$footer.removeClass('visible');
       }
-    } else {
-      if (footerVisible) {
-        $footer.removeClass('visible');
-        footerVisible = false;
-      }
+      this._footerCache.lastState = shouldShow;
+      footerVisible = shouldShow;
     }
   }
 
-  // Check on scroll
-  $(window).on('scroll', checkScrollPosition);
+  // Check on scroll - throttled with RAF for performance
+  $(window).on('scroll', { passive: true }, function() {
+    if (!this._footerCheckThrottled) {
+      this._footerCheckThrottled = window.MobileUtils ?
+        window.MobileUtils.rafThrottle(checkScrollPosition) :
+        checkScrollPosition;
+    }
+    this._footerCheckThrottled();
+  });
 
   // Check on page load
   checkScrollPosition();

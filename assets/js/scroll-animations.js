@@ -4,7 +4,7 @@
 
   // Reveal on scroll using Intersection Observer
   const revealOptions = {
-    threshold: 0.15,
+    threshold: window.MobileUtils && window.MobileUtils.isMobile() ? 0.05 : 0.15,
     rootMargin: '0px 0px -50px 0px'
   };
 
@@ -25,10 +25,15 @@
     revealElements.forEach(el => revealObserver.observe(el));
   });
 
-  // Parallax effect for hero section
+  // Parallax effect for hero section - DISABLED on mobile for performance
   let ticking = false;
 
   window.addEventListener('scroll', function() {
+    // Skip parallax on mobile devices for better performance
+    if (window.MobileUtils && window.MobileUtils.shouldReduceAnimations()) {
+      return;
+    }
+
     if (!ticking) {
       window.requestAnimationFrame(function() {
         const scrolled = window.pageYOffset;
@@ -44,6 +49,6 @@
 
       ticking = true;
     }
-  });
+  }, { passive: true });
 
 })();

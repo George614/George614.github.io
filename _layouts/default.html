@@ -296,6 +296,10 @@
     <!-- JavaScripts -->
     {% include scripts/jquery.html %}
     {% include scripts/bootstrap.html %}
+
+    <!-- CRITICAL: Load mobile utils first (before other scripts that depend on it) -->
+    <script src="{{ '/assets/js/mobile-utils.js' | relative_url | bust_file_cache }}"></script>
+
     {% include scripts/masonry.html %}
     {% include scripts/misc.html %}
     {% include scripts/badges.html %}

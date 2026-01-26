@@ -39,7 +39,12 @@
         if (theme === 'dark') {
           particlesEl.style.display = 'block';
           if (!window.pJSDom || window.pJSDom.length === 0) {
-            fetch('{{ '/assets/json/particles.json' | relative_url }}')
+            // Choose config based on device type
+            var configUrl = (window.MobileUtils && window.MobileUtils.isMobile()) ?
+              '{{ '/assets/json/particles-mobile.json' | relative_url }}' :
+              '{{ '/assets/json/particles.json' | relative_url }}';
+
+            fetch(configUrl)
               .then(response => response.json())
               .then(config => {
                 config.particles.color.value = '#ffffff';

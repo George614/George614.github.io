@@ -30,13 +30,37 @@
   function progressBarSetup() {
     if ("max" in document.createElement("progress")) {
       initializeProgressElement();
-      $(document).on("scroll", function() {
-        progressBar.attr({ value: getCurrentScrollPosition() });
+      $(document).on("scroll", { passive: true }, function() {
+        // Mobile: throttle to 100ms, Desktop: use RAF for smooth 60fps
+        if (window.MobileUtils && window.MobileUtils.isMobile()) {
+          if (!this._progressThrottled) {
+            this._progressThrottled = window.MobileUtils.throttle(function() {
+              progressBar.attr({ value: getCurrentScrollPosition() });
+            }, 100);
+          }
+          this._progressThrottled();
+        } else {
+          if (!this._progressRAF) {
+            this._progressRAF = window.MobileUtils ? window.MobileUtils.rafThrottle(function() {
+              progressBar.attr({ value: getCurrentScrollPosition() });
+            }) : function() {
+              progressBar.attr({ value: getCurrentScrollPosition() });
+            };
+          }
+          this._progressRAF();
+        }
       });
       $(window).on("resize", initializeProgressElement);
     } else {
       resizeProgressBar();
-      $(document).on("scroll", resizeProgressBar);
+      $(document).on("scroll", { passive: true }, function() {
+        if (!this._resizeProgressThrottled) {
+          this._resizeProgressThrottled = window.MobileUtils ?
+            window.MobileUtils.throttle(resizeProgressBar, 100) :
+            resizeProgressBar;
+        }
+        this._resizeProgressThrottled();
+      });
       $(window).on("resize", resizeProgressBar);
     }
   }

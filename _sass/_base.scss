@@ -1503,3 +1503,39 @@ html:not([data-theme='dark']) body::after {
     padding-top: 0.5rem;
   }
 }
+
+/* ==================================================
+   Mobile Performance Optimizations
+   ================================================== */
+
+// Mobile-optimized table containers for news and posts
+.news-table-container[data-scrollable="true"],
+.posts-table-container[data-scrollable="true"] {
+  max-height: 60vw;
+  overflow-y: auto;
+
+  // Disable nested scrolling on mobile for better UX
+  @media (max-width: 767px) {
+    max-height: none;
+  }
+
+  // Smooth scrolling on iOS
+  -webkit-overflow-scrolling: touch;
+
+  // Better scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: var(--global-theme-color) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--global-theme-color);
+    border-radius: 3px;
+  }
+}
