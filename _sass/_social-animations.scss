@@ -1,13 +1,18 @@
-// Modern social icons with unified subtle gradient
+// ─────────────────────────────────────────────
+// Ethereal Orbit Social Icons
+// Animated orbital rings with luminous hover
+// ─────────────────────────────────────────────
+
 .social {
   .contact-icons {
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 25px !important;
+    gap: 22px !important;
     width: 100% !important;
     max-width: 400px !important;
     margin: 0 auto !important;
+    margin-bottom: 14px !important;
     font-size: 0 !important;
 
     a {
@@ -15,40 +20,82 @@
       align-items: center !important;
       justify-content: center !important;
       position: relative !important;
-      width: 70px !important;
-      height: 80px !important;
-      flex: 0 0 calc(33.333% - 17px) !important;
+      width: 56px !important;
+      height: 56px !important;
+      flex: 0 0 auto !important;
       margin: 0 !important;
       padding: 0 !important;
+      border-radius: 50% !important;
+      background: transparent !important;
+      text-decoration: none !important;
+      border: 1px solid rgba(var(--global-theme-color-rgb), 0.08) !important;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.5s ease,
+                  box-shadow 0.6s ease !important;
 
-      // Hexagon with flat top and bottom
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      // Staggered entrance — icons focus in through soft blur
+      // Note: opacity must not be !important or it overrides the animation fill
+      opacity: 0;
+      animation: social-emerge 0.7s ease both !important;
 
-      // Unified subtle gradient for all icons
+      @for $i from 1 through 18 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 0.07}s !important;
+        }
+      }
+
+      // Varied orbital speeds for organic, constellation-like feel
+      &:nth-child(3n+1)::before { animation-duration: 10s !important; }
+      &:nth-child(3n+2)::before { animation-duration: 14s !important; }
+      &:nth-child(3n)::before { animation-duration: 18s !important; }
+      &:nth-child(even)::before { animation-direction: reverse !important; }
+
+      // Animated orbital arc — conic gradient masked to a thin ring
       &::before {
         content: '' !important;
         position: absolute !important;
-        inset: 0 !important;
-        background: linear-gradient(135deg, var(--global-theme-color) 0%, var(--global-hover-color) 100%) !important;
-        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+        inset: -2px !important;
+        border-radius: 50% !important;
+        background: conic-gradient(
+          from 0deg,
+          var(--global-theme-color) 0deg,
+          rgba(var(--global-theme-color-rgb), 0.3) 40deg,
+          transparent 100deg,
+          transparent 220deg,
+          rgba(var(--global-theme-color-rgb), 0.2) 300deg,
+          var(--global-hover-color) 340deg,
+          transparent 360deg
+        ) !important;
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 1.5px),
+          #000 calc(100% - 1.5px)
+        ) !important;
+        mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 1.5px),
+          #000 calc(100% - 1.5px)
+        ) !important;
+        animation: orbital-spin 12s linear infinite !important;
+        opacity: 0.3 !important;
+        transition: opacity 0.5s ease, inset 0.5s ease, filter 0.5s ease !important;
         z-index: 0 !important;
-        transition: all 0.4s ease !important;
       }
 
-      // Subtle shine overlay
+      // Soft radial glow — expands on hover
       &::after {
         content: '' !important;
         position: absolute !important;
-        inset: 0 !important;
-        background: linear-gradient(135deg,
-          rgba(255,255,255,0.15) 0%,
-          rgba(255,255,255,0.05) 50%,
-          rgba(255,255,255,0) 100%) !important;
-        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
-        z-index: 1 !important;
-        opacity: 0.6 !important;
-        transition: all 0.4s ease !important;
+        inset: -4px !important;
+        border-radius: 50% !important;
+        background: radial-gradient(
+          circle at center,
+          rgba(var(--global-theme-color-rgb), 0.03) 0%,
+          transparent 70%
+        ) !important;
+        z-index: 0 !important;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        pointer-events: none !important;
       }
 
       i {
@@ -61,58 +108,95 @@
         height: 100% !important;
 
         &::before {
-          color: #fff !important;
-          font-size: 1.8rem !important;
-          text-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-          transition: all 0.4s ease !important;
+          color: var(--global-text-color) !important;
+          font-size: 1.35rem !important;
+          opacity: 0.6 !important;
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
         }
       }
 
-      // Subtle hover effects
+      // ── Hover: lift, glow, intensify ──
       &:hover {
-        transform: translateY(-8px) scale(1.1) !important;
+        transform: translateY(-5px) scale(1.12) !important;
+        border-color: rgba(var(--global-theme-color-rgb), 0.2) !important;
+        box-shadow: 0 8px 24px -8px rgba(var(--global-theme-color-rgb), 0.15) !important;
 
         &::before {
-          filter: brightness(1.15) !important;
+          opacity: 0.75 !important;
+          inset: -4px !important;
+          filter: blur(0.3px) !important;
         }
 
         &::after {
-          opacity: 0.8 !important;
+          inset: -16px !important;
+          background: radial-gradient(
+            circle at center,
+            rgba(var(--global-theme-color-rgb), 0.1) 0%,
+            rgba(var(--global-theme-color-rgb), 0.03) 50%,
+            transparent 70%
+          ) !important;
         }
 
         i::before {
-          text-shadow: 0 0 15px rgba(255,255,255,0.6) !important;
+          color: var(--global-theme-color) !important;
+          opacity: 1 !important;
+          filter: drop-shadow(0 0 8px rgba(var(--global-theme-color-rgb), 0.45)) !important;
         }
-      }
-    }
-
-    // Center the last row with 2 items
-    &:has(a:nth-last-child(2):nth-child(odd)) {
-      justify-content: center !important;
-
-      a:nth-last-child(2),
-      a:last-child {
-        margin-left: auto !important;
-        margin-right: auto !important;
       }
     }
   }
 }
 
-// Navbar social icons with modern enhancement
+// Navbar social icons — refined hover
 .navbar-brand.social {
   a {
     i::before {
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     &:hover {
-      transform: scale(1.3) rotate(8deg);
+      transform: scale(1.15);
 
       i::before {
         color: var(--global-theme-color);
-        filter: drop-shadow(0 0 8px var(--global-theme-color));
+        filter: drop-shadow(0 0 6px rgba(var(--global-theme-color-rgb), 0.35));
       }
     }
+  }
+}
+
+// ── Responsive ──
+
+@media (max-width: 480px) {
+  .social .contact-icons {
+    gap: 18px !important;
+    max-width: 100% !important;
+
+    a {
+      width: 50px !important;
+      height: 50px !important;
+
+      i::before {
+        font-size: 1.2rem !important;
+      }
+    }
+  }
+}
+
+// ── Keyframes ──
+
+@keyframes orbital-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes social-emerge {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
   }
 }
