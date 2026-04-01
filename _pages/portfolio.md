@@ -611,6 +611,31 @@ nav: true
       </div>
     </div>
 
+    <!-- Interview Prep App Project Card -->
+    <div class="project-card" data-category="ai web" data-project="interview-prep">
+      <div class="project-banner">
+        <img src="/assets/img/interview-prep-app.png" alt="AI Interview Prep App">
+      </div>
+      <div class="project-info">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg, #533483 0%, #0f3460 100%);">
+            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">AI Interview Prep</h3>
+            <p class="project-category">AI/ML · Study Tool</p>
+          </div>
+        </div>
+        <p class="project-brief">
+          A local AI interview preparation tool for AI research scientist and engineer roles. Practice, learn, and track your progress across key ML/AI domains.
+        </p>
+        <div class="view-project-btn">
+          <span>View Project</span>
+          <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+        </div>
+      </div>
+    </div>
+
     <!-- iOS App Project Card -->
     <div class="project-card" data-category="ios" data-project="ios-app">
       <div class="project-banner">
@@ -712,6 +737,85 @@ nav: true
         <a href="https://huggingface.co/spaces/george614/gpu-memory-calculator" class="modal-link">
           <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
           HuggingFace Demo
+        </a>
+      </div>
+    </div>
+
+    <!-- Interview Prep App Modal Content -->
+    <div id="interview-prep-modal" style="display: none;">
+      <div class="modal-header">
+        <div class="modal-icon" style="background: linear-gradient(135deg, #533483 0%, #0f3460 100%);">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" fill="#fff"/></svg>
+        </div>
+        <h2 class="modal-title">AI Interview Prep</h2>
+        <p class="modal-category">AI/ML · Study Tool</p>
+      </div>
+
+      <p class="modal-description">
+        Preparing for AI research scientist and machine learning engineer interviews is uniquely challenging — the field evolves rapidly, questions span deep theory and practical systems, and there's no single resource that ties it all together. This tool was born from that frustration: a local-first, privacy-respecting study companion that lets you systematically build and verify your knowledge across every domain that top AI labs actually test on.
+      </p>
+
+      <h3 style="color: #000000; font-size: 1.4rem; margin-bottom: 24px; font-weight: 600; letter-spacing: 0.05em;">Why This Tool?</h3>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Motivation</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Targeted Coverage:</strong> <span style="color: #1a1a1a; font-weight: 500;">Curated questions from real AI/ML interview loops at top labs — not generic software engineering trivia</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Privacy First:</strong> <span style="color: #1a1a1a; font-weight: 500;">Runs 100% locally with no mandatory cloud dependencies — your study progress stays on your machine</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Science-Backed Learning:</strong> <span style="color: #1a1a1a; font-weight: 500;">Built around active recall and spaced repetition, proven to dramatically improve long-term retention</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">End-to-End Prep:</strong> <span style="color: #1a1a1a; font-weight: 500;">Covers technical, behavioral, and negotiation stages — not just coding questions</span></li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Study Modes</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Question Bank:</strong> <span style="color: #1a1a1a; font-weight: 500;">Flashcard-style review with LaTeX math rendering and diagram support for deep theoretical questions</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Quiz Mode:</strong> <span style="color: #1a1a1a; font-weight: 500;">Self-assessment with optional AI-powered feedback via OpenAI or Anthropic APIs</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Mock Interview:</strong> <span style="color: #1a1a1a; font-weight: 500;">Timed practice sessions that simulate real interview pressure and pacing</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Debug Scenarios:</strong> <span style="color: #1a1a1a; font-weight: 500;">Hands-on ML training debugging exercises — a staple of research engineer interviews</span></li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Domain Coverage</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">LLM Post-Training:</strong> <span style="color: #1a1a1a; font-weight: 500;">RLHF, DPO, reward modeling, and alignment fine-tuning</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Agentic AI & Memory:</strong> <span style="color: #1a1a1a; font-weight: 500;">Tool use, planning, retrieval-augmented generation, and continual learning</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Reinforcement Learning:</strong> <span style="color: #1a1a1a; font-weight: 500;">Policy gradients, value methods, multi-agent systems, and environment design</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Safety & Evaluation:</strong> <span style="color: #1a1a1a; font-weight: 500;">Model alignment, red-teaming, benchmark design, and robustness testing</span></li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 35px; padding: 24px; background: rgba(0, 0, 0, 0.02); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+        <h4 style="color: var(--portfolio-accent); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Progress & Retention</h4>
+        <ul style="color: #000000; line-height: 2; list-style: none; padding: 0; font-size: 1rem;">
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Spaced Repetition:</strong> <span style="color: #1a1a1a; font-weight: 500;">Automatically surfaces questions you're weakest on at optimal review intervals</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Domain Mastery Tracking:</strong> <span style="color: #1a1a1a; font-weight: 500;">Visual progress across all covered domains so you know exactly where to focus</span></li>
+          <li style="margin-bottom: 12px;">• <strong style="color: #000000; font-weight: 600;">Curated Resources:</strong> <span style="color: #1a1a1a; font-weight: 500;">Linked reference materials for deeper study on any topic</span></li>
+        </ul>
+      </div>
+
+      <div class="modal-screenshots">
+        <div class="screenshot-item">
+          <img src="/assets/img/interview-prep-app.png" alt="AI Interview Prep App - Question Bank">
+        </div>
+      </div>
+
+      <div class="modal-tech-stack">
+        <span class="modal-tech-badge">Python</span>
+        <span class="modal-tech-badge">Gradio</span>
+        <span class="modal-tech-badge">OpenAI API</span>
+        <span class="modal-tech-badge">Anthropic API</span>
+        <span class="modal-tech-badge">LaTeX</span>
+        <span class="modal-tech-badge">Spaced Repetition</span>
+        <span class="modal-tech-badge">Local-First</span>
+      </div>
+
+      <div class="modal-links">
+        <a href="https://github.com/George614/interview-prep-app-public" class="modal-link">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub Repository
         </a>
       </div>
     </div>
