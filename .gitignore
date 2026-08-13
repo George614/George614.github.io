@@ -9,3 +9,6 @@ _site
 Gemfile.lock
 vendor
 .playwright-mcp
+# Ad-hoc screenshots dropped at the repo root during UI testing.
+# Site images live under assets/, so they are unaffected.
+/*.png
