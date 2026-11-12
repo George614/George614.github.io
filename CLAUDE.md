@@ -34,7 +34,7 @@ purgecss -c purgecss.config.js          # Remove unused CSS classes
 - **Automatic**: Push to `master` branch triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`)
 - **Manual**: Go to Actions → Deploy → Run workflow
 
-The deploy workflow builds the site with Ruby 3.2.2 and deploys to the `gh-pages` branch.
+The deploy workflow builds the site with the latest Ruby 3.4.x patch release and deploys to the `gh-pages` branch.
 
 ## Site Structure and Architecture
 
