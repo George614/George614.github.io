@@ -3,13 +3,13 @@
 {%- assign thumb = entry.figures | first -%}
 <a class="entry-row{% if thumb %} has-thumb{% endif %}" href="{{ entry.url }}">
   {%- if thumb %}
-  <span class="entry-thumb">{% include picture.html src=thumb.src alt=thumb.alt width=thumb.width height=thumb.height sizes="(max-width: 820px) 112px, 220px" %}</span>
+  <span class="entry-thumb">{% include picture.html src=thumb.src alt=thumb.alt width=thumb.width height=thumb.height sizes="(max-width: 480px) 100vw, (max-width: 820px) 112px, 220px" %}</span>
   {%- endif %}
-  <span class="entry-text">
+  <div class="entry-text">
     <h3>{{ entry.title }}</h3>
     <span class="entry-summary">{{ entry.summary }}</span>
     {%- if entry.label %}
     <span class="label">{{ entry.label }}</span>
     {%- endif %}
-  </span>
+  </div>
 </a>

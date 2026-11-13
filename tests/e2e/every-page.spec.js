@@ -27,3 +27,17 @@ for (const path of PAGES) {
     });
   }
 }
+
+for (const path of PAGES) {
+  test(`${path} has a heading outline with no skipped levels, and no heading inside a span`, async ({ page }) => {
+    await page.goto(path);
+    const headings = await page.locator('h1, h2, h3, h4, h5, h6').evaluateAll((els) =>
+      els.map((h) => ({ level: Number(h.tagName[1]), text: h.textContent.trim(), inSpan: Boolean(h.closest('span')) })));
+    expect(headings[0].level).toBe(1);
+    for (let i = 1; i < headings.length; i += 1) {
+      expect(headings[i].level, `"${headings[i].text}" after "${headings[i - 1].text}"`)
+        .toBeLessThanOrEqual(headings[i - 1].level + 1);
+    }
+    expect(headings.filter((h) => h.inSpan).map((h) => h.text)).toEqual([]);
+  });
+}

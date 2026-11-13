@@ -97,10 +97,6 @@ html:not([data-js]) .topic-filter {
   object-fit: contain;
 }
 
-.entry-text {
-  display: block;
-}
-
 .entry-text h3 {
   max-width: 32em;
   margin: 0 0 6px;
@@ -155,5 +151,12 @@ a.entry-row:hover h3 {
 
   .entry-text h3 {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  // On a narrow phone the thumbnail sits above the text, so a title is not squeezed into a few words a line.
+  .entry-row.has-thumb {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

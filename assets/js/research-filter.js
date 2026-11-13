@@ -1,4 +1,4 @@
-import { parseTopic } from './lib/topic.js';
+import { filterStatus, parseTopic } from './lib/topic.js';
 
 const nav = document.querySelector('[data-topic-filter]');
 const links = [...nav.querySelectorAll('a[data-topic]')];
@@ -28,7 +28,7 @@ function apply(topic) {
   }
   const active = links.find((link) => link.getAttribute('aria-current') === 'true');
   revealInRow(active);
-  status.textContent = topic ? `Showing ${shown} entries in ${active.textContent}` : `Showing all ${shown} entries`;
+  status.textContent = filterStatus(shown, topic ? active.textContent : null);
 }
 
 nav.addEventListener('click', (event) => {

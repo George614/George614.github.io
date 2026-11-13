@@ -98,3 +98,17 @@ test('a portrait figure fits inside its list thumbnail', async ({ page }) => {
   expect(img.height).toBeLessThanOrEqual(box.height);
   expect(img.y).toBeGreaterThanOrEqual(box.y);
 });
+
+test('on a narrow phone a thumbnail sits above its text, so titles keep the full width', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/research/');
+  const rows = page.locator('.entry-row.has-thumb');
+  expect(await rows.count()).toBeGreaterThan(0);
+  for (const row of await rows.all()) {
+    const box = await row.boundingBox();
+    const thumb = await row.locator('.entry-thumb').boundingBox();
+    const title = await row.locator('h3').boundingBox();
+    expect(title.y).toBeGreaterThanOrEqual(thumb.y + thumb.height);
+    expect(Math.abs(title.width - box.width)).toBeLessThan(1);
+  }
+});
