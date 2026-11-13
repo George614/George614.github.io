@@ -1,0 +1,4 @@
+collections:
+  fixtures:
+    output: true
+    permalink: "/fixtures/:name/"

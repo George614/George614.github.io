@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field notes with navigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root { --bar: 46px;
+    --paper: #f7f9fa; --raised: #ffffff; --ink: #17222c; --soft: #53626f; --rule: #d5dce2; --blue: #1f5d8c; --gold: #a06d0c; --tint: #e8eef2; }
+  :root[data-theme="dark"] { --paper: #111a22; --raised: #18232d; --ink: #e4eaef; --soft: #9aa9b6; --rule: #283642; --blue: #86bbe8; --gold: #e0b04f; --tint: #1b2833; }
+  html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 "Hanken Grotesk", system-ui, sans-serif; transition: background .25s ease, color .25s ease; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .fig { width: 100%; height: 100%; display: block; }
+
+  /* mockup-only bar */
+  .mock { position: sticky; top: 0; z-index: 60; height: var(--bar); display: flex; gap: 8px; align-items: center; padding: 0 20px; background: #10161c; color: #93a1ad; font-size: 14px; }
+  .mock button { font: 500 14px/1 "Hanken Grotesk", sans-serif; color: #dfe5ea; background: transparent; border: 1px solid #3a4651; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .mock button[aria-pressed="true"] { background: #f2c14e; border-color: #f2c14e; color: #10161c; }
+  .mock span { margin-right: 6px; }
+
+  /* site header */
+  .site { position: sticky; top: var(--bar); z-index: 40; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+  .site.stuck { border-bottom-color: var(--rule); }
+  .site .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+  .brand { font: 500 21px/1 "Newsreader", serif; letter-spacing: -0.01em; text-decoration: none; white-space: nowrap; }
+  .menu { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; font-size: 15.5px; }
+  .menu a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; color: var(--soft); transition: color .15s ease, background .15s ease; }
+  .menu a:hover { color: var(--ink); background: var(--tint); }
+  .menu a[aria-current="page"] { color: var(--ink); font-weight: 500; position: relative; }
+  .menu a[aria-current="page"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 2px; background: var(--gold); border-radius: 2px; }
+  .tools { display: flex; align-items: center; gap: 4px; }
+  .icon { width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--soft); cursor: pointer; }
+  .icon:hover { color: var(--ink); background: var(--tint); }
+  .icon svg { width: 19px; height: 19px; }
+  #burger { display: none; }
+  :root[data-theme="dark"] .moon, :root:not([data-theme="dark"]) .sun { display: none; }
+
+  .page { display: none; padding-bottom: 40px; }
+  .page.on { display: block; }
+
+  /* home */
+  .hero { display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: end; padding: 64px 0 72px; }
+  h1 { font: 400 clamp(40px, 5.6vw, 68px)/1.04 "Newsreader", serif; letter-spacing: -0.025em; margin: 0 0 28px; text-wrap: balance; }
+  .hero p { max-width: 34em; margin: 0 0 24px; color: var(--soft); font-size: 19px; }
+  .hero img { aspect-ratio: 4/5; object-fit: cover; object-position: 60% 30%; border-radius: 2px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15.5px; }
+  .contact a { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 5px; }
+  .contact a:hover { text-decoration-color: var(--blue); color: var(--blue); }
+  .notes { display: grid; grid-template-columns: 1fr 300px; gap: 64px; padding: 48px 0; border-top: 1px solid var(--rule); }
+  .notes p { margin: 0 0 1em; max-width: 38em; font: 400 20px/1.6 "Newsreader", serif; }
+  dl { margin: 0; font-size: 15px; }
+  dt { color: var(--soft); }
+  dd { margin: 0 0 16px; font-weight: 500; }
+  h2 { font: 400 32px/1.1 "Newsreader", serif; letter-spacing: -0.02em; margin: 0; }
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .head a { font-size: 15.5px; color: var(--blue); text-underline-offset: 5px; }
+  .work { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--rule); align-items: start; text-decoration: none; }
+  .work:last-child { border-bottom: 0; }
+  .thumb { aspect-ratio: 16/10; background: var(--tint); color: var(--blue); border-radius: 2px; }
+  .work h3 { font: 500 23px/1.2 "Newsreader", serif; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .work:hover h3 { color: var(--blue); }
+  .work p { margin: 0 0 8px; color: var(--soft); max-width: 44em; }
+  .work small { font-size: 14px; color: var(--gold); font-weight: 500; }
+
+  /* research list */
+  .intro { padding: 56px 0 28px; }
+  .intro h1 { font-size: clamp(36px, 4.6vw, 54px); margin-bottom: 16px; }
+  .intro p { color: var(--soft); max-width: 38em; font-size: 19px; margin: 0; }
+  .filter { position: sticky; top: calc(var(--bar) + 68px); z-index: 30; background: var(--paper); display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .filter button { font: 500 15px/1 "Hanken Grotesk", sans-serif; padding: 9px 15px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--soft); cursor: pointer; }
+  .filter button:hover { color: var(--ink); border-color: var(--soft); }
+  .filter button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .work[hidden] { display: none; }
+
+  /* project page */
+  .crumb { padding: 36px 0 0; font-size: 15px; color: var(--soft); }
+  .crumb a { text-underline-offset: 5px; text-decoration-color: var(--rule); }
+  .proj h1 { font-size: clamp(34px, 4.4vw, 52px); margin: 18px 0 18px; max-width: 18em; }
+  .proj .by { color: var(--soft); max-width: 44em; margin: 0 0 22px; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+  .btns a { font-weight: 500; font-size: 15.5px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--ink); text-decoration: none; transition: background .15s ease, color .15s ease; }
+  .btns a:first-child, .btns a:hover { background: var(--ink); color: var(--paper); }
+  .bigfig { aspect-ratio: 16/7.5; background: var(--tint); color: var(--blue); border-radius: 2px; }
+  figcaption { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
+  figure { margin: 0; }
+  .body { display: grid; grid-template-columns: 1fr 300px; gap: 64px; padding: 48px 0 56px; }
+  .body p { font: 400 20px/1.6 "Newsreader", serif; margin: 0 0 1em; max-width: 36em; }
+  .body h2 { font-size: 26px; margin: 28px 0 12px; }
+  .body ul { margin: 0; padding-left: 1.1em; max-width: 38em; }
+  .body li { margin-bottom: 8px; }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); }
+  .pager a { padding: 28px 0; text-decoration: none; }
+  .pager a + a { text-align: right; border-left: 1px solid var(--rule); }
+  .pager small { display: block; color: var(--soft); font-size: 14px; }
+  .pager b { font: 500 21px/1.25 "Newsreader", serif; }
+  .pager a:hover b { color: var(--blue); }
+
+  footer { border-top: 1px solid var(--rule); margin-top: 24px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 32px; padding-top: 28px; padding-bottom: 44px; font-size: 15px; color: var(--soft); }
+  footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 820px) {
+    .hero, .notes, .body { grid-template-columns: 1fr; gap: 28px; }
+    .hero { padding-top: 36px; }
+    .work { grid-template-columns: 1fr; gap: 14px; }
+    #burger { display: grid; }
+    .menu { position: absolute; left: 0; right: 0; top: 68px; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 16px; background: var(--paper); border-bottom: 1px solid var(--rule); display: none; }
+    .menu.open { display: flex; }
+    .menu a { padding: 13px 12px; border-radius: 6px; font-size: 18px; }
+    .menu a[aria-current="page"]::after { left: 12px; right: auto; width: 28px; bottom: 6px; }
+    .wrap { padding: 0 20px; }
+    .mock span { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="f-reward" viewBox="0 0 320 200"><g fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M30 170H300M30 170V24" stroke-width="1.5" opacity=".45"/>
+    <path d="M30 150c40-4 55-10 80-34s38-52 72-62 70-12 118-16" stroke-width="3"/>
+    <path d="M30 156c44-2 62-2 90-18s44-34 74-44 62-10 106-12" stroke-width="1.5" opacity=".5" stroke-dasharray="5 6"/></g></symbol>
+  <symbol id="f-blocks" viewBox="0 0 320 200"><g fill="currentColor">
+    <g opacity=".3"><rect x="24" y="36" width="272" height="10" rx="2"/><rect x="24" y="52" width="272" height="10" rx="2"/><rect x="24" y="68" width="200" height="10" rx="2"/></g>
+    <rect x="60" y="112" width="34" height="34" rx="4"/><rect x="104" y="112" width="34" height="34" rx="4" opacity=".8"/><rect x="148" y="112" width="34" height="34" rx="4" opacity=".6"/><rect x="192" y="112" width="34" height="34" rx="4" opacity=".45"/><rect x="236" y="112" width="34" height="34" rx="4" opacity=".3"/></g>
+    <g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".6"><path d="M77 84v22M121 84v22M165 84v22M209 84v22M253 84v22"/></g></symbol>
+  <symbol id="f-tools" viewBox="0 0 320 200"><g fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="160" cy="100" r="26" fill="currentColor" fill-opacity=".18"/>
+    <rect x="34" y="34" width="62" height="36" rx="6"/><rect x="224" y="34" width="62" height="36" rx="6"/><rect x="34" y="130" width="62" height="36" rx="6"/><rect x="224" y="130" width="62" height="36" rx="6"/>
+    <path d="M96 60l42 26M224 60l-42 26M96 140l42-26M224 140l-42-26" opacity=".6"/></g></symbol>
+  <symbol id="f-arm" viewBox="0 0 320 200"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 170h60M90 170V120l60-46 56 30" stroke-width="5"/><circle cx="90" cy="120" r="7" fill="currentColor"/><circle cx="150" cy="74" r="7" fill="currentColor"/>
+    <path d="M206 104c22 2 40-10 54-32" stroke-width="1.5" stroke-dasharray="4 6" opacity=".7"/><rect x="252" y="48" width="24" height="24" rx="3" stroke-width="2" opacity=".8"/></g></symbol>
+  <symbol id="f-gaze" viewBox="0 0 320 200"><g fill="none" stroke="currentColor">
+    <path d="M40 100c40-52 200-52 240 0-40 52-200 52-240 0z" stroke-width="2"/><circle cx="160" cy="100" r="30" stroke-width="2"/><circle cx="160" cy="100" r="11" fill="currentColor"/></g></symbol>
+  <symbol id="f-wide" viewBox="0 0 640 300"><g fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M60 250H590M60 250V40" stroke-width="1.5" opacity=".45"/>
+    <path d="M60 222c80-6 110-18 160-58s76-84 144-98 140-16 226-22" stroke-width="3.5"/>
+    <path d="M60 230c88-2 124-4 180-30s88-52 148-66 124-14 202-18" stroke-width="1.5" opacity=".5" stroke-dasharray="6 7"/>
+    <path d="M60 236c96 0 150-2 210-14s120-24 320-30" stroke-width="1.5" opacity=".3"/></g></symbol>
+</svg>
+
+<div class="mock" role="group" aria-label="Mockup page">
+  <span>Direction A, three pages</span>
+  <button data-p="home" aria-pressed="true">Home</button>
+  <button data-p="research" aria-pressed="false">Research list</button>
+  <button data-p="project" aria-pressed="false">Project page</button>
+</div>
+
+<header class="site" id="site">
+  <div class="wrap">
+    <a class="brand" href="#" data-go="home">Zhizhuo Yang</a>
+    <ul class="menu" id="menu">
+      <li><a href="#" data-go="home" data-nav="home" aria-current="page">Home</a></li>
+      <li><a href="#" data-go="research" data-nav="research">Research</a></li>
+      <li><a href="#" data-nav="x">Publications</a></li>
+      <li><a href="#" data-nav="x">CV</a></li>
+      <li><a href="#" data-nav="x">Photography</a></li>
+    </ul>
+    <div class="tools">
+      <button class="icon" id="theme" aria-label="Switch between light and dark">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg>
+      </button>
+      <button class="icon" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main class="page on" id="home">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>I train large language models to act, not only to answer.</h1>
+        <p>AI Research Scientist at WRITER, working on reinforcement learning and post-training for agents. I also go by George.</p>
+        <div class="contact"><a href="#">Email</a><a href="#">Google Scholar</a><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">CV as PDF</a></div>
+      </div>
+      <img src="/files/portrait.jpg" alt="Zhizhuo Yang holding a camera in Yosemite Valley">
+    </div>
+
+    <div class="notes">
+      <div>
+        <p>At WRITER I built the agentic reinforcement learning stack end to end: synthetic data, verifiers and rewards, and training a 744-billion-parameter model inside the production agent harness.</p>
+        <p>Before that I earned a Ph.D. at Rochester Institute of Technology on active inference, studying how agents perceive, act and learn under uncertainty, after years of work on eye tracking and virtual reality.</p>
+      </div>
+      <aside><dl>
+        <dt>Now</dt><dd>AI Research Scientist, WRITER, San Francisco</dd>
+        <dt>Shipped</dt><dd>Training data pipeline behind Palmyra x6</dd>
+        <dt>Under review</dt><dd>Two papers on diffusion language models</dd>
+        <dt>Ph.D.</dt><dd>Rochester Institute of Technology, 2024</dd>
+      </dl></aside>
+    </div>
+
+    <section>
+      <div class="head"><h2>Selected work</h2><a href="#" data-go="research">All research</a></div>
+      <a class="work" href="#" data-go="project"><div class="thumb"><svg class="fig"><use href="#f-reward"/></svg></div>
+        <div><h3>Reinforcement learning for a 744B-parameter agent</h3>
+        <p>End-to-end GRPO training across 8-node GPU clusters, with the production agent as the environment. Profiling and engine changes raised rollout output by 2.6 to 4.1 times.</p><small>WRITER, 2025 to 2026</small></div></a>
+      <a class="work" href="#"><div class="thumb"><svg class="fig"><use href="#f-tools"/></svg></div>
+        <div><h3>Palmyra x6: an agentic, tool-use model</h3>
+        <p>Built the synthetic tool-use data pipeline that post-trained the shipped model, which reached the top BFCL Core score among compared models.</p><small>Technical report, arXiv 2026</small></div></a>
+      <a class="work" href="#"><div class="thumb"><svg class="fig"><use href="#f-blocks"/></svg></div>
+        <div><h3>Denoising blocks, not tokens</h3>
+        <p>Branching Latent Diffusion compresses 1,024 tokens into 64 latents and decodes them in parallel, for over 6 times the throughput of an autoregressive baseline.</p><small>Under review, ICLR 2027</small></div></a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= RESEARCH ================= -->
+<main class="page" id="research">
+  <div class="wrap">
+    <div class="intro">
+      <h1>Research</h1>
+      <p>Projects and papers, newest first. Each one opens a short summary with a figure, the main results and links.</p>
+    </div>
+    <div class="filter" role="group" aria-label="Filter by topic">
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="agents" aria-pressed="false">LLM agents and RL</button>
+      <button data-f="diffusion" aria-pressed="false">Diffusion language models</button>
+      <button data-f="aif" aria-pressed="false">Active inference</button>
+      <button data-f="eye" aria-pressed="false">Eye tracking and VR</button>
+    </div>
+    <a class="work" data-t="agents" href="#" data-go="project"><div class="thumb"><svg class="fig"><use href="#f-reward"/></svg></div>
+      <div><h3>Reinforcement learning for a 744B-parameter agent</h3><p>End-to-end GRPO training across 8-node GPU clusters, with the production agent as the environment.</p><small>WRITER, 2025 to 2026</small></div></a>
+    <a class="work" data-t="agents" href="#"><div class="thumb"><svg class="fig"><use href="#f-tools"/></svg></div>
+      <div><h3>Palmyra x6: an agentic, tool-use model</h3><p>The synthetic tool-use data pipeline behind a shipped model with the top BFCL Core score among compared models.</p><small>Technical report, arXiv 2026</small></div></a>
+    <a class="work" data-t="diffusion" href="#"><div class="thumb"><svg class="fig"><use href="#f-blocks"/></svg></div>
+      <div><h3>Denoising blocks, not tokens</h3><p>Branching Latent Diffusion compresses 1,024 tokens into 64 latents and decodes them in parallel.</p><small>Under review, ICLR 2027</small></div></a>
+    <a class="work" data-t="diffusion" href="#"><div class="thumb"><svg class="fig"><use href="#f-blocks"/></svg></div>
+      <div><h3>When are errors evidence?</h3><p>Deciding whether a diffusion language model should erase a suspicious token or keep it as context for revision.</p><small>Under review, ACL ARR 2026</small></div></a>
+    <a class="work" data-t="aif" href="#"><div class="thumb"><svg class="fig"><use href="#f-arm"/></svg></div>
+      <div><h3>SR-AIF: sparse-reward robotics from pixels</h3><p>Active inference with world models that solves sparse-reward manipulation tasks.</p><small>ICRA 2025</small></div></a>
+    <a class="work" data-t="eye" href="#"><div class="thumb"><svg class="fig"><use href="#f-gaze"/></svg></div>
+      <div><h3>Gaze-in-Wild</h3><p>A dataset for studying how eyes and head coordinate in everyday activities.</p><small>Scientific Reports, 2020</small></div></a>
+  </div>
+</main>
+
+<!-- ================= PROJECT ================= -->
+<main class="page proj" id="project">
+  <div class="wrap">
+    <div class="crumb"><a href="#" data-go="research">Research</a> / LLM agents and RL</div>
+    <h1>Reinforcement learning for a 744B-parameter agent</h1>
+    <p class="by">Zhizhuo Yang, with Peng Du, Zhenyu Zhao, Kiran Kamble and Arjun Krishna. WRITER, 2025 to 2026.</p>
+    <div class="btns"><a href="#">Technical report</a><a href="#">arXiv</a><a href="#">Slides</a></div>
+
+    <figure>
+      <div class="bigfig"><svg class="fig"><use href="#f-wide"/></svg></div>
+      <figcaption>Placeholder for a real figure from the work, with its caption.</figcaption>
+    </figure>
+
+    <div class="body">
+      <div>
+        <p>We trained a 744-billion-parameter mixture-of-experts agent end to end with reinforcement learning, using the production agent harness itself as the environment, so the model learns in the same setting where it is later used.</p>
+        <h2>Main results</h2>
+        <ul>
+          <li>An initial small-scale run raised held-out task reward by 0.077 over the base policy.</li>
+          <li>Generation took 61% of wall-clock time; FP8 weights and one engine per node gave 2.6 to 4.1 times the rollout output.</li>
+          <li>Asynchronous one-step off-policy training cut per-step non-generation time from 170 seconds to 24 seconds.</li>
+        </ul>
+      </div>
+      <aside><dl>
+        <dt>Method</dt><dd>GRPO with LoRA and truncated importance sampling</dd>
+        <dt>Scale</dt><dd>8-node H100 and H200 clusters</dd>
+        <dt>Framework</dt><dd>Slime</dd>
+        <dt>Related</dt><dd><a href="#">Palmyra x6 technical report</a></dd>
+      </dl></aside>
+    </div>
+
+    <div class="pager">
+      <a href="#" data-go="research"><small>Back to</small><b>All research</b></a>
+      <a href="#"><small>Next project</small><b>Palmyra x6: an agentic, tool-use model</b></a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <span>Zhizhuo Yang, San Francisco</span>
+  <nav aria-label="Footer"><a href="#">Email</a><a href="#">Google Scholar</a><a href="#">GitHub</a><a href="#">LinkedIn</a></nav>
+</div></footer>
+
+<script>
+  const root = document.documentElement, menu = document.getElementById('menu'), burger = document.getElementById('burger');
+  function go(p) {
+    document.querySelectorAll('.page').forEach(x => x.classList.toggle('on', x.id === p));
+    document.querySelectorAll('.mock button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.p === p)));
+    const nav = p === 'project' ? 'research' : p;
+    document.querySelectorAll('.menu a').forEach(a => a.dataset.nav === nav ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('.mock button').forEach(b => b.addEventListener('click', () => go(b.dataset.p)));
+  document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); go(a.dataset.go); }));
+  document.querySelectorAll('a[href="#"]:not([data-go])').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+  document.getElementById('theme').addEventListener('click', () => root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark');
+  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', String(menu.classList.toggle('open'))));
+  const site = document.getElementById('site');
+  addEventListener('scroll', () => site.classList.toggle('stuck', scrollY > 8), { passive: true });
+  document.querySelectorAll('.filter button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.filter button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll('#research .work').forEach(w => w.hidden = b.dataset.f !== 'all' && w.dataset.t !== b.dataset.f);
+  }));
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "george614-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bundle exec jekyll build",
+    "build:test": "bundle exec jekyll build --config _config.yml,tests/_config.test.yml",
+    "test:unit": "node --test --experimental-test-coverage --test-coverage-include='assets/js/lib/**' --test-coverage-lines=80 'tests/unit/**/*.test.js'",
+    "test:e2e": "playwright test",
+    "test:site": "node --test 'tests/site/**/*.test.js'",
+    "check:links": "bundle exec htmlproofer _site --disable-external",
+    "test": "npm run build:test && npm run test:unit && npm run test:e2e && npm run build && npm run test:site && npm run check:links"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
+    "http-server": "^14.1.1",
+    "lighthouse": "^13.6.0"
+  }
+}

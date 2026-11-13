@@ -1,5 +1,4 @@
 ---
-layout: post
 title: starting new job
 date: 2025-02-03 16:11:00-0400
 inline: true

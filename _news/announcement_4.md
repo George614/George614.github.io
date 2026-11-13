@@ -1,5 +1,4 @@
 ---
-layout: post
 title: student researcher
 date: 2023-09-11 16:11:00-0400
 inline: true

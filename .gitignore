@@ -5,11 +5,15 @@ _site
 .jekyll-metadata
 .DS_store
 .ruby-version
-.tweet-cache
-Gemfile.lock
 vendor
 .playwright-mcp
 # Ad-hoc screenshots dropped at the repo root during UI testing.
 # Site images live under assets/, so they are unaffected.
 /*.png
 .superpowers/
+
+# Test tooling output.
+node_modules/
+test-results/
+playwright-report/
+.lighthouseci/
