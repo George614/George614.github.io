@@ -9,11 +9,13 @@
     "test:e2e": "playwright test",
     "test:site": "node --test 'tests/site/**/*.test.js'",
     "check:links": "bundle exec htmlproofer _site --disable-external",
-    "test": "npm run build:test && npm run test:unit && npm run test:e2e && npm run build && npm run test:site && npm run check:links"
+    "test": "npm run build:test && npm run test:unit && npm run test:e2e && npm run build && npm run test:site && npm run check:links",
+    "lighthouse": "node scripts/lighthouse.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.65.0",
+    "chrome-launcher": "1.2.3",
     "http-server": "^14.1.1",
     "lighthouse": "^13.6.0"
   }

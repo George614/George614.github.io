@@ -95,6 +95,12 @@ p {
   border: 0;
 }
 
+// The fonts stop at weight 600, so bold text asks for exactly that.
+strong,
+b {
+  font-weight: 600;
+}
+
 .skip-link {
   position: absolute;
   top: 12px;
