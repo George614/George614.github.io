@@ -53,6 +53,8 @@ The directory is git-ignored, so the builder copies the file to `docs/superpower
   Dark theme: paper `#111a22`, ink `#e4eaef`, soft text `#9aa9b6`, rule `#283642`, blue `#86bbe8`, gold `#e0b04f`, tint `#1b2833`.
   Blue is for links and figures.
   Gold is for venue and date labels and the current-page marker.
+  In the light theme, gold `#a06d0c` has a contrast ratio of 4.24 to 1 against the paper colour, which is below the 4.5 to 1 that WCAG AA requires for small text.
+  Gold text in the light theme therefore uses the slightly darker `#8a5d08` (5.45 to 1), and `#a06d0c` is kept for marks that are not text, such as the current-page underline.
 - **Type.**
   Newsreader (serif) for headings, the hero statement and long-form body text.
   Hanken Grotesk (sans) for navigation, labels, summaries and metadata.
@@ -171,7 +173,7 @@ Figures:
 
 ### Photography (`/photography/`)
 
-- Keeps the existing 32 photographs and their four albums (Mammoth, Olympic, Sequoia, Lassen and Mt. Shasta).
+- Keeps the existing 31 photographs and their four albums (Mammoth, Olympic, Sequoia, Lassen and Mt. Shasta).
 - Restyled in the new visual language: album headings, a justified or masonry grid, and a lightbox that opens the larger image with keyboard support.
 - The page loads resized thumbnails, not the full-size originals, and lazy-loads images below the first screen.
 
