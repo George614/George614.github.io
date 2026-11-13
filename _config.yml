@@ -60,6 +60,8 @@ sass:
 
 jekyll-minifier:
   exclude: [robots.txt]
+  # Sass already compresses the stylesheet, and the minifier's own CSS compressor breaks var() inside calc().
+  compress_css: false
 
 # Resized WebP copies of every image, used by _includes/picture.html.
 imagemagick:
