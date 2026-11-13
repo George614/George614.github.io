@@ -109,8 +109,8 @@
   display: none;
 }
 
-// An open BibTeX block takes the whole row under the links. Its minimum width is zero
-// so that long BibTeX lines scroll inside the block instead of widening the page.
+// An open BibTeX block takes a full row under the links. Its minimum width is zero so that
+// long lines scroll inside the block instead of widening the page.
 .pub-bibtex {
   min-width: 0;
 }
@@ -119,8 +119,26 @@
   flex-basis: 100%;
 }
 
+// Where the details content box can be styled, the list item and the details element step out
+// of the layout, so the toggle stays in the row of links and only the block wraps beneath it.
+@supports selector(::details-content) {
+  .pub-bibtex,
+  .pub-bibtex details {
+    display: contents;
+  }
+
+  .pub-bibtex details::details-content {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+
+  .pub-bibtex details:not([open])::details-content {
+    display: none;
+  }
+}
+
 .pub-bibtex pre {
-  margin: 10px 0 0;
+  margin: 4px 0 0;
   padding: 14px 16px;
   overflow-x: auto;
   border: 1px solid var(--rule);

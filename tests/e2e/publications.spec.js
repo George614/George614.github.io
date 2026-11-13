@@ -68,3 +68,20 @@ test('BibTeX opens in place without custom keys', async ({ page }) => {
   await page.locator('details').evaluateAll((els) => els.forEach((d) => { d.open = true; }));
   await expectNoOverflow(page);
 });
+
+test('opening BibTeX keeps the toggle in place and the block under the whole row', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/publications/');
+  const srAif = page.locator('li.pub', { hasText: 'SR-AIF' });
+  const toggle = srAif.locator('summary', { hasText: 'BibTeX' });
+  const before = await toggle.boundingBox();
+  await toggle.click();
+  const after = await toggle.boundingBox();
+  expect(Math.abs(after.x - before.x)).toBeLessThan(1);
+  expect(Math.abs(after.y - before.y)).toBeLessThan(1);
+  const row = await srAif.locator('.pub-links').boundingBox();
+  const pre = await srAif.locator('details pre').boundingBox();
+  expect(pre.y).toBeGreaterThan(after.y + after.height);
+  expect(Math.abs(pre.x - row.x)).toBeLessThan(1);
+  expect(Math.abs(pre.width - row.width)).toBeLessThan(1);
+});
