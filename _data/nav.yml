@@ -1,0 +1,5 @@
+- { key: home, title: Home, href: / }
+- { key: research, title: Research, href: /research/ }
+- { key: publications, title: Publications, href: /publications/ }
+- { key: cv, title: CV, href: /cv/ }
+- { key: photography, title: Photography, href: /photography/ }

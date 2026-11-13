@@ -1,0 +1,59 @@
+// Design tokens. The palette comes from the owner's Sierra Nevada photographs:
+// granite grey, sky blue and the gold of dry grass.
+
+@mixin light {
+  --paper: #f7f9fa;
+  --raised: #ffffff;
+  --ink: #17222c;
+  --soft: #53626f;
+  --rule: #d5dce2;
+  --blue: #1f5d8c;
+  --gold: #a06d0c;      // marks that are not text, such as the current-page underline
+  --gold-text: #8a5d08; // gold text, darker so small text meets WCAG AA on paper
+  --tint: #e8eef2;
+  --show-moon: inline;
+  --show-sun: none;
+  color-scheme: light;
+}
+
+@mixin dark {
+  --paper: #111a22;
+  --raised: #18232d;
+  --ink: #e4eaef;
+  --soft: #9aa9b6;
+  --rule: #283642;
+  --blue: #86bbe8;
+  --gold: #e0b04f;
+  --gold-text: #e0b04f;
+  --tint: #1b2833;
+  --show-moon: none;
+  --show-sun: inline;
+  color-scheme: dark;
+}
+
+:root {
+  @include light;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --measure: 38em;
+  --margin-column: 300px;
+  --header-height: 68px;
+  --gutter: 32px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include dark;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --gutter: 20px;
+  }
+}

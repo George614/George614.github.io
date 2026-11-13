@@ -1,0 +1,38 @@
+.site-footer {
+  margin-top: 24px;
+  border-top: 1px solid var(--rule);
+  color: var(--soft);
+  font-size: 15px;
+}
+
+.footer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 32px;
+  padding-top: 28px;
+  padding-bottom: 44px;
+}
+
+.footer-bar p {
+  margin: 0;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer .contact-links a {
+  text-decoration: none;
+}
+
+.site-footer .contact-links a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}

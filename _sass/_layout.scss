@@ -1,0 +1,88 @@
+// The page column, the prose-plus-margin pattern and the small shared pieces.
+
+.wrap {
+  max-width: calc(1080px + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.page {
+  padding-bottom: 72px;
+}
+
+.page-head {
+  padding: 56px 0 32px;
+}
+
+.page-head h1 {
+  font-size: clamp(36px, 4.6vw, 54px);
+}
+
+.lede {
+  max-width: var(--measure);
+  margin: 16px 0 0;
+  color: var(--soft);
+  font-size: 19px;
+}
+
+// Prose on the left and a narrow column of key facts on the right.
+.with-margin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-column);
+  gap: 64px;
+}
+
+.facts {
+  margin: 0;
+  font-size: 15px;
+}
+
+.facts dt {
+  color: var(--soft);
+}
+
+.facts dd {
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.facts a {
+  color: var(--blue);
+}
+
+// Gold venue or date label.
+.label {
+  color: var(--gold-text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.section {
+  padding: 56px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-bottom: 8px;
+}
+
+.section-head a {
+  color: var(--blue);
+  font-size: 15.5px;
+}
+
+@media (max-width: 820px) {
+  .with-margin {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .page-head {
+    padding-top: 36px;
+  }
+}

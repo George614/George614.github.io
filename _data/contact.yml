@@ -1,0 +1,5 @@
+# Contact links shown in the footer of every page and in the home page hero.
+- { label: Email, href: "mailto:yangzhizhuo@gmail.com" }
+- { label: Google Scholar, href: "https://scholar.google.com/citations?user=OA2-BIsAAAAJ" }
+- { label: GitHub, href: "https://github.com/George614" }
+- { label: LinkedIn, href: "https://www.linkedin.com/in/zhizhuo-yang" }

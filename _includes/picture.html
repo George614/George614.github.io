@@ -1,0 +1,16 @@
+{%- comment -%}
+  One responsive image built from the WebP copies that jekyll-imagemagick generates.
+  Parameters: src (source path, no dots except the extension), alt, width and height (of the source),
+  sizes, class, and either fetchpriority (for the image that matters most on first paint) or loading (default lazy).
+{%- endcomment -%}
+{%- assign base = include.src | split: '.' | first -%}
+{%- assign source_width = include.width | plus: 0 -%}
+{%- assign widths = "480,800,1400" | split: ',' -%}
+{%- capture srcset -%}
+  {%- for w in widths -%}
+    {%- assign n = w | plus: 0 -%}
+    {%- if n < source_width %}{{ base }}-{{ n }}.webp {{ n }}w, {% endif -%}
+  {%- endfor -%}
+  {{ base }}-2000.webp {% if source_width > 2000 %}2000{% else %}{{ source_width }}{% endif %}w
+{%- endcapture -%}
+<img src="{{ base }}-800.webp" srcset="{{ srcset | strip }}" sizes="{{ include.sizes | default: '100vw' }}" width="{{ include.width }}" height="{{ include.height }}" alt="{{ include.alt | escape }}"{% if include.class %} class="{{ include.class }}"{% endif %}{% if include.fetchpriority %} fetchpriority="{{ include.fetchpriority }}"{% else %} loading="{{ include.loading | default: 'lazy' }}"{% endif %} decoding="async">

@@ -1,0 +1,8 @@
+<ul class="contact-links">
+  {%- for link in site.data.contact %}
+  <li><a href="{{ link.href }}"{% unless link.href contains 'mailto:' %} rel="me noopener"{% endunless %}>{{ link.label }}</a></li>
+  {%- endfor %}
+  {%- if include.cv %}
+  <li><a href="{{ site.cv_pdf }}">CV as PDF</a></li>
+  {%- endif %}
+</ul>

@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="color-scheme" content="light dark">
+{% seo %}
+{%- assign version = site.time | date: "%s" %}
+<script src="/assets/js/theme-init.js?v={{ version }}"></script>
+<link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css?v={{ version }}">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<script type="module" src="/assets/js/site.js?v={{ version }}"></script>
+{%- for script in page.scripts %}
+<script type="module" src="/assets/js/{{ script }}?v={{ version }}"></script>
+{%- endfor %}
+{%- include analytics.html %}
