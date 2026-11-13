@@ -1,6 +1,6 @@
 import { wrapIndex } from './lib/gallery.js';
 
-// Opens each photograph in a native modal dialog, which supplies the focus trap, the backdrop
+// Opens each photograph in a full-screen native modal dialog, which supplies the focus trap
 // and closing with Escape. Without JavaScript each thumbnail is a plain link to the larger image.
 const dialog = document.querySelector('dialog.lightbox');
 const links = [...document.querySelectorAll('a.photo')];
@@ -46,11 +46,6 @@ dialog.addEventListener('keydown', (event) => {
   else if (event.key === 'ArrowRight') show(current + 1);
   else return;
   event.preventDefault();
-});
-
-// A click on the dimmed area around the photograph closes the dialog.
-dialog.addEventListener('click', (event) => {
-  if (event.target === dialog) dialog.close();
 });
 
 dialog.addEventListener('close', () => links[current].focus());
