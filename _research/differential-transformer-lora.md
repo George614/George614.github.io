@@ -17,7 +17,7 @@ facts:
   - { label: Baseline, value: "FlashAttention-2" }
   - { label: Period, value: "February to August 2025" }
 ---
-The differential Transformer computes attention as the difference of two attention maps, which cancels much of the noise that ordinary attention spreads over irrelevant tokens.
+The differential Transformer computes attention as the difference of two attention maps, which cancels the noise that ordinary attention spreads over irrelevant context.
 This project asked how to keep that benefit while making the model cheaper to train and better on long inputs.
 
-We measured where each variant puts its attention with a new cumulative relevance score, adapted the architecture with low-rank adapters for training and parameter efficiency, and tested hyper-attention as a faster attention kernel for long context.
+We measured where each variant puts its attention with a new cumulative relevance score, adapted the architecture with low-rank adapters for training and parameter efficiency, and integrated hyper-attention into the improved model, benchmarking it against FlashAttention-2.

@@ -10,7 +10,7 @@ featured: true
 cv_sourced: true
 results:
   - "An initial small-scale run raised held-out task reward by 0.077 over the base policy."
-  - "Generation took 61% of wall-clock time; FP8 weights and one engine per node gave 2.6 to 4.1 times the rollout output."
+  - "Generation took 61% of wall-clock time; with FP8 weights one rollout engine fits on each node, which gave 2.6 to 4.1 times the output of the previous two-node layout."
   - "Asynchronous one-step off-policy training cut per-step non-generation time from 170 seconds to 24 seconds."
 facts:
   - { label: Method, value: "GRPO with LoRA and truncated importance sampling" }

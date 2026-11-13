@@ -9,7 +9,7 @@ authors: "Zhizhuo Yang, with Melisa Russak and Arjun Krishna."
 cv_sourced: true
 results:
   - "Explored Monte Carlo tree search for planning, together with learning from the trajectories most likely to succeed."
-  - "Implemented self-correction mechanisms that improved agent task performance."
+  - "Implemented self-correction mechanisms to improve agent task performance."
   - "Used LoRA fine-tuning and model merging for continual learning, raising accuracy in agentic workflows."
 facts:
   - { label: Methods, value: "Monte Carlo tree search, self-correction, LoRA and model merging" }
