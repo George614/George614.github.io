@@ -137,10 +137,12 @@
   }
 }
 
+// Long lines wrap rather than scroll, so every line can be read without a pointer.
 .pub-bibtex pre {
   margin: 4px 0 0;
   padding: 14px 16px;
-  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--tint);
@@ -172,5 +174,13 @@
 
   .pub-list > li {
     padding-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  // A smaller face on a narrow phone keeps most BibTeX lines whole.
+  .pub-bibtex pre {
+    padding: 12px 14px;
+    font-size: 12px;
   }
 }

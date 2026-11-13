@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { expectNoOverflow } from './helpers.js';
+import { expectNoAxeViolations, expectNoOverflow } from './helpers.js';
 
 test('three groups in CV order', async ({ page }) => {
   await page.goto('/publications/');
@@ -84,4 +84,16 @@ test('opening BibTeX keeps the toggle in place and the block under the whole row
   expect(pre.y).toBeGreaterThan(after.y + after.height);
   expect(Math.abs(pre.x - row.x)).toBeLessThan(1);
   expect(Math.abs(pre.width - row.width)).toBeLessThan(1);
+});
+
+test('open BibTeX blocks wrap instead of scrolling, so keyboard users can read all of them', async ({ page }) => {
+  for (const width of [320, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/publications/');
+    await page.locator('details').evaluateAll((els) => els.forEach((d) => { d.open = true; }));
+    const hidden = await page.locator('.pub-bibtex pre').evaluateAll((pres) =>
+      pres.filter((pre) => pre.scrollWidth > pre.clientWidth).length);
+    expect(hidden, `blocks with hidden text at ${width}px`).toBe(0);
+    await expectNoAxeViolations(page);
+  }
 });
