@@ -1,0 +1,72 @@
+---
+title: CV
+permalink: /cv/
+nav_key: cv
+cv_sourced: true
+lede: 'Education, work, teaching and mentoring, taken from my CV. <a href="/publications/">Publications</a> and <a href="/research/">research projects</a> have their own pages.'
+---
+{%- assign cv = site.data.cv -%}
+<p class="cv-pdf"><a href="{{ site.cv_pdf }}">Open the CV as a PDF</a> <span>Updated November 2026, with research experience, service and skills.</span></p>
+
+<section class="cv-section" id="education" aria-labelledby="education-heading">
+  <h2 id="education-heading">Education</h2>
+  <ul class="cv-list">
+    {%- for item in cv.education %}
+    <li>
+      <span class="cv-when">{{ item.dates }}</span>
+      <div class="cv-what">
+        <p class="cv-title">{{ item.degree }}</p>
+        <p class="cv-meta">{{ item.institution }}, {{ item.location }}</p>
+        {%- for line in item.details %}
+        <p class="cv-detail">{{ line }}</p>
+        {%- endfor %}
+      </div>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="cv-section" id="experience" aria-labelledby="experience-heading">
+  <h2 id="experience-heading">Professional experience</h2>
+  <ul class="cv-list">
+    {%- for item in cv.experience %}
+    <li>
+      <span class="cv-when">{{ item.dates }}</span>
+      <div class="cv-what">
+        <p class="cv-title">{{ item.role }}, {{ item.organization }}</p>
+        <p class="cv-detail">{{ item.summary }}</p>
+      </div>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="cv-section" id="teaching" aria-labelledby="teaching-heading">
+  <h2 id="teaching-heading">Teaching</h2>
+  <ul class="cv-list">
+    {%- for item in cv.teaching %}
+    <li>
+      <span class="cv-when">{{ item.term }}</span>
+      <div class="cv-what">
+        <p class="cv-title">{{ item.course }}</p>
+        <p class="cv-meta">{{ item.role }}, using {{ item.tools }}</p>
+      </div>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="cv-section" id="mentoring" aria-labelledby="mentoring-heading">
+  <h2 id="mentoring-heading">Mentoring</h2>
+  <ul class="cv-list">
+    {%- for item in cv.mentoring %}
+    <li>
+      <span class="cv-when">{{ item.period }}</span>
+      <div class="cv-what">
+        <p class="cv-title">{{ item.who }}</p>
+        <p class="cv-meta">{{ item.context }}</p>
+      </div>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
