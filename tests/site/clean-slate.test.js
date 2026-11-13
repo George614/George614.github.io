@@ -6,7 +6,8 @@ import { SITE, allHtmlFiles, read } from './site-files.js';
 
 test('template content is gone', () => {
   for (const path of ['blog', 'projects/1_project', 'docs', 'tests', 'fixtures', 'node_modules',
-                      'package.json', 'README.md', 'CLAUDE.md', 'assets/json']) {
+                      'package.json', 'README.md', 'CLAUDE.md', 'assets/json', 'scripts',
+                      'lighthouserc.json', 'Gemfile', 'Gemfile.lock']) {
     assert.equal(existsSync(join(SITE, path)), false, path);
   }
   for (const html of allHtmlFiles()) {

@@ -28,9 +28,15 @@ exclude:
   - test-results
   - playwright-report
   - .lighthouseci
-  # Photograph originals stay in the repository as sources; the site serves resized copies.
+  - scripts
+  # Original images stay in the repository as sources; the site serves only their resized WebP
+  # copies, which have the camera metadata (including any GPS position) stripped.
   - "assets/photography/*/*.JPG"
   - "assets/photography/*/*.jpg"
+  - "assets/img/*.jpg"
+  - "assets/img/*.png"
+  - "assets/img/research/*.jpg"
+  - "assets/img/research/*.png"
 
 collections:
   research:

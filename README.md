@@ -58,7 +58,7 @@ It serves the site over HTTP/2 with gzip, as GitHub Pages does, and blocks Googl
 
 Every push to `master` runs `.github/workflows/deploy.yml`.
 It builds the site, runs the unit, browser, site and link tests, and publishes `_site` to the `gh-pages` branch only if all of them pass.
-Pull requests run the same tests without publishing.
+Pull requests, and manual runs on any other branch, run the same tests without publishing.
 
 ## Adding content
 
@@ -100,6 +100,7 @@ Leave out any other key and its part of the page is left out too.
 For a project page, use `sort_date` as the publication month (the first day of the month), or 1 July of the year when the month is unknown.
 For a project at WRITER, use the last day of its end month.
 Put figures in `assets/img/research/`, with no spaces and no dots in the file name other than the extension, and give the original width and height.
+The site publishes only resized WebP copies of each figure, with the image metadata removed.
 To add a topic, add a `key` and `title` to `_data/topics.yml`.
 
 ### A publication
