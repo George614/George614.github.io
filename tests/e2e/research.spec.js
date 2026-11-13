@@ -89,3 +89,12 @@ test('on a phone the active topic is scrolled into view', async ({ page }) => {
   await expect(active).toBeInViewport({ ratio: 1 });
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
 });
+
+test('a portrait figure fits inside its list thumbnail', async ({ page }) => {
+  await page.goto('/research/');
+  const thumb = page.locator('#software a[href="/research/meow-translator/"] .entry-thumb');
+  const box = await thumb.boundingBox();
+  const img = await thumb.locator('img').boundingBox();
+  expect(img.height).toBeLessThanOrEqual(box.height);
+  expect(img.y).toBeGreaterThanOrEqual(box.y);
+});

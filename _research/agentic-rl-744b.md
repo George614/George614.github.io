@@ -16,5 +16,6 @@ facts:
   - { label: Method, value: "GRPO with LoRA and truncated importance sampling" }
   - { label: Scale, value: "8-node H100 and H200 clusters" }
   - { label: Framework, value: "Slime" }
+  - { label: Related, value: "Palmyra x6 technical report", href: "/research/palmyra-x6/" }
 ---
 We trained a 744-billion-parameter mixture-of-experts agent end to end with reinforcement learning, using the production agent harness itself as the environment, so the model learns in the same setting where it is later used.

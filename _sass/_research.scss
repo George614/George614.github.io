@@ -77,11 +77,12 @@ html:not([data-js]) .topic-filter {
   grid-template-columns: 220px minmax(0, 1fr);
 }
 
+// The box keeps its 16:10 shape whatever the figure's shape; the image is laid out
+// inside it rather than sizing it, so tall figures shrink to fit instead of being cut off.
 .entry-thumb {
-  display: grid;
-  place-items: center;
+  position: relative;
+  display: block;
   aspect-ratio: 16 / 10;
-  padding: 8px;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: #ffffff;
@@ -89,8 +90,10 @@ html:not([data-js]) .topic-filter {
 }
 
 .entry-thumb img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
   object-fit: contain;
 }
 

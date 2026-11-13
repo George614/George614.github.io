@@ -21,14 +21,15 @@ test('project page without a figure or links shows no empty parts', async ({ pag
   await page.goto('/research/agentic-rl-744b/');
   await expect(page.locator('figure')).toHaveCount(0);
   await expect(page.locator('.project-links')).toHaveCount(0);
-  await expect(page.locator('.facts dt')).toHaveText(['Method', 'Scale', 'Framework']);
+  await expect(page.locator('.facts dt')).toHaveText(['Method', 'Scale', 'Framework', 'Related']);
+  await expect(page.locator('.facts dd a')).toHaveAttribute('href', '/research/palmyra-x6/');
 });
 
 test('the pager walks the research entries newest first', async ({ page }) => {
   await page.goto('/research/agentic-rl-744b/');
   const next = page.locator('.project-pager a[rel="next"]');
-  await expect(next).toHaveAttribute('href', '/research/sr-aif/');
-  await expect(next).toContainText('SR-AIF');
+  await expect(next).toHaveAttribute('href', '/research/palmyra-x6/');
+  await expect(next).toContainText('Palmyra x6');
 });
 
 test('entry with only a title, kind and summary renders cleanly', async ({ page }) => {
