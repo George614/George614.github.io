@@ -1,0 +1,45 @@
+# Albums on the photography page, in the order of the original gallery. Each file lives in
+# assets/photography/<slug>/; width and height are the original's, after EXIF rotation.
+- title: "Mt. Mammoth"
+  slug: mammoth
+  photos:
+    - { file: DSC_0457.JPG, title: "Morning Light", width: 4496, height: 3000 }
+    - { file: DSC_0541.JPG, title: "Snow Peaks", width: 4496, height: 3000 }
+    - { file: DSC_0542.JPG, title: "Winter Silence", width: 4496, height: 3000 }
+    - { file: DSC_0590.JPG, title: "Alpine Glow", width: 4496, height: 3000 }
+    - { file: DSC_0617.JPG, title: "Frozen Trees", width: 4496, height: 3000 }
+    - { file: DSC_0696.JPG, title: "Summit View", width: 4496, height: 3000 }
+- title: "Olympic Park"
+  slug: olympic
+  photos:
+    - { file: DSC_0236.JPG, title: "Forest Path", width: 3000, height: 4496 }
+    - { file: DSC_0237.JPG, title: "Misty Morning", width: 4496, height: 3000 }
+    - { file: DSC_0299.JPG, title: "River Crossing", width: 3000, height: 4496 }
+    - { file: DSC_0382.JPG, title: "Golden Hour", width: 4496, height: 3000 }
+    - { file: DSC_0408.JPG, title: "Fall Colors", width: 4496, height: 3000 }
+    - { file: DSC_0410.JPG, title: "Still Waters", width: 4496, height: 3000 }
+    - { file: DSC_0427.JPG, title: "Mountain Vista", width: 4496, height: 3000 }
+    - { file: DSC_0432.JPG, title: "Twilight", width: 4496, height: 3000 }
+- title: "Sequoia"
+  slug: sequoia
+  photos:
+    - { file: IMG_1358.jpg, title: "Gentle Giants", width: 4032, height: 3024 }
+    - { file: IMG_1359.jpg, title: "Forest Cathedral", width: 5712, height: 4284 }
+    - { file: IMG_1381.jpg, title: "Morning Mist", width: 5712, height: 4284 }
+    - { file: IMG_1395.jpg, title: "Ancient Bark", width: 5712, height: 4284 }
+    - { file: IMG_1397.jpg, title: "Trail of Giants", width: 5712, height: 4284 }
+    - { file: IMG_1419.jpg, title: "Sun Through Branches", width: 4284, height: 5712 }
+    - { file: IMG_1450.jpg, title: "Forest Floor", width: 5712, height: 4284 }
+    - { file: IMG_1456.jpg, title: "Standing Tall", width: 4284, height: 5712 }
+    - { file: IMG_1475.jpg, title: "Whispers of Time", width: 5712, height: 4284 }
+- title: "Lassen and Mt. Shasta"
+  slug: lassen-shasta
+  photos:
+    - { file: IMG_0347.jpg, title: "Volcanic Vista", width: 3024, height: 4032 }
+    - { file: IMG_0389.jpg, title: "Peak Reflection", width: 4032, height: 3024 }
+    - { file: IMG_0403.jpg, title: "Mountain Mist", width: 3024, height: 4032 }
+    - { file: IMG_0439.jpg, title: "Alpine Lake", width: 3024, height: 4032 }
+    - { file: IMG_0480.jpg, title: "Snowy Slopes", width: 4032, height: 3024 }
+    - { file: IMG_1681.jpg, title: "Sunset Summit", width: 4032, height: 3024 }
+    - { file: IMG_1737.jpg, title: "Trail to Heaven", width: 4032, height: 3024 }
+    - { file: IMG_1790.jpg, title: "Guardian Peak", width: 5712, height: 4284 }
