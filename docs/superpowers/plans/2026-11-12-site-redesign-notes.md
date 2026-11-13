@@ -43,9 +43,15 @@ New titles, or a move of `DSC_0457` to another album, are one-line changes in `_
 - The older news items keep their original wording, for example "Super excited to announce that our paper ... has been accepted at ICRA 2025!". Only the four newest appear on the home page.
 - `LICENSE` is still the MIT licence of the al-folio theme. Whether the site's own text and photographs need a licence is your call.
 
+## Before merging
+
+The deploy workflow has run only on this Mac, never on GitHub's Linux runners.
+Pushing the `redesign` branch and opening a pull request to `master` runs every test there without publishing anything, so a problem with the runner's ImageMagick, fonts or browsers shows up before the site changes.
+
 ## Checks run on the final branch
 
 - The full test suite passes in Chromium, Firefox and WebKit, together with the site checks and the link check.
-- Lighthouse on the home page, on a phone profile: performance 0.99, accessibility 1, largest contentful paint 2.1 seconds, layout shift 0.
+- Lighthouse on the home page, on a phone profile: performance 1, accessibility 1, largest contentful paint 1.7 seconds, layout shift 0.
 - Every page was opened in the production build with Google requests blocked, with no console errors and no Content Security Policy violations.
 - Every page was looked at in full-page screenshots at 320, 768, 1024 and 1440 pixels wide in both themes, together with the open phone menu, an active topic filter, an open BibTeX block and the open photo viewer.
+- The built site contains no original photographs or figures, only resized WebP copies with their metadata removed, and none of them carries a GPS position.
