@@ -43,3 +43,17 @@ test('only Google Analytics is loaded from another domain', () => {
     }
   }
 });
+
+// Google's documented policy for Google Analytics 4 without Ads features:
+// https://developers.google.com/tag-platform/security/guides/csp
+test('the Content Security Policy allows every host Google Analytics 4 uses, and no inline script', () => {
+  const policy = attr(tags(read('_site/index.html'), 'meta')
+    .find((t) => attr(t, 'http-equiv') === 'Content-Security-Policy'), 'content');
+  const directive = (name) => (policy.match(new RegExp(`(?:^|;)\\s*${name}\\s+([^;]*)`)) ?? [])[1]?.split(/\s+/) ?? [];
+  for (const host of ['https://www.googletagmanager.com']) assert.ok(directive('script-src').includes(host), host);
+  assert.ok(!directive('script-src').includes("'unsafe-inline'"));
+  for (const host of ['https://www.googletagmanager.com', 'https://*.google-analytics.com'])
+    assert.ok(directive('img-src').includes(host), `img-src ${host}`);
+  for (const host of ['https://www.googletagmanager.com', 'https://*.google-analytics.com', 'https://*.google.com'])
+    assert.ok(directive('connect-src').includes(host), `connect-src ${host}`);
+});
