@@ -1,0 +1,9 @@
+# Papers under review: listed on the research page by title and venue only, with no project page.
+- title: "Denoising Blocks, Not Tokens: Efficient Compressed Continuous Diffusion with Branching Token Realization"
+  venue: "ICLR 2027"
+  topic: diffusion
+  sort_date: "2026-06-02"
+- title: "When Are Errors Evidence? Deciding Whether to Revise, What to Keep, and How to Commit in Diffusion Language Models"
+  venue: "ACL ARR October 2026"
+  topic: diffusion
+  sort_date: "2026-06-01"

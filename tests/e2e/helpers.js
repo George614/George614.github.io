@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 /** Every page that the shared checks visit. Later tasks append to this list. */
-export const PAGES = ['/', '/research/', '/publications/', '/cv/', '/photography/', '/research/agentic-rl-744b/', '/research/sr-aif/'];
+export const PAGES = ['/', '/research/', '/publications/', '/cv/', '/photography/', '/research/agentic-rl-744b/', '/research/sr-aif/', '/research/?topic=diffusion'];
 
 export const VIEWPORTS = [320, 768, 1024, 1440];
 export const THEMES = ['light', 'dark'];

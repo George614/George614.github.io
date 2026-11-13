@@ -1,0 +1,50 @@
+---
+layout: default
+---
+{%- assign research_entries = site.research | where: "kind", "research" -%}
+{%- assign listed = research_entries | concat: site.data.under_review | sort: "sort_date" | reverse -%}
+{%- assign software_entries = site.research | where: "kind", "software" | sort: "order" -%}
+<div class="wrap page research-page">
+  <header class="page-head">
+    <h1>{{ page.title }}</h1>
+    <p class="lede">Projects and papers, newest first. Each one opens a short summary with a figure, the main results and links.</p>
+  </header>
+
+  <nav class="topic-filter" aria-label="Filter by topic" data-topic-filter>
+    <ul>
+      <li><a href="/research/" data-topic="" aria-current="true">All</a></li>
+      {%- for topic in site.data.topics %}
+      <li><a href="/research/?topic={{ topic.key }}" data-topic="{{ topic.key }}">{{ topic.title }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+  <p class="visually-hidden" role="status" data-filter-status></p>
+
+  <ul class="entry-list" data-filtered-list>
+    {%- for entry in listed %}
+    {%- if entry.url %}
+    <li data-topic="{{ entry.topic }}" data-sort="{{ entry.sort_date }}">{% include entry-row.html entry=entry %}</li>
+    {%- else %}
+    <li data-topic="{{ entry.topic }}" data-sort="{{ entry.sort_date }}" data-under-review>
+      <div class="entry-row">
+        <span class="entry-text">
+          <h3>{{ entry.title }}</h3>
+          <span class="label">Under review at {{ entry.venue }}</span>
+        </span>
+      </div>
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+
+  <section class="section software" id="software" aria-labelledby="software-heading">
+    <h2 id="software-heading">Software</h2>
+    {%- if software_entries.size > 0 %}
+    <ul class="entry-list">
+      {%- for entry in software_entries %}
+      <li>{% include entry-row.html entry=entry %}</li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </section>
+</div>
