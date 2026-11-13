@@ -33,6 +33,22 @@
   white-space: nowrap;
 }
 
+// On a phone the navigation is a native popover opened by the menu button, so it works without
+// any script. Everywhere else it is an ordinary part of the header, so the browser's popover
+// styles are undone here.
+.site-nav {
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
 .site-nav ul {
   display: flex;
   align-items: center;
@@ -123,66 +139,31 @@
   display: none;
 }
 
-// Without JavaScript neither button can work, so neither is shown.
-html:not([data-js]) [data-theme-toggle],
-html:not([data-js]) [data-menu-toggle] {
+// Without JavaScript the theme button cannot work, so it is not shown.
+html:not([data-js]) [data-theme-toggle] {
   display: none;
 }
 
 @media (max-width: 820px) {
-  // Without JavaScript the links wrap onto a second row under the name.
+  // Where popovers are not supported, the links wrap onto a second row under the name.
   .header-bar {
     flex-wrap: wrap;
     gap: 0 12px;
   }
 
-  html:not([data-js]) .site-nav {
+  .site-nav {
     order: 3;
     width: 100%;
     padding-bottom: 8px;
   }
 
-  html:not([data-js]) .site-nav ul {
+  .site-nav ul {
     flex-wrap: wrap;
     margin-left: -12px;
   }
 
-  html:not([data-js]) .site-nav a {
+  .site-nav a {
     padding: 12px;
-  }
-
-  // With JavaScript the links collapse into a menu opened by the menu button.
-  html[data-js] .menu-button {
-    display: grid;
-  }
-
-  html[data-js] .site-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    display: none;
-    padding: 8px var(--gutter) 16px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  html[data-js] .site-nav[data-open] {
-    display: block;
-  }
-
-  html[data-js] .site-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    // Pull the link padding outward so the text lines up with the name above.
-    margin: 0 -12px;
-  }
-
-  html[data-js] .site-nav a {
-    padding: 13px 12px;
-    border-radius: 6px;
-    font-size: 18px;
   }
 
   .site-nav a[aria-current="page"]::after {
@@ -190,5 +171,41 @@ html:not([data-js]) [data-menu-toggle] {
     right: auto;
     width: 28px;
     bottom: 6px;
+  }
+
+  // Where they are, the links collapse into a menu under the header.
+  @supports selector(:popover-open) {
+    .menu-button {
+      display: grid;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: var(--header-height) 0 auto;
+      display: none;
+      width: auto;
+      padding: 8px var(--gutter) 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .site-nav:popover-open {
+      display: block;
+    }
+
+    .site-nav ul {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 0;
+      // Pull the link padding outward so the text lines up with the name above.
+      margin: 0 -12px;
+    }
+
+    .site-nav a {
+      padding: 13px 12px;
+      border-radius: 6px;
+      font-size: 18px;
+    }
   }
 }

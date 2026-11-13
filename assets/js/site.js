@@ -25,25 +25,35 @@ function setupThemeButton() {
   label();
 }
 
+// The menu is a native popover, so it opens, closes on Escape or an outside click, and comes
+// next in the Tab order without this script. The script reports its state on the button, closes
+// it when a link is chosen, when focus leaves it or when the window widens past it, and returns
+// focus to the button on Escape.
 function setupMenu() {
   const button = document.querySelector('[data-menu-toggle]');
-  const menu = document.getElementById(button?.getAttribute('aria-controls'));
-  if (!button || !menu) return;
-  const setOpen = (open) => {
-    button.setAttribute('aria-expanded', String(open));
-    menu.toggleAttribute('data-open', open);
+  const menu = document.getElementById(button?.getAttribute('popovertarget'));
+  if (!button || !menu || typeof menu.hidePopover !== 'function') return;
+  const close = () => {
+    if (menu.matches(':popover-open')) menu.hidePopover();
   };
-  button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+  button.setAttribute('aria-expanded', 'false');
+  menu.addEventListener('toggle', (event) => {
+    button.setAttribute('aria-expanded', String(event.newState === 'open'));
+  });
   menu.addEventListener('click', (event) => {
-    if (event.target.closest('a')) setOpen(false);
+    if (event.target.closest('a')) close();
   });
+  menu.addEventListener('focusout', (event) => {
+    const next = event.relatedTarget;
+    if (next && !menu.contains(next) && next !== button) close();
+  });
+  // Escape returns focus to the button even where clicking the button did not focus it (Safari).
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
-      setOpen(false);
-      button.focus();
-    }
+    if (event.key !== 'Escape' || !menu.matches(':popover-open')) return;
+    close();
+    button.focus();
   });
-  window.matchMedia('(min-width: 821px)').addEventListener('change', () => setOpen(false));
+  window.matchMedia('(min-width: 821px)').addEventListener('change', close);
 }
 
 function setupHeaderRule() {

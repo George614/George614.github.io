@@ -103,14 +103,46 @@ test('phone menu', async ({ page }) => {
   await expect(links.first()).toBeVisible();
 });
 
-test('without JavaScript the phone navigation is reachable', async ({ browser }) => {
+async function expectMenuOpensAndShowsEveryLink(page) {
+  const button = page.getByRole('button', { name: 'Menu' });
+  const links = page.locator('nav[aria-label="Main"] a');
+  await expect(links).toHaveCount(5);
+  await expect(links.first()).toBeHidden();
+  await button.click();
+  for (const link of await links.all()) await expect(link).toBeVisible();
+}
+
+test('without JavaScript the phone menu still opens', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 375, height: 800 } });
   const page = await context.newPage();
   await page.goto('/');
-  const links = page.locator('nav[aria-label="Main"] a');
-  await expect(links).toHaveCount(5);
-  for (const link of await links.all()) await expect(link).toBeVisible();
+  await expectMenuOpensAndShowsEveryLink(page);
   await context.close();
+});
+
+test('the phone menu still opens when the site script fails to load', async ({ page }) => {
+  await page.route(/\/assets\/js\/site\.js/, (route) => route.abort());
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/');
+  await expectMenuOpensAndShowsEveryLink(page);
+});
+
+test('Tab moves from the menu button into the open menu, and leaving it closes the menu', async ({ page, browserName }) => {
+  const tab = browserName === 'webkit' ? 'Alt+Tab' : 'Tab';
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/');
+  const button = page.getByRole('button', { name: 'Menu' });
+  const links = page.locator('nav[aria-label="Main"] a');
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(links.first()).toBeVisible();
+  await page.keyboard.press(tab);
+  await expect(links.first()).toBeFocused();
+  for (let i = 1; i < 5; i += 1) await page.keyboard.press(tab);
+  await expect(links.last()).toBeFocused();
+  await page.keyboard.press(tab);
+  await expect(links.first()).toBeHidden();
+  await expect(button).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('keyboard focus is visible and a skip link comes first', async ({ page, browserName }) => {
