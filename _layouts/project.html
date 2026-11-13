@@ -1,0 +1,85 @@
+---
+layout: default
+---
+{%- assign topic = site.data.topics | where: "key", page.topic | first -%}
+{%- assign research_entries = site.research | where: "kind", "research" | sort: "sort_date" | reverse -%}
+{%- assign software_entries = site.research | where: "kind", "software" | sort: "order" -%}
+{%- assign sequence = research_entries | concat: software_entries -%}
+{%- assign next_entry = nil -%}
+{%- for entry in sequence -%}
+  {%- if entry.url == page.url -%}{%- assign next_entry = sequence[forloop.index] -%}{%- endif -%}
+{%- endfor -%}
+<article class="wrap project">
+  <nav class="trail" aria-label="Breadcrumb">
+    <a href="/research/">Research</a>
+    {%- if topic %}
+    <span aria-hidden="true">/</span> <a href="/research/?topic={{ topic.key }}">{{ topic.title }}</a>
+    {%- elsif page.kind == "software" %}
+    <span aria-hidden="true">/</span> <a href="/research/#software">Software</a>
+    {%- endif %}
+  </nav>
+
+  <h1>{{ page.title }}</h1>
+
+  {%- if page.authors or page.label %}
+  <p class="byline">
+    {%- if page.authors %} {{ page.authors }}{% endif %}
+    {%- if page.label %} <span class="label">{{ page.label }}</span>{% endif %}
+  </p>
+  {%- endif %}
+
+  {%- if page.links.size > 0 %}
+  <ul class="project-links">
+    {%- for link in page.links %}
+    <li><a href="{{ link.href }}"{% unless link.href contains '://' %}{% else %} rel="noopener"{% endunless %}>{{ link.label }}</a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  {%- if page.figures.size > 0 %}
+  <figure class="project-figure{% if page.figures.size > 1 %} is-gallery{% endif %}">
+    <div class="project-figure-images">
+      {%- for figure in page.figures %}
+      {%- if page.figures.size > 1 -%}
+        {%- assign sizes = "(max-width: 820px) 50vw, 360px" -%}
+      {%- else -%}
+        {%- assign sizes = "(max-width: 1144px) calc(100vw - 40px), 1080px" -%}
+      {%- endif %}
+      {% include picture.html src=figure.src alt=figure.alt width=figure.width height=figure.height sizes=sizes %}
+      {%- endfor %}
+    </div>
+    <figcaption>{{ page.figure_caption }}</figcaption>
+  </figure>
+  {%- endif %}
+
+  <div class="with-margin project-body">
+    <div class="prose">
+      {{ content }}
+      {%- if page.results.size > 0 %}
+      <h2>Main results</h2>
+      <ul>
+        {%- for result in page.results %}
+        <li>{{ result }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+    {%- if page.facts.size > 0 %}
+    <aside aria-label="Key facts">
+      <dl class="facts">
+        {%- for fact in page.facts %}
+        <dt>{{ fact.label }}</dt>
+        <dd>{% if fact.href %}<a href="{{ fact.href }}"{% if fact.href contains '://' %} rel="noopener"{% endif %}>{{ fact.value }}</a>{% else %}{{ fact.value }}{% endif %}</dd>
+        {%- endfor %}
+      </dl>
+    </aside>
+    {%- endif %}
+  </div>
+
+  <nav class="project-pager" aria-label="More projects">
+    <a href="/research/"><small>Back to</small> <b>All research</b></a>
+    {%- if next_entry %}
+    <a href="{{ next_entry.url }}" rel="next"><small>Next project</small> <b>{{ next_entry.title }}</b></a>
+    {%- endif %}
+  </nav>
+</article>

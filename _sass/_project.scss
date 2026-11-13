@@ -1,0 +1,171 @@
+.project {
+  padding-bottom: 24px;
+}
+
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  padding-top: 36px;
+  color: var(--soft);
+  font-size: 15px;
+}
+
+.trail a {
+  text-decoration-color: var(--rule);
+}
+
+.trail a:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.project h1 {
+  max-width: 18em;
+  margin: 18px 0;
+  font-size: clamp(34px, 4.4vw, 52px);
+}
+
+.byline {
+  max-width: 44em;
+  margin: 0 0 22px;
+  color: var(--soft);
+}
+
+.byline .label {
+  white-space: nowrap;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.project-links a {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 15.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.project-links li:first-child a,
+.project-links a:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.project-figure {
+  margin: 0;
+}
+
+// Figures from papers have white backgrounds, so they sit on a white card in both themes.
+.project-figure-images {
+  padding: clamp(12px, 3vw, 32px);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.project-figure-images img {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-figure.is-gallery .project-figure-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: start;
+  background: var(--tint);
+}
+
+.project-figure figcaption {
+  margin-top: 10px;
+  color: var(--soft);
+  font-size: 14.5px;
+}
+
+.project-body {
+  padding: 48px 0 56px;
+}
+
+.prose p {
+  max-width: 36em;
+  margin: 0 0 1em;
+  font: 400 20px/1.6 var(--font-serif);
+}
+
+.prose h2 {
+  margin: 28px 0 12px;
+  font-size: 26px;
+}
+
+.prose ul {
+  max-width: 38em;
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.prose li {
+  margin-bottom: 8px;
+}
+
+.prose li::marker {
+  color: var(--gold);
+}
+
+.project-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+}
+
+.project-pager a {
+  padding: 28px 0;
+  text-decoration: none;
+}
+
+.project-pager a + a {
+  padding-left: 24px;
+  border-left: 1px solid var(--rule);
+  text-align: right;
+}
+
+.project-pager small {
+  display: block;
+  color: var(--soft);
+  font-size: 14px;
+}
+
+.project-pager b {
+  font: 500 21px/1.25 var(--font-serif);
+}
+
+.project-pager a:hover b {
+  color: var(--blue);
+}
+
+@media (max-width: 820px) {
+  .project-body {
+    padding: 36px 0 40px;
+  }
+
+  .project-pager {
+    grid-template-columns: 1fr;
+  }
+
+  .project-pager a + a {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    text-align: left;
+  }
+}

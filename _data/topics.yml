@@ -1,0 +1,5 @@
+# Research topics, in the order the filter shows them. Each research entry names one key.
+- { key: agents, title: LLM agents and RL }
+- { key: diffusion, title: Diffusion language models }
+- { key: active-inference, title: Active inference }
+- { key: eye-tracking-vr, title: Eye tracking and VR }
