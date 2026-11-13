@@ -1,0 +1,61 @@
+---
+layout: default
+---
+{%- assign featured = site.research | where: "featured", true | sort: "sort_date" | reverse -%}
+{%- assign news = site.news | sort: "date" | reverse -%}
+<div class="wrap home">
+  <section class="hero" aria-labelledby="hero-heading" data-source="cv">
+    <div class="hero-text">
+      <h1 id="hero-heading">I train large language models to act, not only to answer.</h1>
+      <p class="hero-lede">AI Research Scientist at WRITER, working on reinforcement learning and post-training for agents. I also go by George.</p>
+      {% include contact-links.html cv=true %}
+    </div>
+    <div class="hero-portrait">
+      {% include picture.html src="/assets/img/prof_pic.jpg" alt="Zhizhuo Yang holding a camera in Yosemite Valley, with El Capitan behind him" width=3024 height=4032 sizes="(max-width: 820px) 280px, 300px" fetchpriority="high" %}
+    </div>
+  </section>
+
+  <div class="with-margin home-notes">
+    <div class="home-bio" data-source="cv">
+      <p>At WRITER I built the agentic reinforcement learning stack end to end: synthetic data, verifiers and rewards, and training a 744-billion-parameter model inside the production agent harness.</p>
+      <p>Before that I earned a Ph.D. at Rochester Institute of Technology on active inference, studying how agents perceive, act and learn under uncertainty, after years of work on eye tracking and virtual reality.</p>
+    </div>
+    <aside aria-label="At a glance">
+      <dl class="facts" data-source="cv">
+        <dt>Now</dt><dd>AI Research Scientist, WRITER, San Francisco</dd>
+        <dt>Shipped</dt><dd>Training data pipeline behind Palmyra x6</dd>
+        <dt>Under review</dt><dd>Two papers on diffusion language models</dd>
+        <dt>Ph.D.</dt><dd>Rochester Institute of Technology, 2024</dd>
+      </dl>
+    </aside>
+  </div>
+
+  <section class="section" aria-labelledby="selected-heading" data-source="cv">
+    <div class="section-head">
+      <h2 id="selected-heading">Selected work</h2>
+      <a href="/research/">All research</a>
+    </div>
+    <ul class="entry-list">
+      {%- for entry in featured %}
+      <li>{% include entry-row.html entry=entry %}</li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section class="section" id="news" aria-labelledby="news-heading">
+    <h2 id="news-heading">Recent news</h2>
+    <ul class="news-list">
+      {%- for item in news limit: 4 %}
+      <li><time class="label" datetime="{{ item.date | date: '%Y-%m' }}">{{ item.date | date: "%b %Y" }}</time><div class="news-text">{{ item.content | markdownify }}</div></li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section class="section personal" aria-labelledby="personal-heading">
+    <h2 id="personal-heading">Outside work</h2>
+    <p>Away from research I photograph landscapes, from Sequoia to the Olympic Peninsula. I also play basketball and the saxophone, and I go hiking whenever I can.</p>
+    <a class="personal-photo" href="/photography/" aria-label="See more photographs">
+      {% include picture.html src="/assets/photography/mammoth/DSC_0617.JPG" alt="A stream winding through a pale volcanic valley below snow-dusted peaks near Mammoth, California" width=4496 height=3000 sizes="(max-width: 1144px) calc(100vw - 40px), 1080px" %}
+    </a>
+  </section>
+</div>

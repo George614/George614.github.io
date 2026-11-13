@@ -1,0 +1,134 @@
+// Home page: the hero with the portrait, the bio beside its facts, selected work, news and a personal note.
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-column);
+  gap: 64px;
+  align-items: end;
+  padding: 64px 0 72px;
+}
+
+.hero h1 {
+  max-width: 13em;
+  margin-bottom: 24px;
+}
+
+.hero-lede {
+  max-width: 34em;
+  margin: 0 0 24px;
+  color: var(--soft);
+  font-size: 19px;
+}
+
+.hero .contact-links {
+  font-size: 15.5px;
+}
+
+.hero .contact-links a {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 5px;
+  transition: color 0.15s var(--ease), text-decoration-color 0.15s var(--ease);
+}
+
+.hero .contact-links a:hover {
+  color: var(--blue);
+  text-decoration-color: var(--blue);
+}
+
+.hero-portrait img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 60% 30%;
+  border-radius: 2px;
+}
+
+.home-notes {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.home-bio p {
+  max-width: var(--measure);
+  margin: 0 0 1em;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.home-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.news-list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news-list li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 24px;
+  padding: 14px 0;
+}
+
+.news-list time {
+  padding-top: 3px;
+}
+
+.news-text p {
+  max-width: 40em;
+  margin: 0;
+}
+
+.news-text a {
+  color: var(--blue);
+}
+
+.personal p {
+  max-width: var(--measure);
+  margin: 16px 0 28px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.personal-photo {
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.personal-photo img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.personal-photo:hover img {
+  transform: scale(1.015);
+}
+
+@media (max-width: 820px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-top: 36px;
+  }
+
+  .hero-portrait {
+    max-width: 280px;
+  }
+
+  .news-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .personal-photo img {
+    aspect-ratio: 3 / 2;
+  }
+}
