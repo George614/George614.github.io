@@ -1,0 +1,30 @@
+---
+title: Publications
+permalink: /publications/
+nav_key: publications
+lede: 'Papers and reports, newest first. Citation counts are on <a href="https://scholar.google.com/citations?user=OA2-BIsAAAAJ">Google Scholar</a>.'
+---
+<section class="pub-group" id="published" aria-labelledby="published-heading">
+  <h2 id="published-heading">Published</h2>
+  <div class="pub-years">
+    {% bibliography --query @*[group=published] %}
+  </div>
+</section>
+
+<section class="pub-group" id="technical-reports" aria-labelledby="reports-heading">
+  <h2 id="reports-heading">Technical reports</h2>
+  <div class="pub-years">
+    {% bibliography --query @*[group=report] %}
+  </div>
+</section>
+
+<section class="pub-group" id="under-review" aria-labelledby="review-heading">
+  <h2 id="review-heading">Under review</h2>
+  <div class="pub-years">
+    <ul class="pub-list">
+      {%- for paper in site.data.under_review %}
+      <li><p class="pub-title">{{ paper.title }}</p><p class="pub-venue">{{ paper.venue }}</p></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

@@ -84,6 +84,9 @@ scholar:
   group_by: year
   group_order: descending
   bibliography_group_tag: h3
+  bibliography_list_tag: ul
+  bibliography_class: pub-list
+  bibliography_item_attributes: { class: pub }
 
 # Custom BibTeX keys that are hidden from the BibTeX shown on the publications page.
 filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, pdf, selected, supp, blog,

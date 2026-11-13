@@ -5,7 +5,7 @@ topic: agents
 sort_date: "2026-08-01"
 label: "Technical report, arXiv 2026"
 summary: "WRITER's shipped agentic model, post-trained on data from a synthetic tool-use pipeline I built. It has the top BFCL Core score (0.785) among the compared models."
-authors: "Peng Du, Kiran Kamble, Rakshith Vasudev, Zhizhuo Yang, Rohith Nadimpally, Arjun Krishna, Waseem AlShikh and Daniel M. Bikel."
+authors: "Peng Du, Kiran Kamble, Rakshith Vasudev, Zhizhuo Yang, Rohith Nadimpally, Arjun Krishna, Waseem Alshikh and Daniel M. Bikel."
 featured: true
 cv_sourced: true
 bib_key: du2026palmyra

@@ -1,0 +1,158 @@
+// Publications: three groups, each a grid with the year in a left gutter and the entries beside it.
+
+.pub-group {
+  padding: 40px 0 8px;
+  border-top: 1px solid var(--rule);
+}
+
+.pub-group h2 {
+  margin-bottom: 20px;
+}
+
+.pub-years {
+  display: grid;
+  // The gutter includes the space before the entries, so rules between years run unbroken.
+  grid-template-columns: 128px minmax(0, 1fr);
+}
+
+.pub-years h3 {
+  grid-column: 1;
+  margin: 0;
+  padding-top: 20px;
+  color: var(--gold-text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.pub-list {
+  grid-column: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pub-list > li {
+  padding: 18px 0 22px;
+}
+
+.pub-list > li + li {
+  border-top: 1px solid var(--rule);
+}
+
+// A rule across both columns between one year's entries and the next year's.
+.pub-years h3 ~ h3,
+.pub-years h3 ~ h3 + .pub-list {
+  border-top: 1px solid var(--rule);
+}
+
+.pub-list p {
+  max-width: 46em;
+  margin: 0;
+}
+
+.pub-title {
+  font: 500 20px/1.35 var(--font-serif);
+}
+
+.pub-authors {
+  margin-top: 6px !important;
+  color: var(--soft);
+  font-size: 15.5px;
+}
+
+.pub-authors strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pub-venue {
+  margin-top: 2px !important;
+  color: var(--soft);
+  font-size: 15.5px;
+  font-style: italic;
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 20px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.pub-links a,
+.pub-links summary {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s var(--ease);
+}
+
+.pub-links a:hover,
+.pub-links summary:hover {
+  text-decoration-color: currentColor;
+}
+
+.pub-links summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.pub-links summary::-webkit-details-marker {
+  display: none;
+}
+
+// An open BibTeX block takes the whole row under the links. Its minimum width is zero
+// so that long BibTeX lines scroll inside the block instead of widening the page.
+.pub-bibtex {
+  min-width: 0;
+}
+
+.pub-bibtex:has(details[open]) {
+  flex-basis: 100%;
+}
+
+.pub-bibtex pre {
+  margin: 10px 0 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--tint);
+  color: var(--ink);
+  font: 400 13px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (max-width: 820px) {
+  .pub-years {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pub-years h3,
+  .pub-list {
+    grid-column: 1;
+  }
+
+  .pub-years h3 {
+    padding-top: 8px;
+  }
+
+  .pub-years h3 ~ h3 {
+    padding-top: 20px;
+  }
+
+  .pub-years h3 ~ h3 + .pub-list {
+    border-top: 0;
+  }
+
+  .pub-list > li {
+    padding-top: 12px;
+  }
+}
