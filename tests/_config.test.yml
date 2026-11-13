@@ -2,3 +2,6 @@ collections:
   fixtures:
     output: true
     permalink: "/fixtures/:name/"
+
+# Absolute addresses in the test build (redirects, canonical links, the sitemap) point at the local test server.
+url: http://localhost:4173

@@ -86,3 +86,13 @@
     padding-top: 36px;
   }
 }
+
+.not-found {
+  max-width: var(--measure);
+  margin: 0;
+  font: 400 20px/1.6 var(--font-serif);
+}
+
+.not-found a {
+  color: var(--blue);
+}
