@@ -12,7 +12,7 @@ It is a static site built with Jekyll and published with GitHub Pages at <https:
 | `/research/<name>/` | One project: summary, figure, links, results, key facts | `_layouts/project.html`, one file in `_research/` |
 | `/publications/` | Published papers, technical reports, papers under review | `_pages/publications.html`, `_bibliography/papers.bib`, `_data/under_review.yml` |
 | `/cv/` | Education, experience, teaching and mentoring, with a link to the PDF | `_pages/cv.html`, `_data/cv.yml`, `assets/pdf/` |
-| `/photography/` | Photo albums with a full-screen viewer | `_pages/photography.html`, `_data/albums.yml`, `assets/photography/` |
+| `/photography/` | An index of the albums by their covers, then each album in full rows of photographs, with a full-screen viewer | `_pages/photography.html`, `_data/albums.yml`, `assets/photography/` |
 
 The old addresses `/teaching/`, `/portfolio/`, `/projects/` and `/news/` redirect to their new places, and any other unknown address shows the page in `_pages/404.md`.
 
@@ -153,7 +153,8 @@ Then add it to that album in `_data/albums.yml`:
 ```
 
 The width and height are those of the photograph as it is displayed, after any camera rotation; `magick DSC_0457.JPG -auto-orient -format '%w %h' info:` prints them.
-A new album is a new folder and a new entry in `_data/albums.yml` with a `title`, a `slug` (the folder name) and its `photos`.
+A new album is a new folder and a new entry in `_data/albums.yml` with a `title`, a `slug` (the folder name), a `cover` (the file name of one of its photographs, shown in the index at the top of the page) and its `photos`.
+The page lays out an album of n photographs in ceil(n / 3) rows whose sizes differ by at most one, with the shorter rows first, and every row fills the width, so the order of `photos` decides which photographs share a row.
 The site publishes resized WebP copies with the camera metadata removed; the originals stay in the repository and are not published.
 
 ### The CV

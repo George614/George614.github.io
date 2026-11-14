@@ -3,27 +3,58 @@ title: Photography
 permalink: /photography/
 nav_key: photography
 scripts: [lightbox.js]
+page_class: photography
 lede: "Landscapes from hikes in California and Washington. Select a photograph to see it larger."
 ---
+{%- comment -%}
+  An index of the albums, each shown by its cover, then each album as rows of photographs. An album
+  of n photographs is split into ceil(n / 3) rows whose sizes differ by at most one, shorter rows
+  first, and every row fills the width, so each album is a rectangle with no ragged last row.
+{%- endcomment -%}
+<nav class="album-index" aria-label="Albums">
+  {%- for album in site.data.albums %}
+  {%- assign cover = album.photos | where: "file", album.cover | first %}
+  {%- capture src %}/assets/photography/{{ album.slug }}/{{ cover.file }}{% endcapture %}
+  <a href="#album-{{ album.slug }}">
+    {% include picture.html src=src width=cover.width height=cover.height alt="" sizes="(max-width: 820px) 45vw, 260px" loading="eager" %}
+    <span class="album-index-title">{{ album.title }}</span>
+    <span class="album-index-count">{{ album.photos.size }} photographs</span>
+  </a>
+  {%- endfor %}
+</nav>
 {%- for album in site.data.albums %}
+{%- assign first_album = forloop.first %}
+{%- assign count = album.photos.size %}
+{%- assign rows = count | plus: 2 | divided_by: 3 %}
+{%- assign short = count | divided_by: rows %}
+{%- assign long_rows = count | modulo: rows %}
+{%- assign short_rows = rows | minus: long_rows %}
+{%- assign offset = 0 %}
 <section class="album" aria-labelledby="album-{{ album.slug }}">
   <div class="album-head">
     <h2 id="album-{{ album.slug }}">{{ album.title }}</h2>
-    <p>{{ album.photos.size }} photographs</p>
+    <p>{{ count }} photographs</p>
   </div>
   <div class="album-grid">
-    {%- for photo in album.photos %}
-    {%- assign src = photo.file | prepend: '/' | prepend: album.slug | prepend: '/assets/photography/' -%}
-    {%- assign base = src | split: '.' | first -%}
-    {%- assign ratio = photo.width | times: 1.0 | divided_by: photo.height | round: 4 -%}
-    {%- capture alt %}{{ photo.title }}, {{ album.title }}{% endcapture %}
-    <a class="photo" href="{{ base }}-2000.webp" style="--ar: {{ ratio }}" data-title="{{ photo.title }}" data-album="{{ album.title }}" data-width="{{ photo.width }}" data-height="{{ photo.height }}">
-      {%- if forloop.parentloop.first -%}
-        {% include picture.html src=src width=photo.width height=photo.height alt=alt sizes="(max-width: 820px) 60vw, 420px" loading="eager" %}
-      {%- else -%}
-        {% include picture.html src=src width=photo.width height=photo.height alt=alt sizes="(max-width: 820px) 60vw, 420px" %}
-      {%- endif -%}
-    </a>
+    {%- for row in (1..rows) %}
+    {%- if row <= short_rows %}{% assign size = short %}{% else %}{% assign size = short | plus: 1 %}{% endif %}
+    {%- assign row_photos = album.photos | slice: offset, size %}
+    <div class="album-row">
+      {%- for photo in row_photos %}
+      {%- assign src = photo.file | prepend: '/' | prepend: album.slug | prepend: '/assets/photography/' -%}
+      {%- assign base = src | split: '.' | first -%}
+      {%- assign ratio = photo.width | times: 1.0 | divided_by: photo.height | round: 4 -%}
+      {%- capture alt %}{{ photo.title }}, {{ album.title }}{% endcapture %}
+      <a class="photo" href="{{ base }}-2000.webp" style="--ar: {{ ratio }}" data-title="{{ photo.title }}" data-album="{{ album.title }}" data-width="{{ photo.width }}" data-height="{{ photo.height }}">
+        {%- if first_album -%}
+          {% include picture.html src=src width=photo.width height=photo.height alt=alt sizes="(max-width: 600px) calc(100vw - 40px), 640px" loading="eager" %}
+        {%- else -%}
+          {% include picture.html src=src width=photo.width height=photo.height alt=alt sizes="(max-width: 600px) calc(100vw - 40px), 640px" %}
+        {%- endif -%}
+      </a>
+      {%- endfor %}
+    </div>
+    {%- assign offset = offset | plus: size %}
     {%- endfor %}
   </div>
 </section>

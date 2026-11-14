@@ -23,17 +23,71 @@ test('thumbnails are resized and lazy', async ({ page }) => {
   expect(lazy.every((l) => l === 'lazy')).toBe(true);
 });
 
-test('rows are justified without a script', async ({ browser }) => {
+test('each album is a clean rectangle of full rows, at most three to a row, shorter rows first', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
   const page = await context.newPage();
   await page.goto('/photography/');
-  const album = page.locator('section.album').first();
-  const grid = await album.locator('.album-grid').boundingBox();
-  const boxes = await album.locator('a.photo').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().toJSON()));
-  const firstRow = boxes.filter((b) => Math.abs(b.top - boxes[0].top) < 1);
-  expect(firstRow.length).toBeGreaterThan(1);
-  expect(Math.abs(firstRow.at(-1).right - (grid.x + grid.width))).toBeLessThan(2);
+  const albums = await page.locator('section.album').evaluateAll((sections) => sections.map((section) => {
+    const grid = section.querySelector('.album-grid').getBoundingClientRect();
+    return {
+      grid: { left: grid.left, right: grid.right },
+      rows: [...section.querySelectorAll('.album-row')].map((row) => [...row.querySelectorAll('a.photo')].map((a) => a.getBoundingClientRect().toJSON())),
+    };
+  }));
+  expect(albums.map((a) => a.rows.map((r) => r.length))).toEqual([[3, 3], [2, 3, 3], [3, 3, 3], [2, 3, 3]]);
+  for (const { grid, rows } of albums) {
+    for (const row of rows) {
+      expect(Math.abs(row[0].left - grid.left)).toBeLessThan(1);
+      expect(Math.abs(row.at(-1).right - grid.right)).toBeLessThan(1);
+      for (const box of row) expect(Math.abs(box.height - row[0].height)).toBeLessThan(1);
+    }
+  }
   await context.close();
+});
+
+test('the heading, album titles and album index are centred on the page', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/photography/');
+  const middle = await page.evaluate(() => document.documentElement.clientWidth / 2);
+  for (const selector of ['.page-head h1', '.page-head .lede', 'section.album h2', '.album-index']) {
+    const centres = await page.locator(selector).evaluateAll((els) => els.map((el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const r = range.getBoundingClientRect();
+      return r.left + r.width / 2;
+    }));
+    for (const x of centres) expect(Math.abs(x - middle), selector).toBeLessThan(2);
+  }
+});
+
+test('the album index shows each album with its cover and count, and jumps to it', async ({ page }) => {
+  await page.goto('/photography/');
+  const index = page.getByRole('navigation', { name: 'Albums' });
+  const links = index.getByRole('link');
+  await expect(links).toHaveCount(4);
+  await expect(links.locator('.album-index-title')).toHaveText(['Mt. Mammoth', 'Olympic Park', 'Sequoia', 'Lassen and Mt. Shasta']);
+  await expect(links.locator('.album-index-count')).toHaveText(['6 photographs', '8 photographs', '9 photographs', '8 photographs']);
+  expect(await links.evaluateAll((els) => els.map((a) => a.getAttribute('href')))).toEqual(['#album-mammoth', '#album-olympic', '#album-sequoia', '#album-lassen-shasta']);
+  for (const img of await links.locator('img').all()) {
+    await expect(img).toHaveAttribute('alt', '');
+  }
+  await links.nth(2).click();
+  await expect(page).toHaveURL(/#album-sequoia$/);
+  const top = await page.locator('#album-sequoia').evaluate((el) => el.getBoundingClientRect().top);
+  expect(top).toBeGreaterThanOrEqual(0);
+  expect(top).toBeLessThan(160);
+});
+
+test('on a phone each photograph takes the full width, one after another', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/photography/');
+  const grid = await page.locator('.album-grid').first().boundingBox();
+  const boxes = await page.locator('section.album').first().locator('a.photo').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().toJSON()));
+  for (const box of boxes) {
+    expect(Math.abs(box.width - grid.width)).toBeLessThan(1);
+    expect(Math.abs(box.height - box.width / 1.4987)).toBeLessThan(1.5);
+  }
+  for (let i = 1; i < boxes.length; i += 1) expect(boxes[i].top).toBeGreaterThan(boxes[i - 1].bottom);
 });
 
 test('lightbox with the keyboard', async ({ page }) => {

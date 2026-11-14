@@ -1,7 +1,9 @@
 # Albums on the photography page, in the order of the original gallery. Each file lives in
 # assets/photography/<slug>/; width and height are the original's, after EXIF rotation.
+# The cover, one of the album's own files, stands for the album in the index at the top of the page.
 - title: "Mt. Mammoth"
   slug: mammoth
+  cover: DSC_0541.JPG
   photos:
     - { file: DSC_0457.JPG, title: "Morning Light", width: 4496, height: 3000 }
     - { file: DSC_0541.JPG, title: "Snow Peaks", width: 4496, height: 3000 }
@@ -11,6 +13,7 @@
     - { file: DSC_0696.JPG, title: "Summit View", width: 4496, height: 3000 }
 - title: "Olympic Park"
   slug: olympic
+  cover: DSC_0432.JPG
   photos:
     - { file: DSC_0236.JPG, title: "Forest Path", width: 3000, height: 4496 }
     - { file: DSC_0237.JPG, title: "Misty Morning", width: 4496, height: 3000 }
@@ -22,6 +25,7 @@
     - { file: DSC_0432.JPG, title: "Twilight", width: 4496, height: 3000 }
 - title: "Sequoia"
   slug: sequoia
+  cover: IMG_1358.jpg
   photos:
     - { file: IMG_1358.jpg, title: "Gentle Giants", width: 4032, height: 3024 }
     - { file: IMG_1359.jpg, title: "Forest Cathedral", width: 5712, height: 4284 }
@@ -34,6 +38,7 @@
     - { file: IMG_1475.jpg, title: "Whispers of Time", width: 5712, height: 4284 }
 - title: "Lassen and Mt. Shasta"
   slug: lassen-shasta
+  cover: IMG_1737.jpg
   photos:
     - { file: IMG_0347.jpg, title: "Volcanic Vista", width: 3024, height: 4032 }
     - { file: IMG_0389.jpg, title: "Peak Reflection", width: 4032, height: 3024 }
