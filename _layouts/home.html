@@ -21,13 +21,13 @@ layout: default
       {% include picture.html src="/assets/img/prof_pic.jpg" alt="Zhizhuo Yang holding a camera in Yosemite Valley, with El Capitan behind him" width=3024 height=4032 sizes="200px" loading="eager" %}
     </div>
     <div class="home-bio" data-source="cv">
-      <p>At WRITER I built the agentic reinforcement learning stack end to end: synthetic data, verifiers and rewards, and training a 744-billion-parameter model inside the production agent harness.</p>
-      <p>Before that I earned a Ph.D. at Rochester Institute of Technology on active inference, studying how agents perceive, act and learn under uncertainty, after years of work on eye tracking and virtual reality.</p>
+      <p>At WRITER I own LLM post-training end to end, as the primary builder of the agentic reinforcement learning stack: data synthesis, verification and rewards, and training a 744-billion-parameter mixture-of-experts model with the production agent harness as its environment.</p>
+      <p>Before that I earned a Ph.D. at Rochester Institute of Technology. I started with eye tracking and gaze, and from 2020 I worked on active inference, which became my dissertation on perception, action and learning.</p>
     </div>
     <aside aria-label="At a glance">
       <dl class="facts" data-source="cv">
         <dt>Now</dt><dd>AI Research Scientist, WRITER, San Francisco</dd>
-        <dt>Shipped</dt><dd>Training data pipeline behind Palmyra x6</dd>
+        <dt>Built</dt><dd>Synthetic tool-use data pipeline behind Palmyra x6</dd>
         <dt>Under review</dt><dd>Two papers on diffusion language models</dd>
         <dt>Ph.D.</dt><dd>Rochester Institute of Technology, 2024</dd>
       </dl>
@@ -36,7 +36,7 @@ layout: default
 
   <section class="section path" aria-labelledby="path-heading" data-source="cv">
     <h2 id="path-heading">The way here</h2>
-    <p class="section-lede">From optics to virtual reality, to how agents perceive and act, to training language models that act.</p>
+    <p class="section-lede">From optics and virtual reality, through eye tracking and active inference, to training language models that act.</p>
     {% include career-ridge.html %}
   </section>
 
@@ -66,7 +66,7 @@ layout: default
       <h2 id="personal-heading">Outside work</h2>
       <a href="/photography/">All photographs</a>
     </div>
-    <p>Away from research I photograph landscapes, from Sequoia to the Olympic Peninsula. I also play basketball and the saxophone, and I go hiking whenever I can.</p>
+    <p>Away from research I hike and photograph landscapes, from Sequoia to the Olympic Peninsula. I also play basketball and badminton, and I learned the saxophone when I was young.</p>
     <div class="mosaic">
       {%- for pick in site.data.home_photos %}
       {%- assign album = site.data.albums | where: "slug", pick.album | first %}

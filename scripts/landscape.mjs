@@ -1,10 +1,11 @@
 // Draws the home page artwork, deterministically, so the committed files can be checked:
 //   assets/img/terrain.svg       contour lines of an imaginary mountain, used as a CSS mask
 //   _includes/terrain-trail.svg  the path that climbs it, drawn over the same view box
-//   _data/ridge.json             the ridge behind the career path, sampled every 5 units across its width
+//   _data/ridge.json             the ridge behind the career path, one 200-unit column per step
+//                                in _data/path.yml, sampled every 5 units
 // Run with `npm run art` after changing anything here.
 import { contours } from 'd3-contour';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const GRID_W = 300;
@@ -12,7 +13,9 @@ const GRID_H = 150;
 const SCALE = 4; // grid cells to view box units: the view box is 1200 by 600
 const LEVELS = 22;
 const SEED = 614;
-// The ridge is sampled every 5 units, so the centre of each of six columns (100, 300, ... 1100) is a sample.
+// Each career step gets a column 200 units wide, sampled every 5 units, so the centre of every
+// column (100, 300, 500, ...) is a sample and each waypoint sits exactly on the ridge line.
+const RIDGE_COLUMN = 200;
 const RIDGE_STEP = 5;
 
 /** A seeded pseudo-random generator (Park and Miller). */
@@ -146,9 +149,14 @@ function trailSvg(points) {
     + '</svg>\n';
 }
 
-/** The ridge behind the career path: rising left to right, jagged, in a 1200 by 240 view box. */
-function ridge() {
-  const width = 1200, height = 240;
+/** The number of steps in the career path, one list item per step. */
+function careerSteps() {
+  return readFileSync(new URL('../_data/path.yml', import.meta.url), 'utf8').match(/^- /gm).length;
+}
+
+/** The ridge behind the career path: rising left to right, jagged, 240 units tall. */
+function ridge(steps) {
+  const width = RIDGE_COLUMN * steps, height = 240;
   const at = (x) => {
     const t = x / width;
     const jag = 14 * Math.sin(x / 37) + 9 * Math.sin(x / 13 + 1.3) + 5 * Math.sin(x / 5.3 + 0.4);
@@ -167,7 +175,7 @@ export function render() {
   return {
     'assets/img/terrain.svg': contourSvg(values),
     '_includes/terrain-trail.svg': trailSvg(climb(height, values)),
-    '_data/ridge.json': `${JSON.stringify(ridge())}\n`,
+    '_data/ridge.json': `${JSON.stringify(ridge(careerSteps()))}\n`,
   };
 }
 

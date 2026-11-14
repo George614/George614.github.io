@@ -17,9 +17,12 @@ test('the contour map is published and small enough to load with the page', () =
   assert.ok(statSync(published).size < 150_000, `${statSync(published).size} bytes`);
 });
 
-test('the ridge rises from left to right, so the career path climbs', () => {
-  const { samples } = JSON.parse(read('_data/ridge.json'));
-  assert.equal(samples.length, 241);
-  const third = (k) => samples.slice(k * 80, k * 80 + 80).reduce((a, b) => a + b) / 80;
+test('the ridge has one column per career step, and rises from left to right', () => {
+  const { width, samples } = JSON.parse(read('_data/ridge.json'));
+  const steps = read('_data/path.yml').match(/^- /gm).length;
+  assert.equal(width, 200 * steps);
+  assert.equal(samples.length, width / 5 + 1);
+  const size = Math.floor(samples.length / 3);
+  const third = (k) => samples.slice(k * size, k * size + size).reduce((a, b) => a + b) / size;
   assert.ok(third(0) > third(1) && third(1) > third(2));
 });

@@ -42,6 +42,15 @@ test('with reduced motion the path is drawn from the start', async ({ page }) =>
   expect(await page.locator('.terrain-summit').evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
 });
 
+test('the bio keeps to the CV: primary builder at WRITER, eye tracking before active inference', async ({ page }) => {
+  await page.goto('/');
+  const bio = page.locator('.home-bio');
+  await expect(bio).toContainText('primary builder of the agentic reinforcement learning stack');
+  await expect(bio).toContainText('744-billion-parameter mixture-of-experts model');
+  await expect(bio).toContainText('from 2020 I worked on active inference');
+  await expect(bio).not.toContainText('uncertainty');
+});
+
 test('the portrait sits beside the bio and loads with the page', async ({ page }) => {
   await page.goto('/');
   const portrait = page.locator('.home-notes .notes-portrait img');
@@ -53,9 +62,9 @@ test('the portrait sits beside the bio and loads with the page', async ({ page }
 
 test('margin facts', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.facts dt')).toHaveText(['Now', 'Shipped', 'Under review', 'Ph.D.']);
+  await expect(page.locator('.facts dt')).toHaveText(['Now', 'Built', 'Under review', 'Ph.D.']);
   await expect(page.locator('.facts dd')).toHaveText(['AI Research Scientist, WRITER, San Francisco',
-    'Training data pipeline behind Palmyra x6', 'Two papers on diffusion language models',
+    'Synthetic tool-use data pipeline behind Palmyra x6', 'Two papers on diffusion language models',
     'Rochester Institute of Technology, 2024']);
 });
 
@@ -64,7 +73,10 @@ test('the career path lists each step in order, ending at WRITER', async ({ page
   const section = page.locator('section', { has: page.getByRole('heading', { name: 'The way here' }) });
   await expect(section).toHaveAttribute('data-source', 'cv');
   const steps = section.locator('ol.ridge-stops > li');
-  await expect(steps.locator('.label')).toHaveText(['2010', '2014', '2017', '2019', '2023', '2025']);
+  await expect(steps.locator('.label')).toHaveText(['2010', '2014', '2017', '2019', '2020', '2023', '2025']);
+  await expect(steps.locator('strong')).toHaveText(['Optical information science', 'Virtual and augmented reality',
+    'Eye tracking and gaze', 'Rendering for VR headsets', 'Active inference', 'Sensor fusion for tracking',
+    'Reinforcement learning for LLM agents']);
   await expect(steps.last()).toContainText('AI Research Scientist, WRITER');
   await expect(steps.last()).toHaveAttribute('aria-current', 'step');
   await expect(section.locator('[aria-current]')).toHaveCount(1);
@@ -75,9 +87,24 @@ test('on a wide screen the ridge rises from the first step to the last', async (
   await page.goto('/');
   const ys = await page.locator('ol.ridge-stops > li').evaluateAll((els) =>
     els.map((el) => parseFloat(el.style.getPropertyValue('--y'))));
-  expect(ys).toHaveLength(6);
+  expect(ys).toHaveLength(7);
   for (let i = 1; i < ys.length; i += 1) expect(ys[i]).toBeLessThan(ys[i - 1]);
   await expect(page.locator('.ridge-art')).toBeVisible();
+});
+
+test('each waypoint sits on its dashed line, at the centre of its step', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const ticks = await page.locator('.ridge-tick').evaluateAll((els) => els.map((el) => {
+    const r = el.getBoundingClientRect();
+    return r.x + r.width / 2;
+  }));
+  const steps = await page.locator('ol.ridge-stops > li').evaluateAll((els) => els.map((el) => {
+    const r = el.getBoundingClientRect();
+    return r.x + r.width / 2;
+  }));
+  expect(ticks).toHaveLength(steps.length);
+  ticks.forEach((x, i) => expect(Math.abs(x - steps[i])).toBeLessThan(1));
 });
 
 test('on a phone the career path is a vertical list without the ridge drawing', async ({ page }) => {
@@ -129,7 +156,7 @@ test('recent news', async ({ page }) => {
 test('outside work shows five photographs, each linking to its album', async ({ page }) => {
   await page.goto('/');
   const note = page.locator('section.personal');
-  for (const hobby of ['photograph', 'saxophone', 'basketball', 'hik']) await expect(note).toContainText(hobby);
+  for (const hobby of ['photograph', 'saxophone', 'basketball', 'badminton', 'hike']) await expect(note).toContainText(hobby);
   const photos = note.locator('.mosaic a');
   await expect(photos).toHaveCount(5);
   for (const href of await photos.evaluateAll((els) => els.map((e) => e.getAttribute('href'))))
