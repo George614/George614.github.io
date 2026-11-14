@@ -175,6 +175,12 @@ The home page artwork is drawn by `scripts/landscape.mjs`, which is deterministi
 
 Run `npm run art` after changing the script; a site test fails if the committed files differ from what it draws.
 
+The terrain and the climb to its summit live in `assets/js/lib/terrain.js`, which both the script and the page use.
+On the page, `assets/js/terrain-map.js` makes the map answer the pointer.
+Moving over the map lights the contour lines near the pointer and previews, as a dotted line, the climb from there to the summit.
+A click, or a tap on a phone, draws that climb in gold, and the last three climbs stay on the map.
+A line under the map tells visitors that they can climb it; without JavaScript the line stays hidden and the map is still.
+
 The fonts are [Newsreader](https://github.com/productiontype/Newsreader) for headings and long-form text, and [Hanken Grotesk](https://github.com/marcologous/hanken-grotesk) for navigation, labels and metadata.
 Both are self-hosted variable fonts from the `@fontsource-variable/newsreader` and `@fontsource-variable/hanken-grotesk` packages, version 5.3.0, in their `latin` and `latin-ext` subsets.
 They are licensed under the SIL Open Font License 1.1, whose text is in `assets/fonts/`.

@@ -34,8 +34,8 @@ _includes/                     head, header, footer, contact-links, picture, ent
                                analytics, terrain-trail.svg (generated), diagrams/ (inline SVG diagrams)
 _sass/                         tokens, fonts, base, layout, header, footer, diagram, and one partial per page
 assets/css/main.scss           imports the partials
-assets/js/                     theme-init (runs before first paint), site, research-filter, lightbox, analytics
-assets/js/lib/                 pure logic with unit tests: theme, topic, gallery
+assets/js/                     theme-init (runs before first paint), site, research-filter, terrain-map, lightbox, analytics
+assets/js/lib/                 pure logic with unit tests: theme, topic, gallery, terrain (shared with scripts/landscape.mjs)
 assets/fonts/                  self-hosted WOFF2 files and their licences
 assets/img/research/           figures and screenshots for project pages
 assets/img/terrain.svg         contour map behind the home page heading (generated)
