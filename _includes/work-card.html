@@ -1,0 +1,30 @@
+{%- comment -%}
+  One research entry as a card under Selected work. Parameters: entry (a research collection
+  document) and lead (true for the first, wide card). After the text comes the figure: the
+  entry's diagram from _includes/diagrams/, or else its first figure. A lead card also quotes
+  the result that `highlight` names, counting from 1. The title's link covers the whole card.
+{%- endcomment -%}
+{%- assign entry = include.entry -%}
+{%- assign figure = entry.figures | first -%}
+<article class="work-card{% if include.lead %} is-lead{% endif %}">
+  <div class="work-text">
+    {%- if entry.label %}
+    <p class="label">{{ entry.label }}</p>
+    {%- endif %}
+    <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+    <p>{{ entry.summary }}</p>
+    {%- if include.lead and entry.highlight %}
+    {%- assign highlight = entry.highlight | minus: 1 %}
+    <p class="work-result">{{ entry.results[highlight] }}</p>
+    {%- endif %}
+  </div>
+  {%- if entry.diagram %}
+  <div class="work-figure is-diagram">
+    {% include diagrams/{{ entry.diagram }} %}
+  </div>
+  {%- elsif figure %}
+  <div class="work-figure">
+    {% include picture.html src=figure.src alt=figure.alt width=figure.width height=figure.height sizes="(max-width: 820px) calc(100vw - 40px), 520px" %}
+  </div>
+  {%- endif %}
+</article>

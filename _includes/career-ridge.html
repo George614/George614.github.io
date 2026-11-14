@@ -1,0 +1,25 @@
+{%- comment -%}
+  The career path from _data/path.yml as waypoints on the ridge from _data/ridge.json (drawn by
+  scripts/landscape.mjs). Each waypoint sits at the centre of its column, at the ridge's height
+  there; the last one is the present step.
+{%- endcomment -%}
+{%- assign ridge = site.data.ridge -%}
+{%- assign count = site.data.path.size -%}
+{%- assign last_sample = ridge.samples.size | minus: 1 -%}
+{%- capture ticks -%}
+  {%- for step in site.data.path -%}
+    {%- assign i = forloop.index0 | times: 2 | plus: 1 | times: last_sample | divided_by: 2 | divided_by: count -%}
+    {%- assign x = ridge.width | times: i | divided_by: last_sample -%}
+    <line class="ridge-tick" x1="{{ x }}" y1="{{ ridge.samples[i] | plus: 10 }}" x2="{{ x }}" y2="{{ ridge.height }}"/>
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="ridge">
+  <svg class="ridge-art" viewBox="0 0 {{ ridge.width }} {{ ridge.height }}" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ridge-fill" d="{{ ridge.fill }}"/><path class="ridge-line" d="{{ ridge.line }}"/>{{ ticks }}</svg>
+  <ol class="ridge-stops">
+    {%- for step in site.data.path %}
+    {%- assign i = forloop.index0 | times: 2 | plus: 1 | times: last_sample | divided_by: 2 | divided_by: count %}
+    {%- assign y = ridge.samples[i] | times: 1.0 | divided_by: ridge.height | round: 3 %}
+    <li style="--y: {{ y }}"{% if forloop.last %} aria-current="step"{% endif %}><span class="label">{{ step.year }}</span><strong>{{ step.title }}</strong><span class="ridge-place">{{ step.place }}</span></li>
+    {%- endfor %}
+  </ol>
+</div>

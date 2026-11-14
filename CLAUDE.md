@@ -27,15 +27,18 @@ The browser tests serve `_site` on port 4173 and expect the test build (`npm run
 
 ```text
 _config.yml                    site settings, collections, plugins, image sizes
-_data/                         nav, contact links, research topics, papers under review, CV, photo albums
+_data/                         nav, contact links, research topics, papers under review, CV, photo albums,
+                               home page career path and photographs, ridge.json (generated)
 _layouts/                      default (page shell), page, home, research, project, bib (one publication)
-_includes/                     head, header, footer, contact-links, picture, entry-row, analytics
-_sass/                         tokens, fonts, base, layout, header, footer, and one partial per page
+_includes/                     head, header, footer, contact-links, picture, entry-row, work-card, career-ridge,
+                               analytics, terrain-trail.svg (generated), diagrams/ (inline SVG diagrams)
+_sass/                         tokens, fonts, base, layout, header, footer, diagram, and one partial per page
 assets/css/main.scss           imports the partials
 assets/js/                     theme-init (runs before first paint), site, research-filter, lightbox, analytics
 assets/js/lib/                 pure logic with unit tests: theme, topic, gallery
 assets/fonts/                  self-hosted WOFF2 files and their licences
 assets/img/research/           figures and screenshots for project pages
+assets/img/terrain.svg         contour map behind the home page heading (generated)
 assets/photography/<album>/    original photographs, one folder per album
 assets/pdf/                    the CV
 _research/                     one Markdown file per research or software project
@@ -48,6 +51,7 @@ tests/unit/                    node:test over assets/js/lib
 tests/e2e/                     Playwright, in Chromium, Firefox and WebKit
 tests/site/                    node:test over the built _site
 scripts/lighthouse.js          Lighthouse check, configured by lighthouserc.json
+scripts/landscape.mjs          draws the generated home page artwork; run with npm run art
 ```
 
 ## Rules
@@ -63,6 +67,7 @@ scripts/lighthouse.js          Lighthouse check, configured by lighthouserc.json
 - Colours, spacing and type sizes come from the custom properties in `_sass/_tokens.scss`. Both themes must meet WCAG AA contrast.
 - The layout must work from 320px to 1920px wide with no horizontal scrolling. The phone menu appears below 820px.
 - Dialogs, such as the photo viewer, use the page's paper and ink colours rather than a dark overlay panel.
+- Never edit the generated artwork by hand; change `scripts/landscape.mjs` and run `npm run art`.
 
 ## Checking a change
 

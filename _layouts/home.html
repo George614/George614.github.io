@@ -3,19 +3,23 @@ layout: default
 ---
 {%- assign featured = site.research | where: "featured", true | sort: "sort_date" | reverse -%}
 {%- assign news = site.news | sort: "date" | reverse -%}
-<div class="wrap home">
-  <section class="hero" aria-labelledby="hero-heading" data-source="cv">
+<section class="hero" aria-labelledby="hero-heading" data-source="cv">
+  <div class="terrain" aria-hidden="true">{% include terrain-trail.svg %}</div>
+  <div class="wrap">
     <div class="hero-text">
       <h1 id="hero-heading">I train large language models to act, not only to answer.</h1>
       <p class="hero-lede">AI Research Scientist at WRITER, working on reinforcement learning and post-training for agents. I also go by George.</p>
       {% include contact-links.html cv=true %}
     </div>
-    <div class="hero-portrait">
-      {% include picture.html src="/assets/img/prof_pic.jpg" alt="Zhizhuo Yang holding a camera in Yosemite Valley, with El Capitan behind him" width=3024 height=4032 sizes="(max-width: 820px) 280px, 300px" fetchpriority="high" %}
-    </div>
-  </section>
+  </div>
+</section>
 
-  <div class="with-margin home-notes">
+<div class="wrap home">
+
+  <div class="home-notes">
+    <div class="notes-portrait">
+      {% include picture.html src="/assets/img/prof_pic.jpg" alt="Zhizhuo Yang holding a camera in Yosemite Valley, with El Capitan behind him" width=3024 height=4032 sizes="200px" loading="eager" %}
+    </div>
     <div class="home-bio" data-source="cv">
       <p>At WRITER I built the agentic reinforcement learning stack end to end: synthetic data, verifiers and rewards, and training a 744-billion-parameter model inside the production agent harness.</p>
       <p>Before that I earned a Ph.D. at Rochester Institute of Technology on active inference, studying how agents perceive, act and learn under uncertainty, after years of work on eye tracking and virtual reality.</p>
@@ -30,16 +34,22 @@ layout: default
     </aside>
   </div>
 
+  <section class="section path" aria-labelledby="path-heading" data-source="cv">
+    <h2 id="path-heading">The way here</h2>
+    <p class="section-lede">From optics to virtual reality, to how agents perceive and act, to training language models that act.</p>
+    {% include career-ridge.html %}
+  </section>
+
   <section class="section" aria-labelledby="selected-heading" data-source="cv">
     <div class="section-head">
       <h2 id="selected-heading">Selected work</h2>
       <a href="/research/">All research</a>
     </div>
-    <ul class="entry-list">
+    <div class="work-grid">
       {%- for entry in featured %}
-      <li>{% include entry-row.html entry=entry %}</li>
+      {% include work-card.html entry=entry lead=forloop.first %}
       {%- endfor %}
-    </ul>
+    </div>
   </section>
 
   <section class="section" id="news" aria-labelledby="news-heading">
@@ -52,10 +62,19 @@ layout: default
   </section>
 
   <section class="section personal" aria-labelledby="personal-heading">
-    <h2 id="personal-heading">Outside work</h2>
+    <div class="section-head">
+      <h2 id="personal-heading">Outside work</h2>
+      <a href="/photography/">All photographs</a>
+    </div>
     <p>Away from research I photograph landscapes, from Sequoia to the Olympic Peninsula. I also play basketball and the saxophone, and I go hiking whenever I can.</p>
-    <a class="personal-photo" href="/photography/" aria-label="See more photographs">
-      {% include picture.html src="/assets/photography/mammoth/DSC_0617.JPG" alt="A stream winding through a pale volcanic valley below snow-dusted peaks near Mammoth, California" width=4496 height=3000 sizes="(max-width: 1144px) calc(100vw - 40px), 1080px" %}
-    </a>
+    <div class="mosaic">
+      {%- for pick in site.data.home_photos %}
+      {%- assign album = site.data.albums | where: "slug", pick.album | first %}
+      {%- assign photo = album.photos | where: "file", pick.file | first %}
+      {%- if forloop.first -%}{%- assign sizes = "(max-width: 820px) calc(100vw - 40px), 540px" -%}{%- else -%}{%- assign sizes = "(max-width: 820px) 50vw, 270px" -%}{%- endif %}
+      {%- capture src %}/assets/photography/{{ album.slug }}/{{ photo.file }}{% endcapture %}
+      <a href="/photography/#album-{{ album.slug }}">{% include picture.html src=src alt=pick.alt width=photo.width height=photo.height sizes=sizes %}</a>
+      {%- endfor %}
+    </div>
   </section>
 </div>

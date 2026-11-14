@@ -1,0 +1,7 @@
+# Photographs in the mosaic under "Outside work" on the home page. The first is shown largest.
+# Each names an album slug and a file from _data/albums.yml, with alt text describing the photograph.
+- { album: sequoia, file: IMG_1358.jpg, alt: "An orange sunset sky over a sea of clouds, with forested ridges in shadow" }
+- { album: lassen-shasta, file: IMG_1737.jpg, alt: "A snow-capped volcano above a forested lakeshore" }
+- { album: lassen-shasta, file: IMG_0480.jpg, alt: "Waterfalls pouring over a mossy cliff into a pool" }
+- { album: sequoia, file: IMG_1475.jpg, alt: "Rocky peaks glowing red in the last evening light" }
+- { album: olympic, file: DSC_0432.JPG, alt: "A blue mountain range under low clouds, above a dark forest" }

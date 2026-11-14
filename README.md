@@ -7,7 +7,7 @@ It is a static site built with Jekyll and published with GitHub Pages at <https:
 
 | Address | What it shows | Built from |
 | --- | --- | --- |
-| `/` | Introduction, selected work, recent news, a photograph | `_layouts/home.html`, `_research/`, `_news/` |
+| `/` | Introduction over a contour map, a short bio, the career path, selected work, recent news, photographs | `_layouts/home.html`, `_research/`, `_news/`, `_data/path.yml`, `_data/home_photos.yml` |
 | `/research/` | Research projects with a topic filter, software, papers under review | `_layouts/research.html`, `_research/`, `_data/topics.yml`, `_data/under_review.yml` |
 | `/research/<name>/` | One project: summary, figure, links, results, key facts | `_layouts/project.html`, one file in `_research/` |
 | `/publications/` | Published papers, technical reports, papers under review | `_pages/publications.html`, `_bibliography/papers.bib`, `_data/under_review.yml` |
@@ -77,6 +77,7 @@ label: "ICRA 2025"             # venue or context, shown under the summary
 summary: "One sentence for the list."
 authors: "Viet Dung Nguyen, Zhizhuo Yang, Christopher L. Buckley and Alexander Ororbia."
 featured: true                 # also show it under Selected work on the home page
+highlight: 3                   # the newest featured entry quotes this result on the home page, counting from 1
 bib_key: nguyen2025sr-aif      # the matching entry in _bibliography/papers.bib
 links:
   - { label: "Paper", href: "https://doi.org/..." }
@@ -86,6 +87,7 @@ figures:                       # the first figure is also the thumbnail in lists
     width: 1560
     height: 650
 figure_caption: "Where the figure comes from."
+diagram: rl-loop.svg           # instead of figures: a diagram from _includes/diagrams/, shown with figure_caption
 results:
   - "One main result per item."
 facts:
@@ -102,6 +104,16 @@ For a project at WRITER, use the last day of its end month.
 Put figures in `assets/img/research/`, with no spaces and no dots in the file name other than the extension, and give the original width and height.
 The site publishes only resized WebP copies of each figure, with the image metadata removed.
 To add a topic, add a `key` and `title` to `_data/topics.yml`.
+
+A diagram is an inline SVG file in `_includes/diagrams/`, drawn with the classes in `_sass/_diagram.scss` so that it follows the theme.
+It needs `role="img"` and a `<title>` that describes it in words.
+A project with a diagram shows it on its page in place of a figure, and on its card under Selected work.
+
+### The home page
+
+The career path under "The way here" lists the steps in `_data/path.yml`, oldest first, with a year, a title and a place for each, all taken from the CV.
+The last step is marked as the present one.
+The photographs under "Outside work" are listed in `_data/home_photos.yml`, by album slug and file name from `_data/albums.yml`, each with its own alt text; the first is shown largest.
 
 ### A publication
 
@@ -153,6 +165,15 @@ To update it, replace the PDF, update `_data/cv.yml` with the same wording and d
 
 The layout is one centred column at most 1080px wide, with a light and a dark theme that follow the system setting and can be switched from the header.
 Colours, spacing and type sizes are defined once in `_sass/_tokens.scss`.
+
+The home page artwork is drawn by `scripts/landscape.mjs`, which is deterministic, so the same script always writes the same files:
+
+- `assets/img/terrain.svg`, the contour lines of an imaginary mountain, used as a CSS mask so that the lines take the theme's `--terrain` colour.
+- `_includes/terrain-trail.svg`, the gold path that climbs from the foothills to the summit, drawn over the same view box when the page loads.
+  With reduced motion turned on, the path is shown already drawn.
+- `_data/ridge.json`, the ridge that the career path climbs, sampled every 5 units across its width.
+
+Run `npm run art` after changing the script; a site test fails if the committed files differ from what it draws.
 
 The fonts are [Newsreader](https://github.com/productiontype/Newsreader) for headings and long-form text, and [Hanken Grotesk](https://github.com/marcologous/hanken-grotesk) for navigation, labels and metadata.
 Both are self-hosted variable fonts from the `@fontsource-variable/newsreader` and `@fontsource-variable/hanken-grotesk` packages, version 5.3.0, in their `latin` and `latin-ext` subsets.

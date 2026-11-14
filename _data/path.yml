@@ -1,0 +1,8 @@
+# The career path on the home page, oldest first, drawn as waypoints along a rising ridge.
+# Every year and place comes from the CV in assets/pdf/. The last step is marked as the present one.
+- { year: 2010, title: "Optics", place: "B.S., Beijing Jiaotong University" }
+- { year: 2014, title: "Virtual and augmented reality", place: "M.S., Beijing Institute of Technology" }
+- { year: 2017, title: "Active inference and eye tracking", place: "Ph.D., Rochester Institute of Technology" }
+- { year: 2019, title: "Rendering for VR headsets", place: "Internships at Facebook, 2019 and 2020" }
+- { year: 2023, title: "Sensor fusion for tracking", place: "Meta, internship and student researcher" }
+- { year: 2025, title: "Reinforcement learning for LLM agents", place: "AI Research Scientist, WRITER" }
