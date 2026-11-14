@@ -42,6 +42,85 @@ test('with reduced motion the path is drawn from the start', async ({ page }) =>
   expect(await page.locator('.terrain-summit').evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
 });
 
+const summitEnd = (page) => page.locator('.terrain-summit').evaluate((c) => ` ${c.getAttribute('cx')} ${c.getAttribute('cy')}`);
+
+test('moving over the map lights the contours near the pointer and previews a climb to the summit', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const hero = page.locator('.hero');
+  const box = await page.locator('.terrain').boundingBox();
+  const at = { x: box.x + box.width * 0.85, y: box.y + box.height * 0.75 };
+  await page.mouse.move(at.x, at.y);
+  await expect(hero).toHaveClass(/is-pointing/);
+  expect(await page.locator('.terrain').evaluate((el) => getComputedStyle(el, '::after').maskImage)).toContain('radial-gradient');
+  const probe = page.locator('.terrain-probe');
+  await expect(probe).toBeVisible();
+  expect((await probe.getAttribute('d')).endsWith(await summitEnd(page))).toBe(true);
+  const start = await page.locator('.terrain-probe-start').boundingBox();
+  expect(Math.abs(start.x + start.width / 2 - at.x)).toBeLessThan(3);
+  expect(Math.abs(start.y + start.height / 2 - at.y)).toBeLessThan(3);
+  await page.mouse.move(at.x, box.y + box.height + 300);
+  await expect(hero).not.toHaveClass(/is-pointing/);
+  await expect(probe).toBeHidden();
+});
+
+test('a click on the map climbs from there to the summit, keeping the last three climbs', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const box = await page.locator('.terrain').boundingBox();
+  const routes = page.locator('.terrain-route');
+  await page.mouse.click(box.x + box.width * 0.9, box.y + box.height * 0.7);
+  await expect(routes).toHaveCount(1);
+  expect((await routes.locator('path').getAttribute('d')).endsWith(await summitEnd(page))).toBe(true);
+  for (const x of [0.55, 0.6, 0.65, 0.7]) await page.mouse.click(box.x + box.width * x, box.y + box.height * 0.6);
+  await expect(routes).toHaveCount(3);
+});
+
+test('a click on a link or on the heading text does not climb', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const link = page.locator('.hero').getByRole('link', { name: 'GitHub' });
+  await link.evaluate((a) => a.addEventListener('click', (e) => e.preventDefault()));
+  await link.click();
+  await page.locator('h1').dblclick();
+  await expect(page.locator('.terrain-route')).toHaveCount(0);
+});
+
+test('with reduced motion a climb is drawn at once', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const box = await page.locator('.terrain').boundingBox();
+  await page.mouse.click(box.x + box.width * 0.9, box.y + box.height * 0.7);
+  const path = page.locator('.terrain-route path');
+  expect(await path.evaluate((el) => el.getAnimations().length)).toBe(0);
+  expect(await path.evaluate((el) => parseFloat(getComputedStyle(el).strokeDashoffset))).toBe(0);
+});
+
+test('on a phone a tap on the map band climbs, and a tap on the text above it does not', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto('/');
+  await page.locator('.hero-lede').click();
+  await expect(page.locator('.terrain-route')).toHaveCount(0);
+  const band = page.locator('.terrain');
+  await band.scrollIntoViewIfNeeded();
+  const box = await band.boundingBox();
+  await page.mouse.click(box.x + box.width * 0.3, box.y + box.height * 0.8);
+  await expect(page.locator('.terrain-route')).toHaveCount(1);
+});
+
+test('a hint says the map can be climbed, and only once the script runs', async ({ browser }) => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto('/');
+  await expect(page.locator('.terrain-hint')).toHaveText('Click anywhere on the map to climb from there.');
+  await page.close();
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const still = await context.newPage();
+  await still.goto('/');
+  await expect(still.locator('.terrain-hint')).toBeHidden();
+  await context.close();
+});
+
 test('the bio keeps to the CV: primary builder at WRITER, eye tracking before active inference', async ({ page }) => {
   await page.goto('/');
   const bio = page.locator('.home-bio');

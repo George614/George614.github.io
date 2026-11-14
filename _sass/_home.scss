@@ -4,6 +4,7 @@
 // The hero spans the window. Its contour map is assets/img/terrain.svg used as a mask, so the
 // lines take the theme's --terrain colour; the gold path over it is _includes/terrain-trail.svg.
 // Both share one view box, and both cover the hero from its centre, so they stay aligned.
+// assets/js/terrain-map.js adds the pointer's spotlight, a dotted preview climb and gold climbs.
 .hero {
   position: relative;
   isolation: isolate;
@@ -56,6 +57,82 @@
   animation: summit 0.6s var(--ease) 3.3s forwards;
 }
 
+// While the pointer is over the map (.is-pointing on the hero), the contours within a small
+// circle around it (--mx, --my) are drawn again in blue, on top of the grey ones.
+.terrain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--blue);
+  mask:
+    url("/assets/img/terrain.svg") center / cover no-repeat,
+    radial-gradient(circle 160px at var(--mx, -999px) var(--my, -999px), #000 20%, transparent);
+  mask-composite: intersect;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.is-pointing .terrain::after {
+  opacity: 1;
+}
+
+.is-pointing {
+  cursor: crosshair;
+}
+
+.terrain-probe {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-dasharray: 0 7;
+  stroke-linecap: round;
+  visibility: hidden;
+}
+
+.terrain-probe-start {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  visibility: hidden;
+}
+
+.is-pointing :is(.terrain-probe, .terrain-probe-start) {
+  visibility: visible;
+}
+
+.terrain-route-line {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: climb 1.6s var(--ease) forwards;
+}
+
+.terrain-route-start {
+  fill: var(--gold);
+}
+
+// Earlier climbs fade back, so the newest one reads first.
+.terrain-route {
+  transition: opacity 0.4s var(--ease);
+}
+
+.terrain-route:not(:last-child) {
+  opacity: 0.4;
+}
+
+.terrain-hint {
+  position: absolute;
+  right: max(var(--gutter), calc((100% - 1080px) / 2));
+  bottom: 28px;
+  margin: 0;
+  color: var(--soft);
+  font-size: 14px;
+  text-shadow: 0 0 12px var(--paper), 0 0 4px var(--paper);
+}
+
 @keyframes climb {
   to {
     stroke-dashoffset: 0;
@@ -83,6 +160,16 @@
   .terrain-summit {
     animation: none;
     opacity: 1;
+  }
+
+  .terrain-route-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .terrain::after,
+  .terrain-route {
+    transition: none;
   }
 }
 
@@ -441,6 +528,12 @@
     aspect-ratio: 2 / 1;
     margin-top: 24px;
     mask-image: none;
+  }
+
+  .terrain-hint {
+    position: static;
+    order: 3;
+    padding: 10px var(--gutter) 0;
   }
 
   .home-notes {

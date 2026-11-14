@@ -1,4 +1,5 @@
-// Draws the home page artwork, deterministically, so the committed files can be checked:
+// Draws the home page artwork, deterministically, so the committed files can be checked. The
+// terrain itself, and the climb, are in assets/js/lib/terrain.js, which the page also uses.
 //   assets/img/terrain.svg       contour lines of an imaginary mountain, used as a CSS mask
 //   _includes/terrain-trail.svg  the path that climbs it, drawn over the same view box
 //   _data/ridge.json             the ridge behind the career path, one 200-unit column per step
@@ -7,59 +8,13 @@
 import { contours } from 'd3-contour';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { GRID_W, GRID_H, SCALE, createTerrain, findSummit, climb, smoothPath } from '../assets/js/lib/terrain.js';
 
-const GRID_W = 300;
-const GRID_H = 150;
-const SCALE = 4; // grid cells to view box units: the view box is 1200 by 600
 const LEVELS = 22;
-const SEED = 614;
 // Each career step gets a column 200 units wide, sampled every 5 units, so the centre of every
 // column (100, 300, 500, ...) is a sample and each waypoint sits exactly on the ridge line.
 const RIDGE_COLUMN = 200;
 const RIDGE_STEP = 5;
-
-/** A seeded pseudo-random generator (Park and Miller). */
-function random(seed) {
-  let state = seed;
-  return () => (state = (state * 16807) % 2147483647) / 2147483647;
-}
-
-/** Smooth value noise over a 32-cell lattice, summed over three octaves. */
-function noiseField(seed) {
-  const size = 32;
-  const next = random(seed);
-  const lattice = Array.from({ length: (size + 1) ** 2 }, next);
-  const at = (i, j) => lattice[(j % (size + 1)) * (size + 1) + (i % (size + 1))];
-  const smooth = (t) => t * t * (3 - 2 * t);
-  const noise = (x, y) => {
-    const xi = Math.floor(x) % size;
-    const yi = Math.floor(y) % size;
-    const xf = smooth(x - Math.floor(x));
-    const yf = smooth(y - Math.floor(y));
-    const a = at(xi, yi), b = at(xi + 1, yi), c = at(xi, yi + 1), d = at(xi + 1, yi + 1);
-    return a + (b - a) * xf + (c - a) * yf + (a - b - c + d) * xf * yf;
-  };
-  return (x, y) => noise(x, y) * 0.55 + noise(x * 2.1, y * 2.1) * 0.27 + noise(x * 4.3, y * 4.3) * 0.13;
-}
-
-// Peaks in a coordinate space two units wide and one unit tall. The first is the summit.
-const PEAKS = [
-  { x: 1.5, y: 0.32, h: 1.0, s: 0.26 },
-  { x: 1.05, y: 0.7, h: 0.42, s: 0.18 },
-  { x: 1.85, y: 0.82, h: 0.38, s: 0.14 },
-  { x: 0.45, y: 0.4, h: 0.4, s: 0.22 },
-];
-
-function terrain() {
-  const fbm = noiseField(SEED);
-  return (gx, gy) => {
-    const x = (gx / GRID_W) * 2;
-    const y = gy / GRID_H;
-    let h = 0;
-    for (const p of PEAKS) h += p.h * Math.exp(-((x - p.x) ** 2 + (y - p.y) ** 2) / (2 * p.s * p.s));
-    return h + 0.3 * fbm(gx / 20, gy / 20);
-  };
-}
 
 const round = (n) => Math.round(n * SCALE);
 
@@ -100,46 +55,6 @@ function contourSvg(values) {
     + '</svg>\n';
 }
 
-/** Climbs from a start in the foothills to the highest cell: it follows the slope, with a pull
- * toward the summit that grows as it goes, so it wanders like an optimiser but cannot stall. */
-function climb(height, values) {
-  let top = 0;
-  for (let k = 1; k < values.length; k += 1) if (values[k] > values[top]) top = k;
-  const sx = top % GRID_W;
-  const sy = Math.floor(top / GRID_W);
-  const grad = (x, y) => [(height(x + 0.5, y) - height(x - 0.5, y)), (height(x, y + 0.5) - height(x, y - 0.5))];
-  let x = 158, y = 146, vx = 0, vy = -0.3;
-  const points = [[x, y]];
-  for (let step = 0; step < 4000; step += 1) {
-    const [gx, gy] = grad(x, y);
-    const gn = Math.hypot(gx, gy) || 1;
-    const dx = sx - x, dy = sy - y, dist = Math.hypot(dx, dy);
-    if (dist < 1.5) break;
-    const pull = 0.35 + 0.65 * Math.min(1, step / 900);
-    vx = vx * 0.92 + ((gx / gn) * (1 - pull) + (dx / dist) * pull) * 0.09;
-    vy = vy * 0.92 + ((gy / gn) * (1 - pull) + (dy / dist) * pull) * 0.09;
-    x += vx;
-    y += vy;
-    if (step % 18 === 0) points.push([x, y]);
-  }
-  while (points.length > 2 && Math.hypot(points.at(-1)[0] - sx, points.at(-1)[1] - sy) < 6) points.pop();
-  points.push([sx, sy]);
-  return points;
-}
-
-/** A smooth curve through the points (Catmull-Rom, written as cubic Béziers). */
-function smoothPath(points) {
-  let d = `M${round(points[0][0])} ${round(points[0][1])}`;
-  for (let i = 0; i < points.length - 1; i += 1) {
-    const p0 = points[Math.max(0, i - 1)], p1 = points[i], p2 = points[i + 1];
-    const p3 = points[Math.min(points.length - 1, i + 2)];
-    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
-    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
-    d += `C${round(c1[0])} ${round(c1[1])} ${round(c2[0])} ${round(c2[1])} ${round(p2[0])} ${round(p2[1])}`;
-  }
-  return d;
-}
-
 function trailSvg(points) {
   const [start, summit] = [points[0], points.at(-1)];
   return '<svg class="terrain-trail-art" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
@@ -169,12 +84,14 @@ function ridge(steps) {
 
 /** Returns every generated file, keyed by its path in the repository. */
 export function render() {
-  const height = terrain();
+  const height = createTerrain();
   const values = new Float64Array(GRID_W * GRID_H);
   for (let j = 0; j < GRID_H; j += 1) for (let i = 0; i < GRID_W; i += 1) values[j * GRID_W + i] = height(i, j);
+  // The drawn trail starts in the foothills below the summit, heading uphill.
+  const trail = climb(height, [158, 146], findSummit(height), [0, -0.3]);
   return {
     'assets/img/terrain.svg': contourSvg(values),
-    '_includes/terrain-trail.svg': trailSvg(climb(height, values)),
+    '_includes/terrain-trail.svg': trailSvg(trail),
     '_data/ridge.json': `${JSON.stringify(ridge(careerSteps()))}\n`,
   };
 }
