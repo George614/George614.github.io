@@ -18,8 +18,16 @@ test('project page with a figure', async ({ page }) => {
 });
 
 test('project page without a figure or links shows no empty parts', async ({ page }) => {
-  await page.goto('/research/agentic-rl-744b/');
+  await page.goto('/research/self-evolving-agents/');
   await expect(page.locator('figure')).toHaveCount(0);
+  await expect(page.locator('.project-links')).toHaveCount(0);
+});
+
+test('project page with a diagram shows it as the figure', async ({ page }) => {
+  await page.goto('/research/agentic-rl-744b/');
+  const figure = page.locator('figure.project-figure');
+  await expect(figure.getByRole('img', { name: /GRPO update improves the policy/ })).toBeVisible();
+  await expect(figure.locator('figcaption')).toHaveText(/\w/);
   await expect(page.locator('.project-links')).toHaveCount(0);
   await expect(page.locator('.facts dt')).toHaveText(['Method', 'Scale', 'Framework', 'Related']);
   await expect(page.locator('.facts dd a')).toHaveAttribute('href', '/research/palmyra-x6/');

@@ -1,0 +1,40 @@
+<svg class="loop" viewBox="0 0 560 340" role="img" aria-labelledby="loop-title">
+  <title id="loop-title">The training loop: synthetic tasks go to the production agent harness, where the 744B mixture-of-experts policy acts; verifiers score the result as rewards, and a GRPO update improves the policy.</title>
+  <defs>
+    <marker id="loop-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="loop-head"/>
+    </marker>
+  </defs>
+  <g class="loop-node is-input">
+    <rect x="330" y="8" width="200" height="50" rx="25"/>
+    <text x="430" y="38">Synthetic tasks</text>
+  </g>
+  <g class="loop-node is-policy">
+    <rect x="20" y="104" width="200" height="72" rx="6"/>
+    <text x="120" y="135">Policy</text>
+    <text x="120" y="158" class="loop-sub">744B mixture of experts</text>
+  </g>
+  <g class="loop-node">
+    <rect x="330" y="104" width="200" height="72" rx="6"/>
+    <text x="430" y="135">Agent harness</text>
+    <text x="430" y="158" class="loop-sub">the production one</text>
+  </g>
+  <g class="loop-node">
+    <rect x="330" y="252" width="200" height="72" rx="6"/>
+    <text x="430" y="283">Verifiers</text>
+    <text x="430" y="306" class="loop-sub">and rewards</text>
+  </g>
+  <g class="loop-node">
+    <rect x="20" y="252" width="200" height="72" rx="6"/>
+    <text x="120" y="283">GRPO update</text>
+    <text x="120" y="306" class="loop-sub">on the Slime framework</text>
+  </g>
+  <path class="loop-edge" d="M430 58V98" marker-end="url(#loop-arrow)"/>
+  <path class="loop-edge is-flow" d="M222 140H324" marker-end="url(#loop-arrow)"/>
+  <path class="loop-edge is-flow" d="M430 176V246" marker-end="url(#loop-arrow)"/>
+  <path class="loop-edge is-flow" d="M330 288H226" marker-end="url(#loop-arrow)"/>
+  <path class="loop-edge is-flow" d="M120 252V182" marker-end="url(#loop-arrow)"/>
+  <text x="273" y="130" class="loop-edge-label">acts</text>
+  <text x="442" y="216" class="loop-edge-label is-start">trajectories</text>
+  <text x="275" y="278" class="loop-edge-label">reward</text>
+</svg>

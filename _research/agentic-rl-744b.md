@@ -8,6 +8,9 @@ summary: "End-to-end GRPO training across 8-node GPU clusters, with the producti
 authors: "Zhizhuo Yang, with Peng Du, Zhenyu Zhao, Kiran Kamble and Arjun Krishna."
 featured: true
 cv_sourced: true
+diagram: rl-loop.svg
+figure_caption: "The training loop. The policy acts inside the production agent harness on synthetic tasks, verifiers turn each trajectory into a reward, and a GRPO update improves the policy."
+highlight: 3
 results:
   - "An initial small-scale run raised held-out task reward by 0.077 over the base policy."
   - "Generation took 61% of wall-clock time; with FP8 weights one rollout engine fits on each node, which gave 2.6 to 4.1 times the output of the previous two-node layout."

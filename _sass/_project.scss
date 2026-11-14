@@ -79,6 +79,11 @@
   margin: 0 auto;
 }
 
+// A diagram is drawn in the theme's colours, so it sits on the tint rather than on white.
+.project-figure.is-diagram .project-figure-images {
+  background: var(--tint);
+}
+
 .project-figure.is-gallery .project-figure-images {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

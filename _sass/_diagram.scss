@@ -1,0 +1,65 @@
+// Diagrams drawn as inline SVG in _includes/diagrams/, coloured by the theme.
+// The training loop: nodes are boxes, and the gold arrows show the loop's direction.
+
+.loop {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+.loop-node rect {
+  fill: var(--raised);
+  stroke: var(--rule);
+  stroke-width: 1.5;
+}
+
+.loop-node.is-policy rect {
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+
+.loop-node.is-input rect {
+  fill: transparent;
+  stroke: var(--soft);
+  stroke-dasharray: 4 4;
+}
+
+.loop-node text {
+  fill: var(--ink);
+  font-size: 17px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.loop-node .loop-sub {
+  fill: var(--soft);
+  font-size: 13.5px;
+  font-weight: 400;
+}
+
+.loop-edge {
+  fill: none;
+  stroke: var(--soft);
+  stroke-width: 1.5;
+}
+
+.loop-edge.is-flow {
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+
+.loop-head {
+  fill: var(--gold);
+}
+
+.loop-edge-label {
+  fill: var(--soft);
+  font-size: 13px;
+  text-anchor: middle;
+}
+
+.loop-edge-label.is-start {
+  text-anchor: start;
+}

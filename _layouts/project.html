@@ -36,7 +36,14 @@ layout: default
   </ul>
   {%- endif %}
 
-  {%- if page.figures.size > 0 %}
+  {%- if page.diagram %}
+  <figure class="project-figure is-diagram">
+    <div class="project-figure-images">
+      {% include diagrams/{{ page.diagram }} %}
+    </div>
+    <figcaption>{{ page.figure_caption }}</figcaption>
+  </figure>
+  {%- elsif page.figures.size > 0 %}
   <figure class="project-figure{% if page.figures.size > 1 %} is-gallery{% endif %}">
     <div class="project-figure-images">
       {%- for figure in page.figures %}
