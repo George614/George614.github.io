@@ -1,0 +1,1 @@
+export const THEMES=["light","dark"];export function effectiveTheme(e,t){return THEMES.includes(e)?e:t?"dark":"light"}export function nextTheme(e){return"dark"===e?"light":"dark"}

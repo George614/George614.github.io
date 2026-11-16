@@ -1,0 +1,1 @@
+!function(){var t=document.documentElement;t.setAttribute("data-js","");try{var e=window.localStorage.getItem("theme");"light"!==e&&"dark"!==e||t.setAttribute("data-theme",e)}catch(t){}}();

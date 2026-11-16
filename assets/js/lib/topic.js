@@ -1,0 +1,1 @@
+export function parseTopic(n,e){const t=new URLSearchParams(n).get("topic");return e.includes(t)?t:null}export function filterStatus(n,e){return null===e?`Showing all ${n} entries`:`Showing ${n} ${1===n?"entry":"entries"} in ${e}`}

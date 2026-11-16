@@ -1,0 +1,1 @@
+export function wrapIndex(n,r){return(n%r+r)%r}
