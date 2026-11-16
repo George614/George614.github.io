@@ -137,10 +137,19 @@ test('the bio says who I am as a researcher and as a person, not only what I do 
   await expect(paragraphs).toHaveCount(3);
   await expect(paragraphs.nth(0)).toContainText('杨智卓');
   await expect(paragraphs.nth(0)).toContainText('perceive, act and learn');
-  for (const step of ['optics', 'virtual reality', 'Rochester Institute of Technology', 'Alexander Ororbia', 'Reynold Bailey', 'eye tracking', 'Facebook', 'Meta'])
+  for (const step of ['optics', 'virtual reality', 'Rochester Institute of Technology', 'eye tracking', 'Facebook', 'Meta', 'sensor fusion for glove tracking'])
     await expect(paragraphs.nth(1)).toContainText(step);
-  for (const trait of ['mentored', 'interns', 'basketball', 'badminton', 'music', 'travel', 'hike', 'saxophone'])
+  for (const trait of ['mentored', 'an intern', 'music and movies', 'basketball', 'badminton', 'travel', 'hike', 'a little guitar'])
     await expect(paragraphs.nth(2)).toContainText(trait);
+  await expect(paragraphs.nth(2)).not.toContainText(/saxophone|interns/);
+});
+
+test('the bio names my advisors as on the CV, each linking to their page', async ({ page }) => {
+  await page.goto('/');
+  const advisors = page.locator('.home-bio a');
+  await expect(advisors).toHaveText(['Dr. Alexander G. Ororbia II', 'Dr. Reynold Bailey']);
+  expect(await advisors.evaluateAll((els) => els.map((a) => a.getAttribute('href'))))
+    .toEqual(['https://www.cs.rit.edu/~ago/', 'https://www.rit.edu/directory/rjbvcs-reynold-bailey']);
 });
 
 test('the portrait sits beside the bio and loads with the page', async ({ page }) => {
@@ -170,7 +179,7 @@ test('the career path lists each step in order, ending at WRITER', async ({ page
   const steps = section.locator('ol.ridge-stops > li');
   await expect(steps.locator('.label')).toHaveText(['2010', '2014', '2017', '2019', '2020', '2023', '2025']);
   await expect(steps.locator('strong')).toHaveText(['Optical information science', 'Virtual and augmented reality',
-    'Eye tracking and gaze', 'Rendering for VR headsets', 'Active inference', 'Sensor fusion for tracking',
+    'Eye tracking and gaze', 'Rendering for VR headsets', 'Active inference', 'Sensor fusion for glove tracking',
     'Reinforcement learning for LLM agents']);
   await expect(steps.last()).toContainText('AI Research Scientist, WRITER');
   await expect(steps.last()).toHaveAttribute('aria-current', 'step');
