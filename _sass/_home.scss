@@ -213,7 +213,7 @@
 
 .home-notes {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) var(--margin-column);
+  grid-template-columns: 260px minmax(0, 1fr);
   gap: 48px;
   align-items: start;
   padding: 48px 0;
@@ -543,6 +543,10 @@
 
   .notes-portrait {
     max-width: 200px;
+  }
+
+  .home-bio p {
+    font-size: 18px;
   }
 
   // The ridge drawing needs width; on a phone the path is a plain vertical list.

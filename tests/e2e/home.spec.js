@@ -126,8 +126,21 @@ test('the bio keeps to the CV: primary builder at WRITER, eye tracking before ac
   const bio = page.locator('.home-bio');
   await expect(bio).toContainText('primary builder of the agentic reinforcement learning stack');
   await expect(bio).toContainText('744-billion-parameter mixture-of-experts model');
+  await expect(bio).toContainText('synthetic tool-use data pipeline behind Palmyra x6');
   await expect(bio).toContainText('from 2020 I worked on active inference');
   await expect(bio).not.toContainText('uncertainty');
+});
+
+test('the bio says who I am as a researcher and as a person, not only what I do now', async ({ page }) => {
+  await page.goto('/');
+  const paragraphs = page.locator('.home-bio p');
+  await expect(paragraphs).toHaveCount(3);
+  await expect(paragraphs.nth(0)).toContainText('杨智卓');
+  await expect(paragraphs.nth(0)).toContainText('perceive, act and learn');
+  for (const step of ['optics', 'virtual reality', 'Rochester Institute of Technology', 'Alexander Ororbia', 'Reynold Bailey', 'eye tracking', 'Facebook', 'Meta'])
+    await expect(paragraphs.nth(1)).toContainText(step);
+  for (const trait of ['mentored', 'interns', 'basketball', 'badminton', 'music', 'travel', 'hike', 'saxophone'])
+    await expect(paragraphs.nth(2)).toContainText(trait);
 });
 
 test('the portrait sits beside the bio and loads with the page', async ({ page }) => {
@@ -139,12 +152,15 @@ test('the portrait sits beside the bio and loads with the page', async ({ page }
   expect(box.width / box.height).toBeCloseTo(0.8, 1);
 });
 
-test('margin facts', async ({ page }) => {
+test('the portrait and the bio stand alone, with no list of short-lived facts beside them', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  await expect(page.locator('.facts dt')).toHaveText(['Now', 'Built', 'Under review', 'Ph.D.']);
-  await expect(page.locator('.facts dd')).toHaveText(['AI Research Scientist, WRITER, San Francisco',
-    'Synthetic tool-use data pipeline behind Palmyra x6', 'Two papers on diffusion language models',
-    'Rochester Institute of Technology, 2024']);
+  const notes = page.locator('.home-notes');
+  await expect(notes.locator('aside, dl')).toHaveCount(0);
+  await expect(page.locator('main')).not.toContainText('Under review');
+  const portrait = await notes.locator('.notes-portrait').boundingBox();
+  const bio = await notes.locator('.home-bio').boundingBox();
+  expect(bio.x).toBeGreaterThan(portrait.x + portrait.width);
 });
 
 test('the career path lists each step in order, ending at WRITER', async ({ page }) => {
@@ -235,7 +251,7 @@ test('recent news', async ({ page }) => {
 test('outside work shows five photographs, each linking to its album', async ({ page }) => {
   await page.goto('/');
   const note = page.locator('section.personal');
-  for (const hobby of ['photograph', 'saxophone', 'basketball', 'badminton', 'hike']) await expect(note).toContainText(hobby);
+  await expect(note.locator('p')).toContainText('photograph landscapes');
   const photos = note.locator('.mosaic a');
   await expect(photos).toHaveCount(5);
   for (const href of await photos.evaluateAll((els) => els.map((e) => e.getAttribute('href'))))
