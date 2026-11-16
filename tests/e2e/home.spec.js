@@ -144,12 +144,12 @@ test('the bio says who I am as a researcher and as a person, not only what I do 
   await expect(paragraphs.nth(2)).not.toContainText(/saxophone|interns/);
 });
 
-test('the bio names my advisors as on the CV, each linking to their page', async ({ page }) => {
+test('the bio links WRITER and names my advisors as on the CV, each linking to their page', async ({ page }) => {
   await page.goto('/');
-  const advisors = page.locator('.home-bio a');
-  await expect(advisors).toHaveText(['Dr. Alexander G. Ororbia II', 'Dr. Reynold Bailey']);
-  expect(await advisors.evaluateAll((els) => els.map((a) => a.getAttribute('href'))))
-    .toEqual(['https://www.cs.rit.edu/~ago/', 'https://www.rit.edu/directory/rjbvcs-reynold-bailey']);
+  const links = page.locator('.home-bio a');
+  await expect(links).toHaveText(['WRITER', 'Dr. Alexander G. Ororbia II', 'Dr. Reynold Bailey']);
+  expect(await links.evaluateAll((els) => els.map((a) => a.getAttribute('href'))))
+    .toEqual(['https://writer.com/', 'https://www.cs.rit.edu/~ago/', 'https://www.rit.edu/directory/rjbvcs-reynold-bailey']);
 });
 
 test('the portrait sits beside the bio and loads with the page', async ({ page }) => {
