@@ -32,8 +32,11 @@
   color: var(--soft);
 }
 
+// The label moves to its own line as one piece when it fits there, and wraps only when it is
+// wider than the column, as on a 320px phone.
 .byline .label {
-  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .project-links {

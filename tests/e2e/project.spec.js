@@ -67,3 +67,17 @@ test('entry with only a title and summary renders cleanly', async ({ page }) => 
   expect(await page.locator('main *:not(img):not(br):not(hr)').evaluateAll(
     (els) => els.filter((e) => !e.textContent.trim() && !e.querySelector('img')).length)).toBe(0);
 });
+
+test('a long publication label wraps inside the byline on a 320px phone instead of running past it', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/research/perceptual-motor-learning/');
+  const byline = page.locator('.byline');
+  await expect(byline.locator('.label')).toHaveText('Frontiers in Computational Neuroscience, 2023');
+  const { overflow, labelRight, bylineRight } = await byline.evaluate((el) => ({
+    overflow: el.scrollWidth - el.clientWidth,
+    labelRight: el.querySelector('.label').getBoundingClientRect().right,
+    bylineRight: el.getBoundingClientRect().right,
+  }));
+  expect(overflow).toBe(0);
+  expect(labelRight).toBeLessThanOrEqual(bylineRight);
+});
