@@ -37,17 +37,23 @@ exclude:
   - "assets/img/*.png"
   - "assets/img/research/*.jpg"
   - "assets/img/research/*.png"
+  - "assets/img/software/*.png"
 
 collections:
   research:
     output: true
     permalink: /research/:name/
+  software:
+    output: true
+    permalink: /software/:name/
   news:
     output: false
 
 defaults:
   - scope: { path: "", type: research }
     values: { layout: project, nav_key: research }
+  - scope: { path: "", type: software }
+    values: { layout: project, nav_key: software }
   - scope: { path: _pages }
     values: { layout: page }
   - scope: { path: assets }

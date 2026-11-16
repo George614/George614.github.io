@@ -8,10 +8,12 @@ It is a static site built with Jekyll and published with GitHub Pages at <https:
 | Address | What it shows | Built from |
 | --- | --- | --- |
 | `/` | Introduction over a contour map, a short bio, the career path, selected work, recent news, photographs | `_layouts/home.html`, `_research/`, `_news/`, `_data/path.yml`, `_data/home_photos.yml` |
-| `/research/` | Research projects with a topic filter, software, papers under review | `_layouts/research.html`, `_research/`, `_data/topics.yml`, `_data/under_review.yml` |
-| `/research/<name>/` | One project: summary, figure, links, results, key facts | `_layouts/project.html`, one file in `_research/` |
+| `/research/` | Research projects with a topic filter, and papers under review | `_layouts/research.html`, `_research/`, `_data/topics.yml`, `_data/under_review.yml` |
+| `/research/<name>/` | One research project: summary, figure, links, results, key facts | `_layouts/project.html`, one file in `_research/` |
 | `/publications/` | Published papers, technical reports, papers under review | `_pages/publications.html`, `_bibliography/papers.bib`, `_data/under_review.yml` |
-| `/cv/` | Education, experience, teaching and mentoring, with a link to the PDF | `_pages/cv.html`, `_data/cv.yml`, `assets/pdf/` |
+| `/software/` | Apps and tools I have built | `_pages/software.html`, `_software/` |
+| `/software/<name>/` | One app or tool, laid out like a research project | `_layouts/project.html`, one file in `_software/` |
+| `/cv/` | A link to the CV as a PDF | `_pages/cv.html`, `assets/pdf/` |
 | `/photography/` | An index of the albums by their covers, then each album in full rows of photographs, with a full-screen viewer | `_pages/photography.html`, `_data/albums.yml`, `assets/photography/` |
 
 The old addresses `/teaching/`, `/portfolio/`, `/projects/` and `/news/` redirect to their new places, and any other unknown address shows the page in `_pages/404.md`.
@@ -69,10 +71,8 @@ Create `_research/<name>.md`; the page appears at `/research/<name>/`.
 ```yaml
 ---
 title: "SR-AIF: sparse-reward robotics from pixels"
-kind: research                 # research or software
-topic: active-inference        # research only: a key from _data/topics.yml
-sort_date: "2025-07-01"        # research only: orders the list, newest first; never shown
-order: 1                       # software only: position in the software list
+topic: active-inference        # a key from _data/topics.yml
+sort_date: "2025-07-01"        # orders the list, newest first; never shown
 label: "ICRA 2025"             # venue or context, shown under the summary
 summary: "One sentence for the list."
 authors: "Viet Dung Nguyen, Zhizhuo Yang, Christopher L. Buckley and Alexander Ororbia."
@@ -97,7 +97,7 @@ facts:
 The body: two or three short paragraphs on the problem and the approach.
 ```
 
-Only `title`, `kind` and `summary` are required.
+Only `title` and `summary` are required.
 Leave out any other key and its part of the page is left out too.
 For a project page, use `sort_date` as the publication month (the first day of the month), or 1 July of the year when the month is unknown.
 For a project at WRITER, use the last day of its end month.
@@ -108,6 +108,29 @@ To add a topic, add a `key` and `title` to `_data/topics.yml`.
 A diagram is an inline SVG file in `_includes/diagrams/`, drawn with the classes in `_sass/_diagram.scss` so that it follows the theme.
 It needs `role="img"` and a `<title>` that describes it in words.
 A project with a diagram shows it on its page in place of a figure, and on its card under Selected work.
+
+### A software project
+
+Create `_software/<name>.md`; the page appears at `/software/<name>/`, and the Software page lists it.
+It takes the same keys as a research project except `topic`, `sort_date`, `featured`, `highlight` and `bib_key`, and adds `order`, its position in the list counting from 1:
+
+```yaml
+---
+title: GPU Memory Calculator
+order: 1
+label: "Open-source web tool"
+summary: "One sentence for the list."
+links:
+  - { label: "Code", href: "https://github.com/..." }
+figures:
+  - src: /assets/img/software/gpu-memory-calculator.png
+    alt: "What the screenshot shows."
+    width: 1370
+    height: 623
+---
+```
+
+Put screenshots in `assets/img/software/`, under the same rules as research figures.
 
 ### The home page
 
@@ -159,8 +182,9 @@ The site publishes resized WebP copies with the camera metadata removed; the ori
 
 ### The CV
 
-The CV page is built from `_data/cv.yml`, transcribed from the PDF in `assets/pdf/`.
-To update it, replace the PDF, update `_data/cv.yml` with the same wording and dates, and change the PDF file name in `_pages/cv.html` and in `tests/e2e/cv-claims.spec.js` if it changed.
+The CV page only links to the PDF in `assets/pdf/`.
+To update it, replace the PDF and, if its file name changed, change it in `cv_pdf` in `_config.yml`, in `tests/e2e/cv.spec.js` and in `tests/e2e/cv-claims.spec.js`.
+The page count and month shown next to the link are written in `_pages/cv.html`.
 
 ## Design
 

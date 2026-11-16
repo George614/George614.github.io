@@ -1,6 +1,5 @@
 ---
 title: "SR-AIF: sparse-reward robotics from pixels"
-kind: research
 topic: active-inference
 sort_date: "2025-07-01"
 label: "ICRA 2025"

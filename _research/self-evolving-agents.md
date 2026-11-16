@@ -1,6 +1,5 @@
 ---
 title: Self-evolving agentic AI systems
-kind: research
 topic: agents
 sort_date: "2025-09-30"
 label: "WRITER, 2025"

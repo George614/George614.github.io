@@ -1,9 +1,7 @@
 ---
 layout: default
 ---
-{%- assign research_entries = site.research | where: "kind", "research" -%}
-{%- assign listed = research_entries | concat: site.data.under_review | sort: "sort_date" | reverse -%}
-{%- assign software_entries = site.research | where: "kind", "software" | sort: "order" -%}
+{%- assign listed = site.research | concat: site.data.under_review | sort: "sort_date" | reverse -%}
 <div class="wrap page research-page">
   <header class="page-head">
     <h1>{{ page.title }}</h1>
@@ -38,15 +36,4 @@ layout: default
     {%- endif %}
     {%- endfor %}
   </ul>
-
-  <section class="section software" id="software" aria-labelledby="software-heading">
-    <h2 id="software-heading">Software</h2>
-    {%- if software_entries.size > 0 %}
-    <ul class="entry-list">
-      {%- for entry in software_entries %}
-      <li>{% include entry-row.html entry=entry %}</li>
-      {%- endfor %}
-    </ul>
-    {%- endif %}
-  </section>
 </div>

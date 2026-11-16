@@ -68,12 +68,6 @@ test('the filter bar stays under the header while scrolling', async ({ page }) =
   await expect.poll(async () => Math.abs((await filter(page).boundingBox()).y - header.height)).toBeLessThanOrEqual(1);
 });
 
-test('the Software section is not filtered', async ({ page }) => {
-  await page.goto('/research/?topic=diffusion');
-  await expect(page.locator('section#software')).toBeVisible();
-  await expect(page.locator('section#software h2')).toHaveText('Software');
-});
-
 test('research rows link to their project pages', async ({ page }) => {
   await page.goto('/research/');
   const row = page.locator('main li[data-sort]').filter({ hasText: 'SR-AIF' });
@@ -91,8 +85,8 @@ test('on a phone the active topic is scrolled into view', async ({ page }) => {
 });
 
 test('a portrait figure fits inside its list thumbnail', async ({ page }) => {
-  await page.goto('/research/');
-  const thumb = page.locator('#software a[href="/research/meow-translator/"] .entry-thumb');
+  await page.goto('/software/');
+  const thumb = page.locator('main a[href="/software/meow-translator/"] .entry-thumb');
   const box = await thumb.boundingBox();
   const img = await thumb.locator('img').boundingBox();
   expect(img.height).toBeLessThanOrEqual(box.height);

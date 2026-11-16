@@ -1,6 +1,5 @@
 ---
 title: Passive haptics based mixed reality system
-kind: research
 topic: eye-tracking-vr
 sort_date: "2016-12-31"
 label: "ISMAR 2016 and VRCAI 2016"

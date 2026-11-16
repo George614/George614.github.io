@@ -1,6 +1,5 @@
 ---
 title: A neural active inference model of perceptual-motor learning
-kind: research
 topic: active-inference
 sort_date: "2023-02-20"
 label: "Frontiers in Computational Neuroscience, 2023"

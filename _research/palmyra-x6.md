@@ -1,6 +1,5 @@
 ---
 title: "Palmyra x6: an agentic, tool-use model"
-kind: research
 topic: agents
 sort_date: "2026-08-01"
 label: "Technical report, arXiv 2026"

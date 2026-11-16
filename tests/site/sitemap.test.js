@@ -8,9 +8,10 @@ const paths = [...read(join(SITE, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/
   .map(([, loc]) => new URL(loc).pathname);
 
 test('the sitemap lists every page', () => {
-  const slugs = readdirSync('_research').filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, ''));
-  assert.ok(slugs.length >= 12);
-  for (const path of ['/', '/research/', '/publications/', '/cv/', '/photography/', ...slugs.map((s) => `/research/${s}/`)]) {
+  const pages = (collection) => readdirSync(`_${collection}`).filter((f) => f.endsWith('.md')).map((f) => `/${collection}/${f.replace(/\.md$/, '')}/`);
+  const projects = [...pages('research'), ...pages('software')];
+  assert.ok(projects.length >= 12);
+  for (const path of ['/', '/research/', '/publications/', '/software/', '/cv/', '/photography/', ...projects]) {
     assert.ok(paths.includes(path), `${path} missing from sitemap.xml`);
   }
 });

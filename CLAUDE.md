@@ -6,7 +6,7 @@ This file gives Claude Code the context it needs to work in this repository.
 
 This is the personal site of Zhizhuo Yang, a static Jekyll 4 site published with GitHub Pages from the `master` branch.
 The layouts, styles and scripts are written for this site; it uses no theme.
-`README.md` describes the pages, how to add a research project, a publication, a news item, a photograph or a CV change, the fonts, and the tests.
+`README.md` describes the pages, how to add a research project, a software project, a publication, a news item, a photograph or a CV change, the fonts, and the tests.
 Read it before changing content.
 
 ## Commands
@@ -27,7 +27,7 @@ The browser tests serve `_site` on port 4173 and expect the test build (`npm run
 
 ```text
 _config.yml                    site settings, collections, plugins, image sizes
-_data/                         nav, contact links, research topics, papers under review, CV, photo albums,
+_data/                         nav, contact links, research topics, papers under review, photo albums,
                                home page career path and photographs, ridge.json (generated)
 _layouts/                      default (page shell), page, home, research, project, bib (one publication)
 _includes/                     head, header, footer, contact-links, picture, entry-row, work-card, career-ridge,
@@ -37,14 +37,16 @@ assets/css/main.scss           imports the partials
 assets/js/                     theme-init (runs before first paint), site, research-filter, terrain-map, lightbox, analytics
 assets/js/lib/                 pure logic with unit tests: theme, topic, gallery, terrain (shared with scripts/landscape.mjs)
 assets/fonts/                  self-hosted WOFF2 files and their licences
-assets/img/research/           figures and screenshots for project pages
+assets/img/research/           figures for research project pages
+assets/img/software/           screenshots for software project pages
 assets/img/terrain.svg         contour map behind the home page heading (generated)
 assets/photography/<album>/    original photographs, one folder per album
 assets/pdf/                    the CV
-_research/                     one Markdown file per research or software project
+_research/                     one Markdown file per research project
+_software/                     one Markdown file per app or tool
 _news/                         news items
 _bibliography/papers.bib       publications
-_pages/                        home, research, publications, cv, photography, 404, redirects/
+_pages/                        home, research, publications, software, cv, photography, 404, redirects/
 _plugins/hideCustomBibtex.rb   strips the custom keys from the BibTeX shown to readers
 _fixtures/                     test-only research entries, published only by build:test
 tests/unit/                    node:test over assets/js/lib

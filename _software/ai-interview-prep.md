@@ -1,13 +1,12 @@
 ---
 title: AI Interview Prep
-kind: software
 order: 2
 label: "Open-source study tool"
 summary: "A local study tool for AI research scientist and engineer interviews, with a question bank, quizzes, mock interviews and spaced repetition."
 links:
   - { label: "Code", href: "https://github.com/George614/interview-prep-app-public" }
 figures:
-  - src: /assets/img/research/ai-interview-prep.png
+  - src: /assets/img/software/ai-interview-prep.png
     alt: "The question bank view. Tabs across the top lead to quiz mode, mock interview, progress, resources, debug scenarios, behavioral prep and negotiation prep. On the left, filters for domain, difficulty and tag are set to post-training and GRPO; on the right, a revealed answer compares RLOO, PPO and GRPO with the advantage formula for each."
     width: 1882
     height: 1218

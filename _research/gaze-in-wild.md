@@ -1,6 +1,5 @@
 ---
 title: Gaze-in-Wild
-kind: research
 topic: eye-tracking-vr
 sort_date: "2020-02-13"
 label: "Scientific Reports, 2020"

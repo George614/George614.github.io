@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 /** Every page that the shared checks visit. Later tasks append to this list. */
 export const PAGES = [
-  '/', '/research/', '/publications/', '/cv/', '/photography/',
+  '/', '/research/', '/publications/', '/software/', '/cv/', '/photography/',
   '/research/agentic-rl-744b/',
   '/research/palmyra-x6/',
   '/research/self-evolving-agents/',
@@ -13,9 +13,9 @@ export const PAGES = [
   '/research/rit-eyes/',
   '/research/gaze-in-wild/',
   '/research/passive-haptics-mr/',
-  '/research/gpu-memory-calculator/',
-  '/research/ai-interview-prep/',
-  '/research/meow-translator/',
+  '/software/gpu-memory-calculator/',
+  '/software/ai-interview-prep/',
+  '/software/meow-translator/',
   '/research/?topic=diffusion',
 ];
 

@@ -1,6 +1,5 @@
 ---
 title: GPU Memory Calculator
-kind: software
 order: 1
 label: "Open-source web tool"
 summary: "Estimates how much GPU memory it takes to train or serve a large language model, across the common distributed training and inference engines."
@@ -8,7 +7,7 @@ links:
   - { label: "Code", href: "https://github.com/George614/gpu-mem-calculator" }
   - { label: "Demo", href: "https://huggingface.co/spaces/george614/gpu-memory-calculator" }
 figures:
-  - src: /assets/img/research/gpu-memory-calculator.png
+  - src: /assets/img/software/gpu-memory-calculator.png
     alt: "The results panel of the calculator for a 7B-parameter model trained on 8 GPUs. It lists memory per GPU and in total, then a breakdown into model parameters, gradients, optimizer states, activations and overhead, drawn as a stacked bar where activations take most of the space, and ends with a feasibility check that reads Fits on GPU."
     width: 1370
     height: 623

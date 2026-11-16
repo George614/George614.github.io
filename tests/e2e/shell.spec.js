@@ -7,7 +7,7 @@ const background = (page) => page.evaluate(() => getComputedStyle(document.body)
 test('header links and current page', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('nav[aria-label="Main"]');
-  await expect(nav.getByRole('link')).toHaveText(['Home', 'Research', 'Publications', 'CV', 'Photography']);
+  await expect(nav.getByRole('link')).toHaveText(['Home', 'Research', 'Publications', 'Software', 'CV', 'Photography']);
   await expect(nav.locator('[aria-current="page"]')).toHaveText('Home');
   await expect(page.locator('header.site-header a').first()).toHaveAttribute('href', '/');
   await page.goto('/publications/');
@@ -106,7 +106,7 @@ test('phone menu', async ({ page }) => {
 async function expectMenuOpensAndShowsEveryLink(page) {
   const button = page.getByRole('button', { name: 'Menu' });
   const links = page.locator('nav[aria-label="Main"] a');
-  await expect(links).toHaveCount(5);
+  await expect(links).toHaveCount(6);
   await expect(links.first()).toBeHidden();
   await button.click();
   for (const link of await links.all()) await expect(link).toBeVisible();
@@ -138,7 +138,8 @@ test('Tab moves from the menu button into the open menu, and leaving it closes t
   await expect(links.first()).toBeVisible();
   await page.keyboard.press(tab);
   await expect(links.first()).toBeFocused();
-  for (let i = 1; i < 5; i += 1) await page.keyboard.press(tab);
+  const count = await links.count();
+  for (let i = 1; i < count; i += 1) await page.keyboard.press(tab);
   await expect(links.last()).toBeFocused();
   await page.keyboard.press(tab);
   await expect(links.first()).toBeHidden();

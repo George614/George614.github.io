@@ -1,5 +1,5 @@
 ---
 permalink: /teaching/
-redirect_to: /cv/#teaching
+redirect_to: /cv/
 sitemap: false
 ---

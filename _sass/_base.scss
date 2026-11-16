@@ -10,7 +10,12 @@ html {
   scroll-padding-top: calc(var(--header-height) + 24px);
 }
 
+// The main content grows to fill the window, so on a short page the footer still sits at the bottom.
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -18,6 +23,10 @@ body {
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 img,

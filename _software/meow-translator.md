@@ -1,19 +1,18 @@
 ---
 title: Meow Translator
-kind: software
 order: 3
 label: "iPhone app"
 summary: "An iPhone app that listens to a cat's meows and tells you the emotion it hears."
 figures:
-  - src: /assets/img/research/meow-translator-1.png
+  - src: /assets/img/software/meow-translator-1.png
     alt: "Welcome screen titled Listen to Your Cat, with a purple sound-wave button and the line: AI analyzes your cat's meows to understand their emotions in real time."
     width: 1206
     height: 2622
-  - src: /assets/img/research/meow-translator-2.png
+  - src: /assets/img/software/meow-translator-2.png
     alt: "Welcome screen titled Understand Emotions, with a smiling orange face and the line: get insights into what your cat is feeling, happy, playful, calm or curious."
     width: 1206
     height: 2622
-  - src: /assets/img/research/meow-translator-3.png
+  - src: /assets/img/software/meow-translator-3.png
     alt: "Settings screen with the cat's profile and its number of readings, switches for notifications, haptic feedback and auto-saving recordings, and a tab bar with Listen, History and Settings."
     width: 1206
     height: 2622

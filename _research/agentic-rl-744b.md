@@ -1,6 +1,5 @@
 ---
 title: Reinforcement learning for a 744B-parameter agent
-kind: research
 topic: agents
 sort_date: "2026-09-30"
 label: "WRITER, 2025 to 2026"

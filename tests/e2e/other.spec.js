@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('retired addresses redirect to their new home', async ({ page, baseURL }) => {
-  for (const [from, to] of [['/teaching/', '/cv/#teaching'], ['/portfolio/', '/research/'],
+  for (const [from, to] of [['/teaching/', '/cv/'], ['/portfolio/', '/software/'],
                             ['/projects/', '/research/'], ['/news/', '/#news']]) {
     await page.goto(from);
     await page.waitForURL((url) => url.pathname + url.hash === to);

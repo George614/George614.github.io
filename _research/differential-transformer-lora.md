@@ -1,6 +1,5 @@
 ---
 title: Differential Transformer with low-rank adapters
-kind: research
 topic: agents
 sort_date: "2025-08-31"
 label: "WRITER, 2025"

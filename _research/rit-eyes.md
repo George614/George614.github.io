@@ -1,6 +1,5 @@
 ---
 title: RIT-Eyes
-kind: research
 topic: eye-tracking-vr
 sort_date: "2020-09-12"
 label: "ACM SAP 2020"

@@ -1,4 +1,4 @@
-{%- comment -%} One research or software entry as a list row. Parameter: entry (a research collection document). {%- endcomment -%}
+{%- comment -%} One research or software entry as a list row. Parameter: entry (a document from the research or software collection). {%- endcomment -%}
 {%- assign entry = include.entry -%}
 {%- assign thumb = entry.figures | first -%}
 <a class="entry-row{% if thumb %} has-thumb{% endif %}" href="{{ entry.url }}">

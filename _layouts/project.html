@@ -2,20 +2,30 @@
 layout: default
 ---
 {%- assign topic = site.data.topics | where: "key", page.topic | first -%}
-{%- assign research_entries = site.research | where: "kind", "research" | sort: "sort_date" | reverse -%}
-{%- assign software_entries = site.research | where: "kind", "software" | sort: "order" -%}
-{%- assign sequence = research_entries | concat: software_entries -%}
+{%- comment -%}
+  A research or software project. Its breadcrumb, its pager and the list it returns to belong to
+  its own collection: research newest first, software in its `order`.
+{%- endcomment -%}
+{%- if page.collection == "software" -%}
+  {%- assign sequence = site.software | sort: "order" -%}
+  {%- assign list_title = "Software" -%}
+  {%- assign list_href = "/software/" -%}
+  {%- assign back_label = "All software" -%}
+{%- else -%}
+  {%- assign sequence = site.research | sort: "sort_date" | reverse -%}
+  {%- assign list_title = "Research" -%}
+  {%- assign list_href = "/research/" -%}
+  {%- assign back_label = "All research" -%}
+{%- endif -%}
 {%- assign next_entry = nil -%}
 {%- for entry in sequence -%}
   {%- if entry.url == page.url -%}{%- assign next_entry = sequence[forloop.index] -%}{%- endif -%}
 {%- endfor -%}
 <article class="wrap project">
   <nav class="trail" aria-label="Breadcrumb">
-    <a href="/research/">Research</a>
+    <a href="{{ list_href }}">{{ list_title }}</a>
     {%- if topic %}
     <span aria-hidden="true">/</span> <a href="/research/?topic={{ topic.key }}">{{ topic.title }}</a>
-    {%- elsif page.kind == "software" %}
-    <span aria-hidden="true">/</span> <a href="/research/#software">Software</a>
     {%- endif %}
   </nav>
 
@@ -84,7 +94,7 @@ layout: default
   </div>
 
   <nav class="project-pager" aria-label="More projects">
-    <a href="/research/"><small>Back to</small> <b>All research</b></a>
+    <a href="{{ list_href }}"><small>Back to</small> <b>{{ back_label }}</b></a>
     {%- if next_entry %}
     <a href="{{ next_entry.url }}" rel="next"><small>Next project</small> <b>{{ next_entry.title }}</b></a>
     {%- endif %}

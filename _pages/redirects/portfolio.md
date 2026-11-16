@@ -1,5 +1,5 @@
 ---
 permalink: /portfolio/
-redirect_to: /research/
+redirect_to: /software/
 sitemap: false
 ---

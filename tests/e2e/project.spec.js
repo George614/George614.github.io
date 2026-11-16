@@ -40,7 +40,25 @@ test('the pager walks the research entries newest first', async ({ page }) => {
   await expect(next).toContainText('Palmyra x6');
 });
 
-test('entry with only a title, kind and summary renders cleanly', async ({ page }) => {
+test('a software page sits under Software, and its pager walks the software in order', async ({ page }) => {
+  await page.goto('/software/gpu-memory-calculator/');
+  const trail = page.locator('nav[aria-label="Breadcrumb"]');
+  await expect(trail.getByRole('link')).toHaveText(['Software']);
+  await expect(trail.getByRole('link')).toHaveAttribute('href', '/software/');
+  await expect(page.locator('nav[aria-label="Main"] [aria-current="page"]')).toHaveText('Software');
+  await expect(page.locator('.project-pager a').first()).toHaveAttribute('href', '/software/');
+  await expect(page.locator('.project-pager a').first()).toContainText('All software');
+  await expect(page.locator('.project-pager a[rel="next"]')).toHaveAttribute('href', '/software/ai-interview-prep/');
+  await page.goto('/software/meow-translator/');
+  await expect(page.locator('.project-pager a[rel="next"]')).toHaveCount(0);
+});
+
+test('the research pager never leads to software', async ({ page }) => {
+  await page.goto('/research/passive-haptics-mr/');
+  await expect(page.locator('.project-pager a[rel="next"]')).toHaveCount(0);
+});
+
+test('entry with only a title and summary renders cleanly', async ({ page }) => {
   await page.goto('/fixtures/minimal/');
   await expect(page.locator('h1')).toHaveText('Minimal fixture');
   for (const sel of ['figure', '.project-links', '.facts', '.label'])

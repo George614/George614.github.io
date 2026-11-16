@@ -1,0 +1,13 @@
+---
+title: Software
+permalink: /software/
+nav_key: software
+lede: "Apps and tools I have built. Each one opens a short summary with screenshots."
+---
+<h2 class="visually-hidden">Apps and tools</h2>
+<ul class="entry-list">
+  {%- assign entries = site.software | sort: "order" %}
+  {%- for entry in entries %}
+  <li>{% include entry-row.html entry=entry %}</li>
+  {%- endfor %}
+</ul>
