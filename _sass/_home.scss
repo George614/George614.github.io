@@ -220,11 +220,10 @@
   border-top: 1px solid var(--rule);
 }
 
+// The photograph keeps its own shape, taken from its width and height attributes, so it is never cropped.
 .notes-portrait img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 60% 30%;
+  height: auto;
   border-radius: 2px;
 }
 

@@ -157,8 +157,27 @@ test('the portrait sits beside the bio and loads with the page', async ({ page }
   const portrait = page.locator('.home-notes .notes-portrait img');
   await expect(portrait).toHaveAttribute('alt', /Zhizhuo Yang/);
   await expect(portrait).toHaveAttribute('loading', 'eager');
-  const box = await portrait.boundingBox();
-  expect(box.width / box.height).toBeCloseTo(0.8, 1);
+});
+
+test('the portrait shows the whole photograph in its own shape, without cropping', async ({ page }) => {
+  for (const width of [1440, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const portrait = page.locator('.home-notes .notes-portrait img');
+    await expect(portrait).toHaveJSProperty('complete', true);
+    const { shown, declared, natural, fit } = await portrait.evaluate((img) => {
+      const rect = img.getBoundingClientRect();
+      return {
+        shown: rect.width / rect.height,
+        declared: img.width / img.height,
+        natural: img.naturalWidth / img.naturalHeight,
+        fit: getComputedStyle(img).objectFit,
+      };
+    });
+    expect(declared).toBeCloseTo(natural, 2);
+    expect(shown).toBeCloseTo(natural, 2);
+    expect(fit).not.toBe('cover');
+  }
 });
 
 test('the portrait and the bio stand alone, with no list of short-lived facts beside them', async ({ page }) => {
